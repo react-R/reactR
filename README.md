@@ -1,6 +1,6 @@
 # reactR
 
-A convenience function with local dependencies for using [`React`](https://facebook.github.io/react) in `R`.  This is modeled after the `html_dependency_*` functions from RStudio's [`rmarkdown`](https://github.com/rstudio/rmarkdown) package.
+A set of convenience function with local dependencies for using [`React`](https://facebook.github.io/react) in `R`.  This is modeled after the `html_dependency_*` functions from RStudio's [`rmarkdown`](https://github.com/rstudio/rmarkdown) package.
 
 ## Installation
 
@@ -32,6 +32,22 @@ browsable(attachDependencies(
   ),
   html_dependency_react()
 ))
+```
+
+`reactR` also uses `V8` if available to transform `JSX` and `ES2015` code.
+
+```R
+library(reactR)
+library(htmltools)
+
+browsable(
+  attachDependencies(
+    tags$script(
+      babel_transform('ReactDOM.render(<h1>Powered By React/JSX</h1>,document.body)')
+    ),
+    html_dependency_react()
+  )
+)
 ```
 
 ## Contributing and Code of Conduct

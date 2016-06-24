@@ -24,5 +24,6 @@ Imports:
 Suggests:
     htmlwidgets (>= 0.6.0),
     rmarkdown,
-    shiny
+    shiny,
+    V8
 RoxygenNote: 5.0.1
