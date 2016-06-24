@@ -35,7 +35,10 @@ html_dependency_react <- function(offline=TRUE){
   )
 
   if(!offline) {
-    hd$src = c(href="https://fb.me")
+    hd$src <- list(href=sprintf(
+      "//cdnjs.cloudflare.com/ajax/libs/react/%s",
+      react_version()
+    ))
   }
 
   hd
