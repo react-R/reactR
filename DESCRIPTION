@@ -1,0 +1,28 @@
+Package: reactR
+Type: Package
+Title: React Dependencies for R
+Version: 0.1.0
+Authors@R: c(
+      person(
+        "Facebook", "Inc"
+        , role = c("aut", "cph")
+        , comment = "react library in lib, https://facebook.github.io/react"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
+Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
+Description: Make it easy .
+License: MIT + file LICENSE
+LazyData: TRUE
+Imports:
+    htmltools
+Suggests:
+    htmlwidgets (>= 0.6.0),
+    rmarkdown,
+    shiny
+RoxygenNote: 5.0.1
