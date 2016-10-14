@@ -1,2 +1,2 @@
 #'@keywords internal
-react_version <- function(){'15.1.0'}
+react_version <- function(){'15.3.2'}

@@ -12,7 +12,7 @@ get_react_latest <- function(){
 # get newest react
 download.file(
   url=sprintf(
-    "https://fb.me/react-%s.min.js",
+    "https://unpkg.com/react@%s/dist/react.min.js",
     get_react_latest()
   ),
   destfile="./inst/www/react/react.min.js"
@@ -21,7 +21,7 @@ download.file(
 # get newest react dom
 download.file(
   url=sprintf(
-    "https://fb.me/react-dom-%s.min.js",
+    "https://unpkg.com/react-dom@%s/dist/react-dom.min.js",
     get_react_latest()
   ),
   destfile="./inst/www/react/react-dom.min.js"
