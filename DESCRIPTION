@@ -19,7 +19,9 @@ Authors@R: c(
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
 Description: Make it easy to use 'react' in R with helper
               dependency functions, embedded 'Babel' transpiler,
-              and examples.
+              and examples.  Please note the separate 'react'
+              [BSD license](https://github.com/facebook/react/blob/master/LICENSE)
+              when using 'reactR' and 'react' in your projects.
 URL: https://github.com/timelyportfolio/reactR
 BugReports: https://github.com/timelyportfolio/reactR/issues
 License: BSD_3_clause + file LICENSE
@@ -30,5 +32,7 @@ Suggests:
     htmlwidgets (>= 0.6.0),
     rmarkdown,
     shiny,
-    V8
+    V8,
+    knitr
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
