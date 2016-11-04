@@ -2,6 +2,7 @@
 #'
 #' @param offline \code{logical} to use local file dependencies.  If \code{FALSE},
 #'          then the dependencies use the Facebook cdn as its \code{src}.
+#'          To use with \code{JSX} see \code{\link{babel_transform}}.
 #'
 #' @return \code{\link[htmltools]{htmlDependency}}
 #' @importFrom htmltools htmlDependency
@@ -11,7 +12,7 @@
 #' library(reactR)
 #' library(htmltools)
 #'
-#' browsable(attachDependencies(
+#' attachDependencies(
 #'   tags$script(
 #'   "
 #'     ReactDOM.render(
@@ -25,7 +26,7 @@
 #'   "
 #'   ),
 #'   html_dependency_react()
-#' ))
+#' )
 html_dependency_react <- function(offline=TRUE){
   hd <- htmltools::htmlDependency(
     name = "react",

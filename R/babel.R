@@ -9,12 +9,14 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(reactR)
 #' babel_transform('<div>react div</div>')
+#' }
 babel_transform <- function(code=""){
-  stopifnot(require(V8), is.character(code))
+  stopifnot(requireNamespace("V8"), is.character(code))
 
-  ctx <- v8()
+  ctx <- V8::v8()
   ctx$source('https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.10.3/babel.min.js')
   ctx$assign('code', code)
   ctx$get('Babel.transform(code,{ presets: ["es2015","react"] }).code')

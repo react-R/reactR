@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^\build
 ^CONDUCT\.md$
+^cran-comments\.md$

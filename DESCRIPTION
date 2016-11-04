@@ -1,7 +1,8 @@
 Package: reactR
 Type: Package
-Title: React Dependencies for R
+Title: React Helpers for R
 Version: 0.1.0
+Date: 2016-11-04
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -16,8 +17,12 @@ Authors@R: c(
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
-Description: Make it easy .
-License: MIT + file LICENSE
+Description: Make it easy to use 'react' in R with helper
+              dependency functions, embedded 'Babel' transpiler,
+              and examples.
+URL: https://github.com/timelyportfolio/reactR
+BugReports: https://github.com/timelyportfolio/reactR/issues
+License: BSD_3_clause + file LICENSE
 LazyData: TRUE
 Imports:
     htmltools

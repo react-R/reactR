@@ -8,7 +8,8 @@ html_dependency_react(offline = TRUE)
 }
 \arguments{
 \item{offline}{\code{logical} to use local file dependencies.  If \code{FALSE},
-then the dependencies use the Facebook cdn as its \code{src}.}
+then the dependencies use the Facebook cdn as its \code{src}.
+To use with \code{JSX} see \code{\link{babel_transform}}.}
 }
 \value{
 \code{\link[htmltools]{htmlDependency}}
@@ -20,7 +21,7 @@ Dependencies for React
 library(reactR)
 library(htmltools)
 
-browsable(attachDependencies(
+attachDependencies(
   tags$script(
   "
     ReactDOM.render(
@@ -34,6 +35,6 @@ browsable(attachDependencies(
   "
   ),
   html_dependency_react()
-))
+)
 }
 

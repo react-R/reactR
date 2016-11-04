@@ -17,7 +17,9 @@ Helper function to use \code{V8} with \code{Babel} so we can
 avoid a JSX transformer with using \code{reactR}.
 }
 \examples{
+\dontrun{
 library(reactR)
 babel_transform('<div>react div</div>')
+}
 }
 
