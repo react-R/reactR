@@ -1,6 +1,6 @@
 Package: reactR
 Type: Package
-Title: React Helpers for R
+Title: React Helpers
 Version: 0.1.0
 Date: 2016-11-04
 Authors@R: c(
@@ -20,8 +20,8 @@ Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
 Description: Make it easy to use 'react' in R with helper
               dependency functions, embedded 'Babel' transpiler,
               and examples.  Please note the separate 'react'
-              [BSD license](https://github.com/facebook/react/blob/master/LICENSE)
-              when using 'reactR' and 'react' in your projects.
+              BSD license <https://github.com/facebook/react/blob/master/LICENSE>
+              when using 'react' in your projects.
 URL: https://github.com/timelyportfolio/reactR
 BugReports: https://github.com/timelyportfolio/reactR/issues
 License: BSD_3_clause + file LICENSE
