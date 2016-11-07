@@ -90,3 +90,86 @@ tagList(
     )
   ) %>>%
   browsable()
+
+
+# now let's try to do it with JSX
+#  using a modified version of htmltools
+
+## our silly little chart title
+v_label <- tag(
+  "VictoryCore.VictoryLabel",
+  list(
+    y = "20",
+    text = "Victory from R",
+    style = noquote('{{"font-size" : "150%"}}')
+  )
+)
+## our x axis
+v_xaxis <- tag(
+  "VictoryChart.VictoryAxis",
+  list(
+    tickValues=noquote('{["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}')
+  )
+)
+
+v_yaxis <- tag(
+  "VictoryChart.VictoryAxis",
+  list(
+    dependentAxis = NA,
+    tickFormat = noquote('{(x) => (`$${x / 1000}k`)}')
+  )
+)
+
+v_barchart <- tag(
+  "VictoryChart.VictoryBar",
+  list(
+    data=noquote('{data}'),
+    x=noquote('{"quarter"}'),
+    y=noquote('{"earnings"}')
+  )
+)
+
+v_component <- tag(
+  "VictoryChart.VictoryChart",
+  list(
+    theme=noquote('{VictoryCore.VictoryTheme.material}'),
+    domainPadding=noquote('{20}'),
+    v_label,
+    v_xaxis,
+    v_yaxis,
+    v_barchart
+  )
+)
+
+v_component %>>%
+  as.character() %>>%
+  {
+    sprintf(
+'
+const data = [
+  {quarter: 1, earnings: 13000},
+  {quarter: 2, earnings: 16500},
+  {quarter: 3, earnings: 14250},
+  {quarter: 4, earnings: 19000}
+];
+
+var chart = %s;
+
+ReactDOM.render(chart, document.body);
+'
+      ,
+      .
+    )
+  } %>>%
+  babel_transform() %>>%
+  HTML() %>>%
+  tags$script() %>>%
+  tagList() %>>%
+  attachDependencies(
+    list(
+      html_dependency_react(offline=FALSE),
+      victory_core,
+      victory_chart
+    )
+  ) %>>%
+  browsable()
