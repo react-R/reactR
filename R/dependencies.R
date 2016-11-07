@@ -37,7 +37,7 @@ html_dependency_react <- function(offline=TRUE){
 
   if(!offline) {
     hd$src <- list(href=sprintf(
-      "//unpkg.com/react/%s/dist",
+      "//cdnjs.cloudflare.com/ajax/libs/react/%s",
       react_version()
     ))
   }
