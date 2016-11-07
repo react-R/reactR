@@ -17,7 +17,12 @@ babel_transform <- function(code=""){
   stopifnot(requireNamespace("V8"), is.character(code))
 
   ctx <- V8::v8()
-  ctx$source('https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.10.3/babel.min.js')
+  ctx$source(
+    system.file(
+      "www/babel/babel.min.js",
+      package = "reactR"
+    )
+  )
   ctx$assign('code', code)
   ctx$get('Babel.transform(code,{ presets: ["es2015","react"] }).code')
 }
