@@ -79,18 +79,31 @@ ReactDOM.render(steps, document.querySelector('#stepapp'));
 ### steps with button ####
 steps_button <- list(
   list(
-    title= 'First',
-    content= 'First-content'
+    title= 'Data',
+    content= 'Raw Data'
   ),
   list(
-    title= 'Second',
-    content= 'Second-content'
+    title= 'Model',
+    content= 'Code for Model'
   ),
   list(
-    title= 'Last',
-    content= 'Last-content'
+    title= 'Plot',
+    content= 'Beautiful Plot'
   )
 ) %>>% jsonlite::toJSON(auto_unbox=TRUE)
+
+content_data <- tags$pre(
+  HTML(paste0(
+    capture.output(str(iris,max.level=1)),
+    collapse="<br/>"
+  ))
+)
+
+content_model <- tags$pre("lm(Petal.Width~Petal.Length, data=iris)")
+
+content_plot <- HTML(
+  svglite::htmlSVG({plot(lm(Petal.Length~Petal.Width,data=iris),which=1)},standalone=FALSE)
+)
 
 tagList(
   tags$div(id="stepapp", style="width:30%;"),
@@ -99,6 +112,10 @@ tagList(
       sprintf(
 '
 const steps = %s;
+
+steps[0].content = %s;
+steps[1].content = %s;
+steps[2].content = <img src="%s" />
 
 class App extends React.Component {
   constructor(props) {
@@ -149,7 +166,10 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.querySelector("#stepapp"));
       ',
-      .
+      .,
+      content_data,
+      content_model,
+      base64enc::dataURI(rsvg::rsvg_png(charToRaw(content_plot)),mime="image/png")
     )
   } %>>%
     babel_transform() %>>%
