@@ -1,8 +1,3 @@
-Resubmit with Uwe's suggested DESCRIPTION cleanups.
-
-* remove "for R" in title
-* enclose url in "<>"
-
 ## Test environments
 * local Windows 10 install, R 3.3.1
 * ubuntu 12.04 (on travis-ci), R 3.3.1

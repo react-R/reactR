@@ -6,27 +6,34 @@ library(pipeR)
 #  let's try to use it with reactR
 
 # not necessary to make an htmlDependency but more robust if we do
-victory <- htmlDependency(
-  name = "victory",
-  version = "0.13.3",
-  src = c(href = "https://unpkg.com/victory/dist"),
-  script = "victory.js"
-)
+#victory <- htmlDependency(
+#  name = "victory",
+#  version = "0.13.3",
+#  src = c(href = "https://unpkg.com/victory/dist"),
+#  script = "victory.js"
+#)
 
 victory_core <- htmlDependency(
   name = "victory-core",
   version = "9.1.1",
-  src = c(href = "https://unpkg.com/victory-core@9.1.1/dist"),
+  src = c(
+    file = "c://users/kent/dropbox/development/r/victorychart_deps",
+    href = "https://unpkg.com/victory-core@9.1.1/dist"
+  ),
   script = "victory-core.js"
 )
 
 victory_chart <- htmlDependency(
   name = "victory-chart",
   version = "13.1.1",
-  src = c(href = "https://unpkg.com/victory-chart@13.1.1/dist"),
+  src = c(
+    file = "c://users/kent/dropbox/development/r/victorychart_deps",
+    href = "https://unpkg.com/victory-chart@13.1.1/dist"
+  ),
   script = "victory-chart.js"
 )
 
+###########no jsx version#######
 demo_script <- HTML(
 '
 const data = [
@@ -92,6 +99,7 @@ tagList(
   browsable()
 
 
+###########jsx version#######
 # now let's try to do it with JSX
 #  using a modified version of htmltools
 
