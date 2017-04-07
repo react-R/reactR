@@ -6,10 +6,10 @@ library(pipeR)
 #   and add to my forked github blueprint in docs as gh-pages
 blueprint <- htmlDependency(
   name = "blueprint",
-  version = "1.1.0",
-  src = c(href="https://timelyportfolio.github.io/blueprint/"),
-  script = c("blueprint.js","blueprint-table.js"),
-  stylesheet = c("blueprint.css", "blueprint-table.css")
+  version = "1.1.4",
+  src = c(href="https://unpkg.com/@blueprintjs/"),
+  script = c("core/dist/core.bundle.js","table/dist/table.bundle.js"),
+  stylesheet = c("core/dist/blueprint.css", "table/dist/table.css")
 )
 
 # make sure we have dependencies as expected
@@ -33,16 +33,16 @@ tagList(
 const mtcars = %s;
 const renderCell = (rowIndex, colIndex) => {
     var colname = Object.keys(mtcars)[colIndex]
-    return <blueprintTable.Cell>{`${mtcars[colname][rowIndex]}`}</blueprintTable.Cell>
+    return <Blueprint.Table.Cell>{`${mtcars[colname][rowIndex]}`}</Blueprint.Table.Cell>
 };
 
 const columns = Object.keys(mtcars).map(function(colname) {
-    return <blueprintTable.Column name={colname} renderCell={renderCell}/>
+    return <Blueprint.Table.Column name={colname} renderCell={renderCell}/>
 });
 
-var tbl = <blueprintTable.Table numRows={mtcars["car"].length}>
+var tbl = <Blueprint.Table.Table numRows={mtcars["car"].length}>
   {columns}
-</blueprintTable.Table>
+</Blueprint.Table.Table>
 
 ReactDOM.render(tbl, document.querySelector("#app-table"));
 '
@@ -58,6 +58,53 @@ ReactDOM.render(tbl, document.querySelector("#app-table"));
   )
 )%>>%
   attachDependencies(
-    list(html_dependency_react(offline=FALSE), blueprint)
+    list(
+      htmlDependency(
+        name="classnames",
+        version="2.2.5",
+        src = c(href="https://unpkg.com/classnames"),
+        script = ""
+      ),
+      html_dependency_react(offline=FALSE),
+      blueprint
+    )
+  ) %>>%
+  browsable()
+
+
+
+# now let's try to do a React blueprint table
+#  http://blueprintjs.com/docs/#components.table-js
+tagList(
+  tags$div(id="app-table", style = "width:700px; height:500px;"),
+  tags$script(
+    HTML(
+      babel_transform(
+"
+
+var tbl = <Blueprint.Table.Table numRows={5}>
+<Blueprint.Table.Column />
+<Blueprint.Table.Column />
+<Blueprint.Table.Column />
+</Blueprint.Table.Table>
+
+ReactDOM.render(tbl, document.querySelector('#app-table'));
+"
+
+      )
+    )
+)
+)%>>%
+  attachDependencies(
+    list(
+      htmlDependency(
+        name="classnames",
+        version="2.2.5",
+        src = c(href="https://unpkg.com/classnames"),
+        script = ""
+      ),
+      html_dependency_react(offline=FALSE),
+      blueprint
+    )
   ) %>>%
   browsable()
