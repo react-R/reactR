@@ -7,7 +7,14 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Kent Russell <kent.russell@timelyportfolio.com>'
+
+License components with restrictions and base license permitting such:
+  BSD_3_clause + file LICENSE
+File 'LICENSE':
+  YEAR: 2017
+  COPYRIGHT HOLDER: Kenton Russell
 
 ## Reverse dependencies
 
