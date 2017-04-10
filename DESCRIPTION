@@ -1,8 +1,8 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.1.1
-Date: 2016-11-07
+Version: 0.1.2
+Date: 2017-04-10
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -34,5 +34,5 @@ Suggests:
     shiny,
     V8,
     knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

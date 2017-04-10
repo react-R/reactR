@@ -18,7 +18,7 @@ victory_core <- htmlDependency(
   version = "9.1.1",
   src = c(
     file = "c://users/kent/dropbox/development/r/victorychart_deps",
-    href = "https://unpkg.com/victory-core@9.1.1/dist"
+    href = "https://unpkg.com/victory-core/dist"
   ),
   script = "victory-core.js"
 )
@@ -28,7 +28,7 @@ victory_chart <- htmlDependency(
   version = "13.1.1",
   src = c(
     file = "c://users/kent/dropbox/development/r/victorychart_deps",
-    href = "https://unpkg.com/victory-chart@13.1.1/dist"
+    href = "https://unpkg.com/victory-chart/dist"
   ),
   script = "victory-chart.js"
 )

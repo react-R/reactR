@@ -37,4 +37,3 @@ attachDependencies(
   html_dependency_react()
 )
 }
-

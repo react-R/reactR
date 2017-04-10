@@ -22,4 +22,3 @@ library(reactR)
 babel_transform('<div>react div</div>')
 }
 }
-
