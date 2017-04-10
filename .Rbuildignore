@@ -3,4 +3,4 @@
 ^\build
 ^CONDUCT\.md$
 ^cran-comments\.md$
-^\docs
+^docs$
