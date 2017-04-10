@@ -3,3 +3,6 @@
 language: R
 sudo: false
 cache: packages
+
+before_install:
+  - sudo apt-get install -y libv8-dev
