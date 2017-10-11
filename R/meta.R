@@ -1,3 +1,3 @@
 #'@keywords internal
-react_version <- function(){'15.5.0'}
-babel_version <- function(){'6.24.0'}
+react_version <- function(){'16.0.0'}
+babel_version <- function(){'6.26.0'}

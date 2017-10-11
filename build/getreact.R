@@ -20,7 +20,7 @@ get_babel_latest <- function(){
 # get newest react
 download.file(
   url=sprintf(
-    "https://unpkg.com/react@%s/dist/react.min.js",
+    "https://unpkg.com/react@%s/umd/react.production.min.js",
     get_react_latest()
   ),
   destfile="./inst/www/react/react.min.js"
@@ -29,7 +29,7 @@ download.file(
 # get newest react dom
 download.file(
   url=sprintf(
-    "https://unpkg.com/react-dom@%s/dist/react-dom.min.js",
+    "https://unpkg.com/react-dom@%s/umd/react-dom.production.min.js",
     get_react_latest()
   ),
   destfile="./inst/www/react/react-dom.min.js"
