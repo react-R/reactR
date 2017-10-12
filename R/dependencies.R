@@ -12,7 +12,7 @@
 #' library(reactR)
 #' library(htmltools)
 #'
-#' attachDependencies(
+#' tagList(
 #'   tags$script(
 #'   "
 #'     ReactDOM.render(
@@ -25,7 +25,7 @@
 #'     )
 #'   "
 #'   ),
-#'   html_dependency_react()
+#'   html_dependency_react() #offline=FALSE for CDN
 #' )
 html_dependency_react <- function(offline=TRUE){
   hd <- htmltools::htmlDependency(
@@ -36,11 +36,12 @@ html_dependency_react <- function(offline=TRUE){
   )
 
   if(!offline) {
-    hd$src <- list(href=sprintf(
-      "//unpkg.com/react/@%s/",
-      react_version()
-    ))
-    hd$script = c("react.production.min.js", "react-dom.production.min.js")
+    hd$src <- list(href="//unpkg.com")
+
+    hd$script <- c(
+      "react/umd/react.production.min.js",
+      "react-dom/umd/react-dom.production.min.js"
+    )
   }
 
   hd

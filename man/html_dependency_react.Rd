@@ -21,7 +21,7 @@ Dependencies for React
 library(reactR)
 library(htmltools)
 
-attachDependencies(
+tagList(
   tags$script(
   "
     ReactDOM.render(
@@ -34,6 +34,6 @@ attachDependencies(
     )
   "
   ),
-  html_dependency_react()
+  html_dependency_react() #offline=FALSE for CDN
 )
 }

@@ -14,10 +14,11 @@ blueprint <- htmlDependency(
 
 # make sure we have dependencies as expected
 #  by adding react and blueprint to empty tagList
-tagList() %>>%
-  attachDependencies(
-    list(html_dependency_react(offline=FALSE), blueprint)
-  ) %>>%
+tagList(
+  html_dependency_react(offline=FALSE),
+  html_dependency_reactdom(offline=FALSE),
+  blueprint
+) %>>%
   browsable()
 
 
@@ -55,20 +56,17 @@ ReactDOM.render(tbl, document.querySelector("#app-table"));
         )
       )
     )
-  )
-)%>>%
-  attachDependencies(
-    list(
-      htmlDependency(
-        name="classnames",
-        version="2.2.5",
-        src = c(href="https://unpkg.com/classnames"),
-        script = ""
-      ),
-      html_dependency_react(offline=FALSE),
-      blueprint
-    )
-  ) %>>%
+  ),
+  htmlDependency(
+    name="classnames",
+    version="2.2.5",
+    src = c(href="https://unpkg.com/classnames"),
+    script = ""
+  ),
+  html_dependency_react(),
+  html_dependency_reactdom(),
+  blueprint
+) %>>%
   browsable()
 
 
@@ -93,18 +91,15 @@ ReactDOM.render(tbl, document.querySelector('#app-table'));
 
       )
     )
-)
-)%>>%
-  attachDependencies(
-    list(
-      htmlDependency(
-        name="classnames",
-        version="2.2.5",
-        src = c(href="https://unpkg.com/classnames"),
-        script = ""
-      ),
-      html_dependency_react(offline=FALSE),
-      blueprint
-    )
-  ) %>>%
+  ),
+  htmlDependency(
+    name="classnames",
+    version="2.2.5",
+    src = c(href="https://unpkg.com/classnames"),
+    script = ""
+  ),
+  html_dependency_react(),
+  html_dependency_reactdom(),
+  blueprint
+) %>>%
   browsable()

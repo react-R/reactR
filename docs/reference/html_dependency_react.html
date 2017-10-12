@@ -109,7 +109,7 @@ To use with <code>JSX</code> see <code><a href='babel_transform.html'>babel_tran
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>reactR</span>)
 <span class='fu'>library</span>(<span class='no'>htmltools</span>)
 
-<span class='fu'>attachDependencies</span>(
+<span class='fu'>tagList</span>(
   <span class='no'>tags</span>$<span class='fu'>script</span>(
   <span class='st'>"
     ReactDOM.render(
@@ -122,7 +122,7 @@ To use with <code>JSX</code> see <code><a href='babel_transform.html'>babel_tran
     )
   "</span>
   ),
-  <span class='fu'>html_dependency_react</span>()
+  <span class='fu'>html_dependency_react</span>() <span class='co'>#offline=FALSE for CDN</span>
 )</div><div class='output co'>#&gt; &lt;script&gt;
 #&gt;     ReactDOM.render(
 #&gt;       React.createElement(
