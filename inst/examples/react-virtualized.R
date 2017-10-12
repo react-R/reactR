@@ -5,8 +5,8 @@ library(tibble)
 
 react_virt <-  htmlDependency(
   name = "react-virtualized",
-  version = "9.7.3",
-  src = c(href = "https://unpkg.com/react-virtualized@9.7.3/"),
+  version = "9.10.1",
+  src = c(href = "https://unpkg.com/react-virtualized@9.10.1/"),
   script = "dist/umd/react-virtualized.js",
   stylesheet = "styles.css"
 )
