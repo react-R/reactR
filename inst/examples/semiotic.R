@@ -10,7 +10,7 @@ library(reactR)
 
 semiotic <- htmlDependency(
   name = "semiotic",
-  version = "1.1.2",
+  version = "1.2.4",
   src = c(href = "https://rawgit.com/timelyportfolio/semiotic/standalone/dist"),
   script = "semiotic.js"
 )
