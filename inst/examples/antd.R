@@ -4,7 +4,7 @@ library(pipeR)
 
 antd <- htmlDependency(
   name = "antd",
-  version = "2.5.0",
+  version = "2.13.10",
   src = c(href="https://unpkg.com/antd/dist/"),
   script = "antd.min.js",
   stylesheet = "antd.min.css"
