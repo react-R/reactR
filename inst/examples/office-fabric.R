@@ -1,22 +1,27 @@
 library(htmltools)
 library(reactR)
-library(pipeR)
 
 fabric <- htmlDependency(
   name = "office-fabric-ui-react",
-  version = "0.67.0",
+  version = "5.23.0",
   src = c(href="https://unpkg.com/office-ui-fabric-react/dist"),
   script = "office-ui-fabric-react.js",
   stylesheet = "css/fabric.min.css"
 )
 
-tagList() %>>%
-  attachDependencies(list(html_dependency_react(),fabric)) %>>%
-  browsable()
+browsable(
+  tagList(
+    html_dependency_react(),
+    fabric
+  )
+)
 
-tagList(
-  tags$div(id = "app-button"),
-  tags$script(HTML(babel_transform(
+browsable(
+  tagList(
+    html_dependency_react(),
+    fabric,
+    tags$div(id = "app-button"),
+    tags$script(HTML(babel_transform(
 "
 let btn = <div className='ms-BasicButtonsExample'>
   <Fabric.Label>Command button</Fabric.Label>
@@ -30,8 +35,39 @@ let btn = <div className='ms-BasicButtonsExample'>
 
 ReactDOM.render(btn, document.querySelector('#app-button'));
 "
-  ))),
-  html_dependency_react(),
-  fabric
-) %>>%
-  browsable()
+    )))
+  )
+)
+
+
+browsable(
+  tagList(
+    html_dependency_react(),
+    fabric,
+    tags$div(id="pivot-example"),
+    tags$script(HTML(babel_transform(
+"
+class PivotBasicExample extends React.Component {
+  render() {
+    return (
+      <div>
+        <Fabric.Pivot>
+          <Fabric.PivotItem linkText='My Files'>
+            <Fabric.Label>Pivot #1</Fabric.Label>
+          </Fabric.PivotItem>
+          <Fabric.PivotItem linkText='Recent'>
+            <Fabric.Label>Pivot #2</Fabric.Label>
+          </Fabric.PivotItem>
+          <Fabric.PivotItem linkText='Shared with me'>
+            <Fabric.Label>Pivot #3</Fabric.Label>
+          </Fabric.PivotItem>
+        </Fabric.Pivot>
+      </div>
+    );
+  }
+}
+ReactDOM.render(<PivotBasicExample />, document.querySelector('#pivot-example'));
+"
+    )))
+  )
+)
