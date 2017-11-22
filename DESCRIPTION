@@ -17,14 +17,12 @@ Authors@R: c(
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
-Description: Make it easy to use 'react' in R with helper
+Description: Make it easy to use 'React' in R with helper
               dependency functions, embedded 'Babel' transpiler,
-              and examples.  Please note the separate 'react'
-              BSD license <https://github.com/facebook/react/blob/master/LICENSE>
-              when using 'react' in your projects.
+              and examples.
 URL: https://github.com/timelyportfolio/reactR
 BugReports: https://github.com/timelyportfolio/reactR/issues
-License: BSD_3_clause + file LICENSE
+License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
     htmltools
