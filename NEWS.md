@@ -1,3 +1,7 @@
+# reactR 0.1.4
+
+* Update react and react-dom to 16.1.1
+
 # reactR 0.1.3
 
 * Update react and react-dom to 16.0.0
