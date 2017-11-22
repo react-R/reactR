@@ -1,6 +1,7 @@
 ## Test environments
 * local Windows 10 install, R 3.4.0
 * rhub check_for_cran
+* travis-ci
 
 ## R CMD check results
 
