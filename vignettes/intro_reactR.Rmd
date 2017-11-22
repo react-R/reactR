@@ -50,6 +50,10 @@ attachDependencies(
 )
 ```
 
+## Blog Post
+
+For more on how we can use R and React, see the blog post [React in R](http://www.jsinr.me/2017/11/19/react-in-r/).  Also, there are many more examples in the Github repo at [inst/examples](https://github.com/timelyportfolio/reactR/tree/master/inst/examples).
+
 ## Using JSX
 
 [`JSX`](https://facebook.github.io/react/docs/jsx-in-depth.html) helps ease some of the burden caused by `React.createElement`.  `reactR` provides a `babel_transform()` function to use `JSX`.  Hopefully, in the future, we can convince RStudio to modify `htmltools` to work directly with `JSX` (see [issue](https://github.com/rstudio/htmltools/pull/72)).
