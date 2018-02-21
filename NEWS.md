@@ -1,3 +1,8 @@
+# reactR 0.2.0
+
+* Update react and react-dom to 16.2.0
+* Add core-js shim so that React will show up in RStudio Viewer
+
 # reactR 0.1.4
 
 * Update react and react-dom to 16.1.1

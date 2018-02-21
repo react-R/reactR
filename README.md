@@ -20,7 +20,7 @@ devtools::install_github("timelyportfolio/reactR")
 library(reactR)
 library(htmltools)
 
-browsable(attachDependencies(
+browsable(tagList(
   tags$script(
   "
     ReactDOM.render(
@@ -33,6 +33,8 @@ browsable(attachDependencies(
     )
   "
   ),
+  #add core-js first to work in RStudio Viewer
+  html_dependency_corejs(),
   html_dependency_react()
 ))
 ```
@@ -44,10 +46,12 @@ library(reactR)
 library(htmltools)
 
 browsable(
-  attachDependencies(
+  tagList(
     tags$script(
       babel_transform('ReactDOM.render(<h1>Powered By React/JSX</h1>,document.body)')
     ),
+    # add core-js shim first for React in RStudio Viewer
+    html_dependency_corejs(),
     html_dependency_react()
   )
 )
