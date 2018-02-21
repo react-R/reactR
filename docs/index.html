@@ -29,10 +29,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/intro_reactR.html">Intro to reactR</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -67,7 +82,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install reactR from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"timelyportfolio/reactR"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"timelyportfolio/reactR"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -75,7 +90,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reactR)
 <span class="kw">library</span>(htmltools)
 
-<span class="kw">browsable</span>(<span class="kw">attachDependencies</span>(
+<span class="kw">browsable</span>(<span class="kw">tagList</span>(
   tags<span class="op">$</span><span class="kw">script</span>(
   <span class="st">"</span>
 <span class="st">    ReactDOM.render(</span>
@@ -88,6 +103,8 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="st">    )</span>
 <span class="st">  "</span>
   ),
+  <span class="co">#add core-js first to work in RStudio Viewer</span>
+  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),
   <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
 ))</code></pre></div>
 <p><code>reactR</code> also uses <code>V8</code> if available to transform <code>JSX</code> and <code>ES2015</code> code.</p>
@@ -95,10 +112,12 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="kw">library</span>(htmltools)
 
 <span class="kw">browsable</span>(
-  <span class="kw">attachDependencies</span>(
+  <span class="kw">tagList</span>(
     tags<span class="op">$</span><span class="kw">script</span>(
       <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.body)'</span>)
     ),
+    <span class="co"># add core-js shim first for React in RStudio Viewer</span>
+    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),
     <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
   )
 )</code></pre></div>
@@ -123,10 +142,10 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/BSD-3-Clause">BSD_3_clause</a> + file <a href="LICENSE.html">LICENSE</a></p>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Facebook Inc <br><small class="roles"> Author, copyright holder </small> <br><small>(React library in lib, https://facebook.github.io/react; see AUTHORS for full list of contributors)</small>
+<li>Facebook Inc <br><small class="roles"> Author, copyright holder </small> <br><small>(React library in lib, https://facebook.github.io/react; see AUTHORS for full list of contributors)</small>
 </li>
 <li>Kent Russell <br><small class="roles"> Author, maintainer </small> <br><small>(R interface)</small>
 </li>
@@ -145,7 +164,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

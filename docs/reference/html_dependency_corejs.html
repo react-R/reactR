@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dependencies for React — html_dependency_react â€¢ reactR</title>
+<title>Shim Dependency for React in RStudio Viewer — html_dependency_corejs â€¢ reactR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -95,72 +95,27 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dependencies for React</h1>
+    <h1>Shim Dependency for React in RStudio Viewer</h1>
     </div>
 
     
-    <p>Add JavaScript 'React' dependency.  For this to work in RStudio Viewer, also include
-<code><a href='html_dependency_corejs.html'>html_dependency_corejs</a></code>.</p>
+    <p>Add this first for 'React' to work in RStudio Viewer.</p>
     
 
-    <pre class="usage"><span class='fu'>html_dependency_react</span>(<span class='kw'>offline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>offline</th>
-      <td><p><code>logical</code> to use local file dependencies.  If <code>FALSE</code>,
-then the dependencies use the Facebook cdn as its <code>src</code>.
-To use with <code>JSX</code> see <code><a href='babel_transform.html'>babel_transform</a></code>.</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>html_dependency_corejs</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/htmltools/topics/htmlDependency'>htmlDependency</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>reactR</span>)
-<span class='fu'>library</span>(<span class='no'>htmltools</span>)
-
-<span class='fu'><a href='http://www.rdocumentation.org/packages/htmltools/topics/tag'>tagList</a></span>(
-  <span class='no'>tags</span>$<span class='fu'>script</span>(
-  <span class='st'>"
-    ReactDOM.render(
-      React.createElement(
-        'h1',
-        null,
-        'Powered by React'
-      ),
-      document.body
-    )
-  "</span>
-  ),
-   <span class='co'>#add core-js first to work in RStudio Viewer</span>
-  <span class='fu'><a href='html_dependency_corejs.html'>html_dependency_corejs</a></span>(),
-  <span class='fu'>html_dependency_react</span>() <span class='co'>#offline=FALSE for CDN</span>
-)</div><div class='output co'>#&gt; &lt;script&gt;
-#&gt;     ReactDOM.render(
-#&gt;       React.createElement(
-#&gt;         'h1',
-#&gt;         null,
-#&gt;         'Powered by React'
-#&gt;       ),
-#&gt;       document.body
-#&gt;     )
-#&gt;   &lt;/script&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
