@@ -9,7 +9,7 @@ blueprint <- htmlDependency(
   version = "1.1.4",
   src = c(href="https://unpkg.com/@blueprintjs/"),
   script = c("core/dist/core.bundle.js","table/dist/table.bundle.js"),
-  stylesheet = c("core/dist/blueprint.css", "table/dist/table.css")
+  stylesheet = c("core/lib/css/blueprint.css", "table/lib/css/table.css")
 )
 
 # make sure we have dependencies as expected
@@ -31,17 +31,17 @@ tagList(
         sprintf(
 '
 const mtcars = %s;
-const renderCell = (rowIndex, colIndex) => {
+const cellRenderer = (rowIndex, colIndex) => {
     var colname = Object.keys(mtcars)[colIndex]
     return <Blueprint.Table.Cell>{`${mtcars[colname][rowIndex]}`}</Blueprint.Table.Cell>
 };
 
 const columns = Object.keys(mtcars).map(function(colname) {
-    return <Blueprint.Table.Column name={colname} renderCell={renderCell}/>
+    return <Blueprint.Table.Column name={colname} renderCell={cellRenderer}/>
 });
 
 var tbl = <Blueprint.Table.Table numRows={mtcars["car"].length}>
-  {columns}
+    {columns}
 </Blueprint.Table.Table>
 
 ReactDOM.render(tbl, document.querySelector("#app-table"));

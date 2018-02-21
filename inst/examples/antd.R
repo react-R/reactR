@@ -5,7 +5,7 @@ library(pipeR)
 antd <- htmlDependency(
   name = "antd",
   version = "2.13.10",
-  src = c(href="https://unpkg.com/antd/dist/"),
+  src = c(href="https://unpkg.com/antd@2.13.10/dist"),
   script = "antd.min.js",
   stylesheet = "antd.min.css"
 )
@@ -29,12 +29,10 @@ tl <- tagList(
 )
 
 browsable(
-  attachDependencies(
+  tagList(
     tl,
-    list(
-      html_dependency_react(),
-      antd
-    )
+    html_dependency_react(),
+    antd
   )
 )
 

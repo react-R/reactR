@@ -14,9 +14,9 @@ library(tidyr)
 #  https://github.com/emeeks/semiotic/issues/70
 semiotic <- htmlDependency(
   name = "semiotic",
-  version = "1.2.4",
-  src = c(href = "https://rawgit.com/timelyportfolio/semiotic/standalone/dist"),
-  script = "semiotic.js"
+  version = "1.7.12",
+  src = c(href = "https://unpkg.com/semiotic/dist/"),
+  script = "semiotic.min.js"
 )
 
 # original data was in wide format
