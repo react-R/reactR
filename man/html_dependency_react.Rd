@@ -15,7 +15,8 @@ To use with \code{JSX} see \code{\link{babel_transform}}.}
 \code{\link[htmltools]{htmlDependency}}
 }
 \description{
-Dependencies for React
+Add JavaScript 'React' dependency.  For this to work in RStudio Viewer, also include
+\code{\link{html_dependency_corejs}}.
 }
 \examples{
 library(reactR)
@@ -34,6 +35,8 @@ tagList(
     )
   "
   ),
+   #add core-js first to work in RStudio Viewer
+  html_dependency_corejs(),
   html_dependency_react() #offline=FALSE for CDN
 )
 }

@@ -1,5 +1,8 @@
 #' Dependencies for React
 #'
+#' Add JavaScript 'React' dependency.  For this to work in RStudio Viewer, also include
+#' \code{\link{html_dependency_corejs}}.
+#'
 #' @param offline \code{logical} to use local file dependencies.  If \code{FALSE},
 #'          then the dependencies use the Facebook cdn as its \code{src}.
 #'          To use with \code{JSX} see \code{\link{babel_transform}}.
@@ -25,6 +28,8 @@
 #'     )
 #'   "
 #'   ),
+#'    #add core-js first to work in RStudio Viewer
+#'   html_dependency_corejs(),
 #'   html_dependency_react() #offline=FALSE for CDN
 #' )
 html_dependency_react <- function(offline=TRUE){
@@ -45,4 +50,23 @@ html_dependency_react <- function(offline=TRUE){
   }
 
   hd
+}
+
+
+#' Shim Dependency for React in RStudio Viewer
+#'
+#' Add this first for 'React' to work in RStudio Viewer.
+#'
+#' @return \code{\link[htmltools]{htmlDependency}}
+#' @importFrom htmltools htmlDependency
+#' @export
+html_dependency_corejs <- function() {
+  #shim/polyfill for ES5 and ES6 so react will show up in RStudio Viewer
+  #https://unpkg.com/core-js@2.5.3/
+  htmltools::htmlDependency(
+    name = "core-js",
+    version = "2.5.3",
+    src = c(file=system.file("www/core-js/", package="reactR")),
+    script = "shim.min.js"
+  )
 }
