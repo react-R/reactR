@@ -73,58 +73,54 @@
   <div class="contents col-md-9">
     
 
-<div id="reactr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#reactr" class="anchor"></a>reactR</h1></div>
+<div class="section level1">
+<div class="page-header"><h1>reactR</h1></div>
 <p>A set of convenience function with local dependencies for using <a href="https://facebook.github.io/react"><code>React</code></a> in <code>R</code>. This is modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2>Installation</h2>
 <p>You can install reactR from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"timelyportfolio/reactR"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"timelyportfolio/reactR"</span>)</a></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reactR)
-<span class="kw">library</span>(htmltools)
-
-<span class="kw">browsable</span>(<span class="kw">tagList</span>(
-  tags<span class="op">$</span><span class="kw">script</span>(
-  <span class="st">"</span>
-<span class="st">    ReactDOM.render(</span>
-<span class="st">      React.createElement(</span>
-<span class="st">        'h1',</span>
-<span class="st">        null,</span>
-<span class="st">        'Powered by React'</span>
-<span class="st">      ),</span>
-<span class="st">      document.body</span>
-<span class="st">    )</span>
-<span class="st">  "</span>
-  ),
-  <span class="co">#add core-js first to work in RStudio Viewer</span>
-  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),
-  <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
-))</code></pre></div>
+<div class="section level2">
+<h2>Example</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(reactR)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(htmltools)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">browsable</span>(<span class="kw">tagList</span>(</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  tags<span class="op">$</span><span class="kw">script</span>(</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="st">"</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">    ReactDOM.render(</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">      React.createElement(</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">        'h1',</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">        null,</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">        'Powered by React'</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">      ),</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">      document.body</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">    )</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  "</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">  ),</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="co">#add core-js first to work in RStudio Viewer</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">  <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">))</a></code></pre></div>
 <p><code>reactR</code> also uses <code>V8</code> if available to transform <code>JSX</code> and <code>ES2015</code> code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reactR)
-<span class="kw">library</span>(htmltools)
-
-<span class="kw">browsable</span>(
-  <span class="kw">tagList</span>(
-    tags<span class="op">$</span><span class="kw">script</span>(
-      <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.body)'</span>)
-    ),
-    <span class="co"># add core-js shim first for React in RStudio Viewer</span>
-    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),
-    <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
-  )
-)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(reactR)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(htmltools)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">browsable</span>(</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">tagList</span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    tags<span class="op">$</span><span class="kw">script</span>(</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">      <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.body)'</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    ),</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="co"># add core-js shim first for React in RStudio Viewer</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">)</a></code></pre></div>
 </div>
-<div id="contributing-and-code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing-and-code-of-conduct" class="anchor"></a>Contributing and Code of Conduct</h2>
+<div class="section level2">
+<h2>Contributing and Code of Conduct</h2>
 <p>I welcome contributors. Help make this package great. Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
