@@ -18,7 +18,7 @@ Authors@R: c(
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
 Description: Make it easy to use 'React' in R with helper
-              dependency functions, embedded 'Babel' transpiler,
+              dependency functions, embedded 'Babel' 'transpiler',
               and examples.
 URL: https://github.com/timelyportfolio/reactR
 BugReports: https://github.com/timelyportfolio/reactR/issues
