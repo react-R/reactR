@@ -24,6 +24,7 @@ URL: https://github.com/timelyportfolio/reactR
 BugReports: https://github.com/timelyportfolio/reactR/issues
 License: MIT + file LICENSE
 LazyData: TRUE
+Encoding: UTF-8
 Imports:
     htmltools
 Suggests:
@@ -32,5 +33,5 @@ Suggests:
     shiny,
     V8,
     knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
