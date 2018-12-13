@@ -1,0 +1,15 @@
+{
+  "name": "react-sparklines",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "react-sparklines": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.3.0",
+    "babel-preset-react": "^6.24.1",
+    "browserify": "^16.2.3"
+  }
+}
