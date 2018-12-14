@@ -28,7 +28,7 @@ window.reactR = (function () {
      * @param {string} type 
      * @param {Object} components 
      */
-    function exposeComponents(name, type, components) {
+    function reactWidget(name, type, components) {
         HTMLWidgets.widget({
             name: name,
             type: type,
@@ -46,6 +46,7 @@ window.reactR = (function () {
     }
 
     return {
-        exposeComponents: exposeComponents
+        reactWidget: reactWidget,
+        hydrate: hydrate
     };
 })()

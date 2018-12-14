@@ -1,3 +1,18 @@
+#' @export
+curve <- function(...) {
+  reactR::React$SparklinesCurve(...)
+}
+
+#' @export
+spots <- function(...) {
+  reactR::React$SparklinesSpots(...)
+}
+
+#' @export
+reference_line <- function(...) {
+  reactR::React$SparklinesReferenceLine(...)
+}
+
 #' <Add Title>
 #'
 #' <Add Description>
@@ -5,21 +20,14 @@
 #' @import htmlwidgets
 #'
 #' @export
-sparklineswidget <- function(message, width = NULL, height = NULL, elementId = NULL) {
-
-  # forward options using x
-  x = list(
-    message = message
-  )
-
-  # create widget
+sparklineswidget <- function(data, ...) {
   htmlwidgets::createWidget(
     name = 'sparklineswidget',
-    x,
-    width = width,
-    height = height,
+    list(tag = reactR::component("Sparklines", c(list(data = data, ...)))),
+    width = NULL,
+    height = NULL,
     package = 'sparklineswidget',
-    elementId = elementId
+    elementId = NULL
   )
 }
 
@@ -49,4 +57,14 @@ sparklineswidgetOutput <- function(outputId, width = '100%', height = '400px'){
 renderSparklineswidget <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, sparklineswidgetOutput, env, quoted = TRUE)
+}
+
+# Magical
+sparklineswidget_html <- function(id, style, class, ...) {
+  tagList(
+    reactR::html_dependency_corejs(),
+    reactR::html_dependency_react(),
+    reactR::html_dependency_reacttools(),
+    tags$div(id = id, class = class)
+  )
 }

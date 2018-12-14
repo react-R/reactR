@@ -2,15 +2,26 @@
 % Please edit documentation in R/reacttools.R
 \name{component}
 \alias{component}
-\title{Create a React component represented by an htmltools \code{\link[htmltools]{tag}}.}
+\title{Create a React component}
 \usage{
-component(name, ...)
+component(name, varArgs = list())
 }
 \arguments{
 \item{name}{Name of the React component, which must start with an upper-case character.}
 
 \item{...}{Attributes and children of the element to pass along to \code{\link[htmltools]{tag}} as varArgs.}
 }
+\value{
+An htmltools \code{\link[htmltools]{tag}} object
+}
 \description{
-Create a React component represented by an htmltools \code{\link[htmltools]{tag}}.
+Create a React component
+}
+\examples{
+component("ParentComponent",
+  x = 1,
+  y = 2,
+  component("ChildComponent"),
+  component("OtherChildComponent")
+)
 }

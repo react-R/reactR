@@ -1,3 +1,4 @@
 import * as SparklinesComponents from 'react-sparklines';
+import { reactWidget } from 'reactR';
 
-reactR.exposeComponents('reactsparklines', 'output', SparklinesComponents);
+reactWidget('sparklineswidget', 'output', SparklinesComponents);
