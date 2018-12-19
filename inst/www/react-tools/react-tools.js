@@ -59,16 +59,14 @@ window.reactR = (function () {
             name: name,
             type: type,
             factory: function (el, width, height) {
-                var lastElement = null;
+                var lastValue;
                 renderValue = (function (value) {
-                    lastElement = (value === undefined) ? lastElement : hydrate(components, value.tag);
                     if (actualOptions.renderOnResize) {
-                        var newProps = {};
-                        newProps[options["widthProperty"]] = formatDimension(width);
-                        newProps[options["heightProperty"]] = formatDimension(height);
-                        lastElement = React.cloneElement(lastElement, newProps);
+                        value.tag.attribs[actualOptions["widthProperty"]] = formatDimension(width);
+                        value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
+                        lastValue = value;
                     }
-                    ReactDOM.render(lastElement, el);
+                    ReactDOM.render(hydrate(components, value.tag), el);
                 });
                 return {
                     renderValue: renderValue,
@@ -76,7 +74,7 @@ window.reactR = (function () {
                         if (actualOptions.renderOnResize) {
                             width = newWidth;
                             height = newHeight;
-                            renderValue();
+                            renderValue(lastValue);
                         }
                     }
                 };
