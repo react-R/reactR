@@ -40,4 +40,11 @@ devtools::document()
 devtools::install()
 ```
 
+Next, install the `colourpicker` and `shinySignals` packages, as they are used in the example app:
+
+```
+install.packages("colourpicker")
+devtools::install_github("shinySignals")
+```
+
 Finally you can try the example app by running [app.R](app.R).

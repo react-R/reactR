@@ -65,6 +65,6 @@ sparklineswidget_html <- function(id, style, class, ...) {
     reactR::html_dependency_corejs(),
     reactR::html_dependency_react(),
     reactR::html_dependency_reacttools(),
-    tags$div(id = id, class = class)
+    tags$span(id = id, class = class)
   )
 }

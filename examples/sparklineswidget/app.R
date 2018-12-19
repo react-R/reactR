@@ -28,6 +28,4 @@ server <- function(input, output, session) {
   )
 }
 
-options(shiny.port = 4343)
-
 shinyApp(ui, server)
