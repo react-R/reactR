@@ -22,8 +22,8 @@ reference_line <- function(...) {
 #' @export
 sparklineswidget <- function(data, ...) {
   htmlwidgets::createWidget(
-    name = 'sparklineswidget',
-    list(tag = reactR::component("Sparklines", c(list(data = data, ...)))),
+    'sparklineswidget',
+    reactR::reactData(reactR::component("Sparklines", c(list(data = data, ...)))),
     width = NULL,
     height = NULL,
     package = 'sparklineswidget',

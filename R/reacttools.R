@@ -44,3 +44,15 @@ React <- structure(list(), class = "react_component_builder")
 
 #' @export
 `[[<-.react_component_builder` <- `$<-.react_component_builder`
+
+#' Create a data object for transporting a React component to the client.
+#'
+#' @param tag
+#'
+#' @return
+#' @export
+#'
+#' @examples
+reactData <- function(tag) {
+  list(tag = tag)
+}
