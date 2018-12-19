@@ -17,26 +17,16 @@ window.reactR = (function () {
         for (var i = 0; i < tag.children.length; i++) {
             args.push(hydrate(components, tag.children[i]));
         }
-        // Look into a way to clone an element and apply new props
         return React.createElement.apply(null, args);
     }
-
-    // TODO default set of options
-    // TODO Look at ReactDOM.findDOMNode()
 
     var defaultOptions = {
         widthProperty: "width",
         heightProperty: "height",
         appendPx: false,
         renderOnResize: false
-    }
+    };
 
-    /**
-     * If options contains recognized option names, returns a new object with
-     * defaultOptions and user options merged. User options take precedence.
-     * @param {Object} options An object of user-supplied keys and values
-     * @returns {Object} The merged options
-     */
     function mergeOptions(options) {
         for (var k in options) {
             if (!defaultOptions.hasOwnProperty(k)) {
@@ -46,36 +36,11 @@ window.reactR = (function () {
         return jQuery.extend({}, defaultOptions, options);
     }
 
-    /**
-     * Formats a dimension value based on options
-     * @param {Object} dimension The dimension value to format
-     * @param {Object} options The options, which should contain an appendPx key
-     */
-    function formatDimension(dimension, options) {
-        if (dimension === null) {
-            return;
-        } else if (options.appendPx) {
-            return dimension.toString() + "px";
+    function formatDimension(dim, options) {
+        if (options.appendPx) {
+            return dim.toString() + 'px';
         } else {
-            return dimension;
-        }
-    }
-
-    /**
-     * If options.renderOnResize is true, returns a shallow clone of element with two additional props: width and height.
-     * @param {Object} element
-     * @param {number} width
-     * @param {number} height
-     * @param {Object} options
-     */
-    function withDimensions(element, width, height, options) {
-        if (options.renderOnResize) {
-            var newProps = {};
-            newProps[options["widthProperty"]] = formatDimension(width, options);
-            newProps[options["heightProperty"]] = formatDimension(height, options);
-            return React.cloneElement(element, newProps);
-        } else {
-            return element;
+            return dim;
         }
     }
 
@@ -94,26 +59,24 @@ window.reactR = (function () {
             name: name,
             type: type,
             factory: function (el, width, height) {
-                var lastRenderedElement = null;
+                var lastElement = null;
+                renderValue = (function (value) {
+                    lastElement = (value === undefined) ? lastElement : hydrate(components, value.tag);
+                    if (actualOptions.renderOnResize) {
+                        var newProps = {};
+                        newProps[options["widthProperty"]] = formatDimension(width);
+                        newProps[options["heightProperty"]] = formatDimension(height);
+                        lastElement = React.cloneElement(lastElement, newProps);
+                    }
+                    ReactDOM.render(lastElement, el);
+                });
                 return {
-                    renderValue: (function (value) {
-                        lastRenderedElement = withDimensions(
-                            hydrate(components, value.tag),
-                            width,
-                            height,
-                            actualOptions
-                        );
-                        ReactDOM.render(lastRenderedElement, el);
-                    }),
+                    renderValue: renderValue,
                     resize: function (newWidth, newHeight) {
                         if (actualOptions.renderOnResize) {
-                            lastRenderedElement = withDimensions(
-                                lastRenderedElement,
-                                newWidth,
-                                newHeight,
-                                actualOptions
-                            );
-                            ReactDOM.render(lastRenderedElement, el);
+                            width = newWidth;
+                            height = newHeight;
+                            renderValue();
                         }
                     }
                 };
