@@ -7,10 +7,8 @@ window.reactR = (function () {
      * @param {Object} tag
      */
     function hydrate(components, tag) {
-        if (tag.name[0] !== tag.name[0].toUpperCase()) {
-            throw new Error("Component does not begin with a capital letter: " + tag.name);
-        }
-        if (!components.hasOwnProperty(tag.name)) {
+        if (tag.name[0] === tag.name[0].toUpperCase()
+            && !components.hasOwnProperty(tag.name)) {
             throw new Error("Unknown component: " + tag.name);
         }
         var args = [components[tag.name], tag.attribs];
