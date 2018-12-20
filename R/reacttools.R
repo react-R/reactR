@@ -56,3 +56,8 @@ React <- structure(list(), class = "react_component_builder")
 reactData <- function(tag) {
   list(tag = tag)
 }
+
+#' @export
+evalJS <- function(js_string) {
+  list(type = "js", js = babel_transform(js_string))
+}

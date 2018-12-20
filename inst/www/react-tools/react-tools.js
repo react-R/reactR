@@ -7,9 +7,20 @@ window.reactR = (function () {
      * @param {Object} tag
      */
     function hydrate(components, tag) {
+        if (tag.type === "js") {
+            return window.eval(tag.js);
+        }
         if (tag.name[0] === tag.name[0].toUpperCase()
             && !components.hasOwnProperty(tag.name)) {
             throw new Error("Unknown component: " + tag.name);
+        }
+        for (var k in tag.attribs) {
+            var v = tag.attribs[k];
+            if ((typeof v === 'object')
+                && v.tag !== undefined
+                && v.tag.type === 'js') {
+                tag.attribs[k] = window.eval(v.tag.js);
+            }
         }
         var args = [components[tag.name], tag.attribs];
         for (var i = 0; i < tag.children.length; i++) {
