@@ -26,12 +26,17 @@ window.reactR = (function () {
     };
 
     function mergeOptions(options) {
+        var merged = {};
+        for (var k in defaultOptions) {
+            merged[k] = defaultOptions[k];
+        }
         for (var k in options) {
             if (!defaultOptions.hasOwnProperty(k)) {
                 throw new Error("Unrecognized option: " + k);
             }
+            merged[k] = options[k];
         }
-        return jQuery.extend({}, defaultOptions, options);
+        return merged;
     }
 
     function formatDimension(dim, options) {
