@@ -1,18 +1,40 @@
 window.reactR = (function () {
     /**
+     * Inject an event handler prop to pass through to Shiny
+     */
+    function addShiny(tag, event, el) {
+        // bail if we aren't in a Shiny context
+        if (!HTMLWidgets.shinyMode) return tag;
+        var id = tag.name;
+        // if tag has an attribute id then use that instead
+        if(tag.attribs.hasOwnProperty("id")) {
+            id = tag.attribs.id;
+        }
+        tag.attribs[event] = function(value) {
+            Shiny.onInputChange(this.id + "_" + id + "_" + event, value);
+        }.bind(el);
+        return tag;
+    }
+
+    /**
      * Recursively transforms tag, a JSON representation of an instance of a
      * React component and its children, into a React element suitable for
      * passing to ReactDOM.render.
      * @param {Object} components
      * @param {Object} tag
      */
-    function hydrate(components, tag) {
+    function hydrate(components, tag, el) {
         if (tag.type === "js") {
             return window.eval(tag.js);
         }
         if (tag.name[0] === tag.name[0].toUpperCase()
             && !components.hasOwnProperty(tag.name)) {
             throw new Error("Unknown component: " + tag.name);
+        }
+        // check to see if there is a shiny prop
+        //  and if so then add the event handler
+        if(tag.attribs.hasOwnProperty("shinyEvent")) {
+            tag = addShiny(tag, tag.attribs.shinyEvent, el);
         }
         for (var k in tag.attribs) {
             var v = tag.attribs[k];
@@ -24,7 +46,7 @@ window.reactR = (function () {
         }
         var args = [components[tag.name], tag.attribs];
         for (var i = 0; i < tag.children.length; i++) {
-            args.push(hydrate(components, tag.children[i]));
+            args.push(hydrate(components, tag.children[i], el));
         }
         return React.createElement.apply(null, args);
     }
@@ -58,6 +80,7 @@ window.reactR = (function () {
         }
     }
 
+
     /**
      * Creates an HTMLWidget that is updated by rendering a React component.
      * React component constructors are made available by specifying them by
@@ -80,7 +103,7 @@ window.reactR = (function () {
                         value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
                         lastValue = value;
                     }
-                    ReactDOM.render(hydrate(components, value.tag), el);
+                    ReactDOM.render(hydrate(components, value.tag, el), el);
                 });
                 return {
                     renderValue: renderValue,
