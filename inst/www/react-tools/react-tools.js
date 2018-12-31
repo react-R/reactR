@@ -5,8 +5,13 @@ window.reactR = (function () {
     function addShiny(tag, event, el) {
         // bail if we aren't in a Shiny context
         if (!HTMLWidgets.shinyMode) return tag;
+        var id = tag.name;
+        // if tag has an attribute id then use that instead
+        if(tag.attribs.hasOwnProperty("id")) {
+            id = tag.attribs.id;
+        }
         tag.attribs[event] = function(value) {
-            Shiny.onInputChange(this.id + "_" + tag.name + "_" + event, value);
+            Shiny.onInputChange(this.id + "_" + id + "_" + event, value);
         }.bind(el);
         return tag;
     }
@@ -28,8 +33,8 @@ window.reactR = (function () {
         }
         // check to see if there is a shiny prop
         //  and if so then add the event handler
-        if(tag.attribs.hasOwnProperty("shiny")) {
-            tag = addShiny(tag, tag.attribs.shiny, el);
+        if(tag.attribs.hasOwnProperty("shinyEvent")) {
+            tag = addShiny(tag, tag.attribs.shinyEvent, el);
         }
         for (var k in tag.attribs) {
             var v = tag.attribs[k];
