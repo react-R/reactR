@@ -12,10 +12,12 @@ isUpper <- function(s) {
 #'
 #' @examples
 #' component("ParentComponent",
-#'   x = 1,
-#'   y = 2,
-#'   component("ChildComponent"),
-#'   component("OtherChildComponent")
+#'   list(
+#'     x = 1,
+#'     y = 2,
+#'     component("ChildComponent"),
+#'     component("OtherChildComponent")
+#'   )
 #' )
 component <- function(name, varArgs = list()) {
   if (length(name) == 0 || !isUpper(substring(name, 1, 1))) {
