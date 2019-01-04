@@ -11,7 +11,7 @@ You can install reactR from github with:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("timelyportfolio/reactR")
+devtools::install_github("react-R/reactR")
 ```
 
 ## Example
