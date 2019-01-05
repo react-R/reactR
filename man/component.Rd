@@ -7,9 +7,11 @@
 component(name, varArgs = list())
 }
 \arguments{
-\item{name}{Name of the React component, which must start with an upper-case character.}
+\item{name}{Name of the React component, which must start with an upper-case
+character.}
 
-\item{...}{Attributes and children of the element to pass along to \code{\link[htmltools]{tag}} as varArgs.}
+\item{varArgs}{Attributes and children of the element to pass along to
+\code{\link[htmltools]{tag}} as \code{varArgs}.}
 }
 \value{
 An htmltools \code{\link[htmltools]{tag}} object
@@ -19,9 +21,11 @@ Create a React component
 }
 \examples{
 component("ParentComponent",
-  x = 1,
-  y = 2,
-  component("ChildComponent"),
-  component("OtherChildComponent")
+  list(
+    x = 1,
+    y = 2,
+    component("ChildComponent"),
+    component("OtherChildComponent")
+  )
 )
 }

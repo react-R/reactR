@@ -2,13 +2,13 @@
 % Please edit documentation in R/reacttools.R
 \name{reactData}
 \alias{reactData}
-\title{Create a data object for transporting a React component to the client.}
+\title{Create a data object for sending a React component to the client.}
 \usage{
 reactData(tag)
 }
 \arguments{
-\item{tag}{}
+\item{tag}{React component or \code{\link[htmltools]{tag}}}
 }
 \description{
-Create a data object for transporting a React component to the client.
+Create a data object for sending a React component to the client.
 }
