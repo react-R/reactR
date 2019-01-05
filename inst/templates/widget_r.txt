@@ -1,0 +1,60 @@
+#' <Add Title>
+#'
+#' <Add Description>
+#'
+#' @import htmlwidgets
+#'
+#' @export
+%s <- function(message, width = NULL, height = NULL, elementId = NULL) {
+
+  # describe a React component to send to the browser for rendering.
+  component <- reactR::reactData(reactR::component("div", message))
+
+  # create widget
+  htmlwidgets::createWidget(
+    name = '%s',
+    component,
+    width = width,
+    height = height,
+    package = '%s',
+    elementId = elementId
+  )
+}
+
+#' Shiny bindings for %s
+#'
+#' Output and render functions for using %s within Shiny
+#' applications and interactive Rmd documents.
+#'
+#' @param outputId output variable to read from
+#' @param width,height Must be a valid CSS unit (like \code{'100\%%'},
+#'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
+#'   string and have \code{'px'} appended.
+#' @param expr An expression that generates a %s
+#' @param env The environment in which to evaluate \code{expr}.
+#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
+#'   is useful if you want to save an expression in a variable.
+#'
+#' @name %s-shiny
+#'
+#' @export
+%sOutput <- function(outputId, width = '100%%', height = '400px'){
+  htmlwidgets::shinyWidgetOutput(outputId, '%s', width, height, package = '%s')
+}
+
+#' @rdname %s-shiny
+#' @export
+render%s <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  htmlwidgets::shinyRenderWidget(expr, %sOutput, env, quoted = TRUE)
+}
+
+#' Called by HTMLWidgets to produce the widget's root element.
+#' @rdname %s-shiny
+%s_html <- function(id, style, class, ...) {
+  tagList(
+    reactR::html_dependency_react(),
+    reactR::html_dependency_reacttools(),
+    htmltools::tags$div(id = id, class = class)
+  )
+}
