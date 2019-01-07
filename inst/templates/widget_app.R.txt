@@ -1,0 +1,15 @@
+library(shiny)
+library(%s)
+
+ui <- fluidPage(
+  titlePanel("reactR HTMLWidget Example"),
+  %sOutput('widgetOutput')
+)
+
+server <- function(input, output, session) {
+  output$widgetOutput <- render%s(
+    %s("Hello world!")
+  )
+}
+
+shinyApp(ui, server)

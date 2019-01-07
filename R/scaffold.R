@@ -32,6 +32,9 @@ scaffoldReactWidget <- function(name, npmPkg = NULL, edit = interactive()){
   addPackageJSON(toDepJSON(npmPkg))
   addWebpackConfig(name)
   addWidgetJS(name, edit)
+  addExampleApp(name)
+  message("To install dependencies from npm run: yarn install")
+  message("To build JavaScript run: yarn run webpack --mode=development")
 }
 
 toDepJSON <- function(npmPkg) {
@@ -48,12 +51,12 @@ slurp <- function(file) {
   ), collapse = "\n")
 }
 
+capName = function(name){
+  paste0(toupper(substring(name, 1, 1)), substring(name, 2))
+}
+
 addWidgetConstructor <- function(name, package, edit){
   tpl <- slurp('templates/widget_r.txt')
-
-  capName = function(name){
-    paste0(toupper(substring(name, 1, 1)), substring(name, 2))
-  }
   if (!file.exists(file_ <- sprintf("R/%s.R", name))){
     cat(
       sprintf(tpl, name, name, package, name, name, name, name, name, name, package, name, capName(name), name, name, name),
@@ -93,6 +96,7 @@ addPackageJSON <- function(npmPkg) {
   tpl <- sprintf(slurp('templates/widget_package.json.txt'), npmPkg)
   if (!file.exists('package.json')) {
     cat(tpl, file = 'package.json')
+    message('Created package.json')
   } else {
     message("package.json already exists")
   }
@@ -102,6 +106,7 @@ addWebpackConfig <- function(name) {
   tpl <- sprintf(slurp('templates/widget_webpack.config.js.txt'), name, name)
   if (!file.exists('webpack.config.js')) {
     cat(tpl, file = 'webpack.config.js')
+    message('Created webpack.config.js')
   } else {
     message("webpack.config.js already exists")
   }
@@ -123,6 +128,16 @@ addWidgetJS <- function(name, edit){
     message(file_, " already exists")
   }
   if (edit) fileEdit(file_)
+}
+
+addExampleApp <- function(name) {
+  tpl <- sprintf(slurp('templates/widget_app.R.txt'), name, name, capName(name), name)
+  if (!file.exists('app.R')) {
+    cat(tpl, file = 'app.R')
+    message('Created example app.R')
+  } else {
+    message("app.R already exists")
+  }
 }
 
 # invoke file.edit in a way that will bind to the RStudio editor
