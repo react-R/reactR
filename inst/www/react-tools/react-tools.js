@@ -14,10 +14,10 @@ window.reactR = (function () {
         var elem = components.hasOwnProperty(tag.name) ? components[tag.name] : tag.name,
             args = [elem, tag.attribs];
         for (var i = 0; i < tag.children.length; i++) {
-            if (typeof tag.children[i] === 'string') {
-                args.push(tag.children[i]);
-            } else {
+            if (typeof tag.children[i] === 'object') {
                 args.push(hydrate(components, tag.children[i]));
+            } else {
+                args.push(tag.children[i]);
             }
         }
         return React.createElement.apply(null, args);
