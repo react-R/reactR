@@ -11,9 +11,14 @@ window.reactR = (function () {
             && !components.hasOwnProperty(tag.name)) {
             throw new Error("Unknown component: " + tag.name);
         }
-        var args = [components[tag.name], tag.attribs];
+        var elem = components.hasOwnProperty(tag.name) ? components[tag.name] : tag.name,
+            args = [elem, tag.attribs];
         for (var i = 0; i < tag.children.length; i++) {
-            args.push(hydrate(components, tag.children[i]));
+            if (typeof tag.children[i] === 'string') {
+                args.push(tag.children[i]);
+            } else {
+                args.push(hydrate(components, tag.children[i]));
+            }
         }
         return React.createElement.apply(null, args);
     }
