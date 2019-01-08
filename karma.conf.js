@@ -1,11 +1,10 @@
-// TODO: Get source maps for failures working.
 module.exports = function (config) {
     config.set({
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha', 'chai', 'source-map-support'],
         files: ['inst/www/react-tools/react-tools.js', 'js-tests/js-tests.jsx'],
         preprocessors: {
             'js-tests/*.js': ['webpack'],
-            'js-tests/*.jsx': ['webpack', 'sourcemap']
+            'js-tests/*.jsx': ['webpack']
         },
         webpack: {
             module: {
@@ -19,7 +18,7 @@ module.exports = function (config) {
                     }
                 ]
             },
-            devtool: 'source-map'
+            devtool: 'inline-source-map'
         },
         webpackMiddleware: {
             stats: 'errors-only'
