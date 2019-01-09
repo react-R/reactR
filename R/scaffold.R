@@ -51,6 +51,15 @@ slurp <- function(file) {
   ), collapse = "\n")
 }
 
+# Perform a series of pattern replacements on str.
+# Example: renderTemplate("foo ${x} bar ${y} baz ${x}", list(x = 1, y = 2))
+# Produces: "foo 1 bar 2 baz 1"
+renderTemplate <- function(str, substitutions) {
+  Reduce(function(str, name) {
+    gsub(paste0("\\$\\{", name, "\\}"), substitutions[[name]], str)
+  }, names(substitutions), str)
+}
+
 capName = function(name){
   paste0(toupper(substring(name, 1, 1)), substring(name, 2))
 }
@@ -59,7 +68,7 @@ addWidgetConstructor <- function(name, package, edit){
   tpl <- slurp('templates/widget_r.txt')
   if (!file.exists(file_ <- sprintf("R/%s.R", name))){
     cat(
-      sprintf(tpl, name, name, package, name, name, name, name, name, name, package, name, capName(name), name, name, name),
+      renderTemplate(tpl, list(name = name, package = package, capName = capName(name))),
       file = file_
     )
     message('Created boilerplate for widget constructor ', file_)
@@ -93,7 +102,7 @@ addWidgetYAML <- function(name, edit){
 }
 
 addPackageJSON <- function(npmPkg) {
-  tpl <- sprintf(slurp('templates/widget_package.json.txt'), npmPkg)
+  tpl <- renderTemplate(slurp('templates/widget_package.json.txt'), list(npmPkg = npmPkg))
   if (!file.exists('package.json')) {
     cat(tpl, file = 'package.json')
     message('Created package.json')
@@ -103,7 +112,7 @@ addPackageJSON <- function(npmPkg) {
 }
 
 addWebpackConfig <- function(name) {
-  tpl <- sprintf(slurp('templates/widget_webpack.config.js.txt'), name, name)
+  tpl <- renderTemplate(slurp('templates/widget_webpack.config.js.txt'), list(name = name))
   if (!file.exists('webpack.config.js')) {
     cat(tpl, file = 'webpack.config.js')
     message('Created webpack.config.js')
@@ -120,7 +129,7 @@ addWidgetJS <- function(name, edit){
     dir.create('srcjs')
   }
   if (!file.exists(file_ <- sprintf('srcjs/%s.js', name))){
-    cat(sprintf(tpl, name), file = file_)
+    cat(renderTemplate(tpl, list(name = name)), file = file_)
     message('Created boilerplate for widget javascript bindings at ',
             sprintf('srcjs/%s.js', name)
     )
@@ -131,7 +140,7 @@ addWidgetJS <- function(name, edit){
 }
 
 addExampleApp <- function(name) {
-  tpl <- sprintf(slurp('templates/widget_app.R.txt'), name, name, capName(name), name)
+  tpl <- renderTemplate(slurp('templates/widget_app.R.txt'), list(name = name, capName = capName(name)))
   if (!file.exists('app.R')) {
     cat(tpl, file = 'app.R')
     message('Created example app.R')

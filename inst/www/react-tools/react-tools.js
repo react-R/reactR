@@ -20,7 +20,7 @@ window.reactR = (function () {
                 args.push(tag.children[i]);
             }
         }
-        return React.createElement.apply(null, args);
+        return React.createElement.apply(React, args);
     }
 
     var defaultOptions = {
@@ -46,10 +46,17 @@ window.reactR = (function () {
 
     function formatDimension(dim, options) {
         if (options.appendPx) {
-            return dim.toString() + 'px';
+            return dim + 'px';
         } else {
             return dim;
         }
+    }
+
+    function isTag(value) {
+        return (typeof value === 'object')
+            && value.hasOwnProperty('name')
+            && value.hasOwnProperty('attribs')
+            && value.hasOwnProperty('children');
     }
 
     /**
@@ -67,15 +74,16 @@ window.reactR = (function () {
             name: name,
             type: type,
             factory: function (el, width, height) {
-                var lastValue;
-                renderValue = (function (value) {
-                    if (actualOptions.renderOnResize) {
-                        value.tag.attribs[actualOptions["widthProperty"]] = formatDimension(width);
-                        value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
-                        lastValue = value;
-                    }
-                    ReactDOM.render(hydrate(components, value.tag), el);
-                });
+                var lastValue,
+                    renderValue = (function (value) {
+                        // TODO Handle strings naturally
+                        if (actualOptions.renderOnResize) {
+                            value.tag.attribs[actualOptions["widthProperty"]] = formatDimension(width);
+                            value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
+                            lastValue = value;
+                        }
+                        ReactDOM.render(hydrate(components, value.tag), el);
+                    });
                 return {
                     renderValue: renderValue,
                     resize: function (newWidth, newHeight) {
@@ -92,6 +100,12 @@ window.reactR = (function () {
 
     return {
         reactWidget: reactWidget,
-        hydrate: hydrate
+        hydrate: hydrate,
+        __internal: {
+            defaultOptions: defaultOptions,
+            mergeOptions: mergeOptions,
+            formatDimension: formatDimension,
+            isTag: isTag
+        }
     };
 })()

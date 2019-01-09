@@ -5,53 +5,53 @@
 #' @import htmlwidgets
 #'
 #' @export
-%s <- function(message, width = NULL, height = NULL, elementId = NULL) {
+${name} <- function(message, width = NULL, height = NULL, elementId = NULL) {
 
   # describe a React component to send to the browser for rendering.
   component <- reactR::reactMarkup(htmltools::tag("div", list(message)))
 
   # create widget
   htmlwidgets::createWidget(
-    name = '%s',
+    name = '${name}',
     component,
     width = width,
     height = height,
-    package = '%s',
+    package = '${package}',
     elementId = elementId
   )
 }
 
-#' Shiny bindings for %s
+#' Shiny bindings for ${name}
 #'
-#' Output and render functions for using %s within Shiny
+#' Output and render functions for using ${name} within Shiny
 #' applications and interactive Rmd documents.
 #'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
-#' @param expr An expression that generates a %s
+#' @param expr An expression that generates a ${name}
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
-#' @name %s-shiny
+#' @name ${name}-shiny
 #'
 #' @export
-%sOutput <- function(outputId, width = '100%%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, '%s', width, height, package = '%s')
+${name}Output <- function(outputId, width = '100%%', height = '400px'){
+  htmlwidgets::shinyWidgetOutput(outputId, '${name}', width, height, package = '${package}')
 }
 
-#' @rdname %s-shiny
+#' @rdname ${name}-shiny
 #' @export
-render%s <- function(expr, env = parent.frame(), quoted = FALSE) {
+render${capName} <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, %sOutput, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, ${name}Output, env, quoted = TRUE)
 }
 
 #' Called by HTMLWidgets to produce the widget's root element.
-#' @rdname %s-shiny
-%s_html <- function(id, style, class, ...) {
+#' @rdname ${name}-shiny
+${name}_html <- function(id, style, class, ...) {
   tagList(
     reactR::html_dependency_react(),
     reactR::html_dependency_reacttools(),
