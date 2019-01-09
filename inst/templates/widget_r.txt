@@ -8,7 +8,7 @@
 %s <- function(message, width = NULL, height = NULL, elementId = NULL) {
 
   # describe a React component to send to the browser for rendering.
-  component <- reactR::reactData(htmltools::tag("div", list(message)))
+  component <- reactR::reactMarkup(htmltools::tag("div", list(message)))
 
   # create widget
   htmlwidgets::createWidget(

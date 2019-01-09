@@ -98,15 +98,18 @@ React <- structure(
 #' @export
 `[[<-.react_component_builder` <- `$<-.react_component_builder`
 
-#' Create a data object for sending a React component to the client.
+#' Prepare data that represents a character vector, a React component, or an
+#' htmltools tag for sending to the client.
 #'
-#' @param tag React component or \code{\link[htmltools]{tag}}
+#' @param tag character vector or React component or
+#'   \code{\link[htmltools]{tag}}
 #'
 #' @return
 #' @export
 #'
 #' @examples
-reactData <- function(tag) {
+reactMarkup <- function(tag) {
+  # TODO ensure tag is either an htmltools tag or a string (throw otherwise)
   list(tag = tag)
 }
 
