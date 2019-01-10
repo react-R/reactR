@@ -58,7 +58,7 @@ function xmlEqual(x1, x2) {
         && x1.text === x2.text)
         return true;
     return x1.name === x2.name
-        // Test attributes for equalitiy
+        // Test attributes for equality
         && Object.keys(x1).length === Object.keys(x2).length
         && Object.keys(x1).every(k => x1[k] === x2[k])
         // Test children for equality
@@ -67,12 +67,7 @@ function xmlEqual(x1, x2) {
 }
 
 describe('window.reactR', () => {
-    describe('#hydrate()', () => {
-        it('should throw an exception with an unknown component', () => {
-            assert.throws(() => {
-                reactR.hydrate({ Shout: Shout }, stringToTag('<Bar/>'))
-            }, Error, /Unknown component/);
-        });
+    describe('#hydrate() with HTML', () => {
         it('hydrates an HTML5 component with a text child', () => {
             const markup = '<h1>Hello</h1>';
             assert.equal(
@@ -88,4 +83,11 @@ describe('window.reactR', () => {
             )
         })
     });
+    describe('#hydrate() with Components', () => {
+        it('should throw an exception with an unknown component', () => {
+            assert.throws(() => {
+                reactR.hydrate({ Shout: Shout }, stringToTag('<Bar/>'))
+            }, Error, /Unknown component/);
+        });
+    })
 });
