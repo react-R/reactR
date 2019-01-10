@@ -63,7 +63,7 @@ function xmlEqual(x1, x2) {
         && Object.keys(x1).every(k => x1[k] === x2[k])
         // Test children for equality
         && x1.children.length === x2.children.length
-        && x1.children.every((child, i) => markupEqual(child, x2.children[i]))
+        && x1.children.every((child, i) => xmlEqual(child, x2.children[i]))
 }
 
 describe('window.reactR', () => {
