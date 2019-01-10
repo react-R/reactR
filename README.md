@@ -1,6 +1,8 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
 [![Travis-CI Build Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
 
+<img height="150px" alt="react-R logo" src="assets/logos/reactR-logo.png"/>
+
 # reactR
 
 A set of convenience function with local dependencies for using [`React`](https://facebook.github.io/react) in `R`.  This is modeled after the `html_dependency_*` functions from RStudio's [`rmarkdown`](https://github.com/rstudio/rmarkdown) package.
