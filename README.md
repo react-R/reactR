@@ -1,7 +1,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
 [![Travis-CI Build Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
 
-![react-R logo]("inst/logos/reactr-logo.png")
+![react-R logo](inst/logos/reactr-logo.png)
 
 # reactR
 
