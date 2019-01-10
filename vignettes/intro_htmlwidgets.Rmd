@@ -1,0 +1,64 @@
+---
+title: "htmlwidgets with reactR"
+author: "Alan Dipert"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{htmlwidgets with reactR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction to htmlwidgets with reactR
+
+The [htmlwidgets](https://www.htmlwidgets.org) package provides a framework for creating R bindings to JavaScript libraries. reactR adds to this framework by simplifying the creation of widgets that build on [React](https://facebook.github.io/react/)-based libraries or code.
+
+In particular, reactR adds:
+
+* The `reactR::scaffoldReactWidget` function for generating a skeletal React-based htmlwidget, including JavaScript build tool configuration. It is analagous to `htmlwidgets::scaffoldWidget`.
+* An [htmlDependency](https://shiny.rstudio.com/articles/packaging-javascript.html), returned by `reactR::html_dependency_reacttools`, that adds `window.reactR` to the browser environment. Scaffolded widgets include a reference to this htmlDependency, as well as one to `reactR::html_dependency_react` which provides React itself.
+* The `window.reactR.reactWidget` JavaScript function, which creates an installs a named widget backed by a set of [React Components](https://reactjs.org/docs/react-component.html).
+* `reactR::reactMarkup`, which prepares an `htmltools::tag` or `reactR::component` to be sent to the browser and rendered by React.
+
+## Tutorial: Adapting a JavaScript library
+
+In the following tutorial, we will build a widget around the [react-sparklines](https://reactjs.org/docs/react-component.html) React-based JavaScript library.
+
+We'll start by preparing our machine for React and reactR widget development. Then, we'll scaffold an initial `reactSparklines` widget package. Then, we'll add functionality that will make the widget easier to use.
+
+## Prepare your machine
+
+In order to develop a reactR widget, you'll need to install R and optionally RStudio. If you're on Windows, you should also install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+
+> For an introduction to general R package concepts, please consult the excellent [R packages](http://r-pkgs.had.co.nz/) online book.
+
+In addition, you'll need to install the following JavaScript tools on your machine:
+
+* [Node.js](https://nodejs.org): JavaScript engine and runtime for development outside of browsers. Provides the `node` and `npm` commands.
+* [Yarn](https://yarnpkg.com/en/): Command-line dependency management tool, provides the `yarn` command.
+
+## Install dependencies
+
+Several packages must be installed to continue. You can install them like this:
+
+> QA Note: The necessary version of reactR is not yet available on CRAN. Please install reactR with `devtools::install_github("react-R/reactR@enhancements")`
+
+```{r}
+install.packages(c("shiny", "usethis", "htmlwidgets", "reactR"))
+```
+
+## Scaffolding
+
+To create a new widget you can call `scaffoldReactWidget` to generate the basic structure and build configuration. This function will:
+
+* Create the .R, .js, .yaml, and .json files required by your widget;
+* If provided, take an [npm]() package name and version as a two-element character vector. For example, the npm package `foo` at version `^1.2.0` would be expressed as `c("foo", "^1.2.0")`. The package, if provided, will be added to the new widget's `package.json` as a build dependency.
+
+The following R code will create a package and add the `react-sparklines` dependency:
+
+```{r}
+devtools::create("reactSparklines")
+setwd("reactSparklines")
+reactR::scaffoldReactWidget("reactSparklines", c("react-sparklines", "^1.7.0"))
+devtools::install()
+```
