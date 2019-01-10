@@ -6,3 +6,4 @@
 ^cran-comments\.md$
 ^docs$
 ^\.travis\.yml$
+^\assets
