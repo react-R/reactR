@@ -88,6 +88,6 @@ React <- structure(
 reactMarkup <- function(tag) {
   stopifnot(inherits(tag, "shiny.tag")
             || (is.character(tag) && length(tag) == 1))
-  list(tag = tag, class = "reactR.markup")
+  list(tag = tag, class = "reactR_markup")
 }
 
