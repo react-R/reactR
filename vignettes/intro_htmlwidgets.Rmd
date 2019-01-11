@@ -153,10 +153,10 @@ We could also have exposed only a subset of the components exported by `react-sp
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { reactWidget } from 'reactR';
 
-reactWidget('reactSparklines', 'output', SparklinesComponents, {
+reactWidget('reactSparklines', 'output', {
   Sparklines: Sparklines,
   SparklinesLine: SparklinesLine
-});
+}, {});
 ```
 
 The primary difference between the two is the `import` syntax we chose to use.
