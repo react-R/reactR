@@ -7,6 +7,7 @@ window.reactR = (function () {
      * @param {Object} tag
      */
     function hydrate(components, tag) {
+        if (typeof tag === 'string') return tag;
         if (tag.name[0] === tag.name[0].toUpperCase()
             && !components.hasOwnProperty(tag.name)) {
             throw new Error("Unknown component: " + tag.name);
@@ -14,11 +15,7 @@ window.reactR = (function () {
         var elem = components.hasOwnProperty(tag.name) ? components[tag.name] : tag.name,
             args = [elem, tag.attribs];
         for (var i = 0; i < tag.children.length; i++) {
-            if (typeof tag.children[i] === 'object') {
-                args.push(hydrate(components, tag.children[i]));
-            } else {
-                args.push(tag.children[i]);
-            }
+            args.push(hydrate(components, tag.children[i]));
         }
         return React.createElement.apply(React, args);
     }
@@ -76,10 +73,13 @@ window.reactR = (function () {
             factory: function (el, width, height) {
                 var lastValue,
                     renderValue = (function (value) {
-                        // TODO Handle strings naturally
                         if (actualOptions.renderOnResize) {
-                            value.tag.attribs[actualOptions["widthProperty"]] = formatDimension(width);
-                            value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
+                            // value.tag might be a primitive string, in which
+                            // case there is no attribs property.
+                            if (typeof value.tag === 'object') {
+                                value.tag.attribs[actualOptions["widthProperty"]] = formatDimension(width);
+                                value.tag.attribs[actualOptions["heightProperty"]] = formatDimension(height);
+                            }
                             lastValue = value;
                         }
                         ReactDOM.render(hydrate(components, value.tag), el);
