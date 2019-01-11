@@ -73,10 +73,9 @@ html_dependency_corejs <- function() {
 
 #' Adds window.reactR.exposeComponents and window.reactR.hydrate
 #'
-#' @return
+#' @return \code{\link[htmltools]{htmlDependency}}
+#' @importFrom htmltools htmlDependency
 #' @export
-#'
-#' @examples
 html_dependency_reacttools <- function(){
   htmltools::htmlDependency(
     name = "reactwidget",

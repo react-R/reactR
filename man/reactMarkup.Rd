@@ -2,8 +2,8 @@
 % Please edit documentation in R/reacttools.R
 \name{reactMarkup}
 \alias{reactMarkup}
-\title{Prepare data that represents a character vector, a React component, or an
-htmltools tag for sending to the client.}
+\title{Prepare data that represents a single-element character vector, a React
+component, or an htmltools tag for sending to the client.}
 \usage{
 reactMarkup(tag)
 }
@@ -11,7 +11,11 @@ reactMarkup(tag)
 \item{tag}{character vector or React component or
 \code{\link[htmltools]{tag}}}
 }
+\value{
+A reactR markup object suitable for being passed to
+  \code{\link[htmlwidgets]{createWidget}} as widget instance data.
+}
 \description{
-Prepare data that represents a character vector, a React component, or an
-htmltools tag for sending to the client.
+Tag lists as returned by \code{\link[htmltools]{tagList}} are not currently
+supported.
 }

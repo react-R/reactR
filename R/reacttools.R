@@ -83,7 +83,8 @@ React <- structure(
 #' @param tag character vector or React component or
 #'   \code{\link[htmltools]{tag}}
 #'
-#' @return
+#' @return A reactR markup object suitable for being passed to
+#'   \code{\link[htmlwidgets]{createWidget}} as widget instance data.
 #' @export
 reactMarkup <- function(tag) {
   stopifnot(inherits(tag, "shiny.tag")
