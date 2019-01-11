@@ -21,9 +21,18 @@ window.reactR = (function () {
     }
 
     var defaultOptions = {
+        // The name of the property on the root tag to use for the width, if
+        // it's updated.
         widthProperty: "width",
+        // The name of the property on the root tag to use for the height, if
+        // it's updated.
         heightProperty: "height",
+        // Whether or not to append the string 'px' to the width and height
+        // properties when they change.
         appendPx: false,
+        // Whether or not to dynamically update the width and height properties
+        // of the last known tag when the computed width and height change in
+        // the browser.
         renderOnResize: false
     };
 
