@@ -84,7 +84,8 @@ React <- structure(
 #'
 #' @examples
 reactMarkup <- function(tag) {
-  # TODO ensure tag is either an htmltools tag or a string (throw otherwise)
-  list(tag = tag)
+  stopifnot(class(tag) == "shiny.tag"
+            || (is.character(tag) && length(tag) == 1))
+  list(tag = tag, class = "reactR.markup")
 }
 
