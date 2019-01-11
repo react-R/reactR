@@ -24,7 +24,7 @@ In particular, reactR adds:
 
 In the following tutorial, we will build a widget around the [react-sparklines](https://reactjs.org/docs/react-component.html) React-based JavaScript library.
 
-We'll start by preparing our machine for React and reactR widget development. Then, we'll scaffold an initial `reactSparklines` widget package. Then, we'll add functionality that will make the widget easier to use.
+We'll start by preparing our machine for React and reactR widget development. Then, we'll scaffold an initial `reactSparklines` widget package. Finally, we'll add functionality that will make the widget easier to use.
 
 ## Prepare your machine
 
@@ -80,7 +80,7 @@ yarn install
 yarn run webpack --mode=development
 ```
 
-* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **You only need to run it after modifying package.json**.
+* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**.
 * `yarn run webpack --mode=development` converts the [ES2015](https://babeljs.io/docs/en/learn/) JavaScript source file at `srcjs/reactSparklines.js` into `inst/htmlwidgets/reactSparklines.js`. The difference between the two is that the one in `inst/` bundles all dependencies. It is also compiled in a dialect of JavaScript that will run on a wider variety of old browsers.
 
 For further documentation on `yarn install`, see the [yarn documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
@@ -114,12 +114,39 @@ knitr::include_graphics('./widget_app.jpg')
 
 ## Implement Functionality
 
+### JavaScript changes
+
 At this point, we've scaffolded a widget and built its JavaScript, but we have not implemented any functionality provided by the `react-sparklines` library.
 
-To expose that functionality through our widget, we must modify the JavaScript in `srcjs/reactSparklines.js`. After scaffolding, it looks like this:
+To expose that functionality through our widget, we must modify the JavaScript in `srcjs/reactSparklines.js`. Currently, it looks like this:
 
 ```{js eval=FALSE}
 import { reactWidget } from 'reactR';
 
-reactWidget('reactSparklines', 'output', {});
+reactWidget('reactSparklines', 'output', {}, {});
 ```
+
+First, `reactWidget` is [imported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) from the module `'reactR'`. `'reactR'` is provided as an html dependency, but webpack is configured in `webpack.config.js` to consider it a module, so it's available to us here.
+
+Then, there's a call to `reactWidget`, and we pass it four arguments:
+
+1. The name of the widget (`'reactSparklines'`)
+1. The type of the widget (`'output'`)
+1. The React components that should be exposed to the widget (here, `{}`: none)
+1. Additional configuration options (here, `{}`: none)
+
+In order to implement additional functionality, we must change the third argument by adding React components provided by `react-sparklines`. We can do it like this:
+
+
+```{js eval = FALSE}
+import * as SparklinesComponents from 'react-sparklines';
+import { reactWidget } from 'reactR';
+
+reactWidget('sparklines', 'output', SparklinesComponents, {});
+```
+
+Instead of passing an empty object as the React components, we pass an object populated with all of the components exported by the `'react-sparklines'` module as `SparklinesComponents`.
+
+After updating your `app.R`, run `yarn run webpack --mode=development` to rebuild the JavaScript.
+
+### R changes
