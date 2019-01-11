@@ -2,31 +2,6 @@ isUpper <- function(s) {
   grepl("^[[:upper:]]+$", s)
 }
 
-#' React component builder functions
-#'
-#' Functions for creating React component, HTML, and SVG trees to send to the
-#' browser for rendering.
-#'
-#' The \code{\link{component}} function creates a representation of a React
-#' component instance to send to the browser for rendering. It is analagous to
-#' \code{\link[htmltools]{tag}}.
-#'
-#' The \code{\link{React}} list is a special object that supports
-#' \link[=InternalMethods]{extraction} syntax for creating React components.
-#'
-#' Once a component or tag has been created in R, it must be passed to
-#' \code\{\link{reactData}} before being sent to the browser. In the case of
-#' htmlwidgets, the return value of \code{reactData} should be passed as the
-#' \code{x} argument of \code{\link{htmlwidgets::createWidget}}.
-#'
-#' Any React components named by \code{component} or \code{React} must have been
-#' installed on the client using \code{reactR.reactWidget}. Alternatively, the
-#' JSON representing the tag can be converted to a React component tree with
-#' \code{reactR.hydrate}.
-#'
-#' @name builder
-NULL
-
 #' Create a React component
 #'
 #' @param name Name of the React component, which must start with an upper-case
@@ -98,8 +73,8 @@ React <- structure(
 #' @export
 `[[<-.react_component_builder` <- `$<-.react_component_builder`
 
-#' Prepare data that represents a character vector, a React component, or an
-#' htmltools tag for sending to the client.
+#' Prepare data that represents a single-element character vector, a React
+#' component, or an htmltools tag for sending to the client.
 #'
 #' @param tag character vector or React component or
 #'   \code{\link[htmltools]{tag}}
