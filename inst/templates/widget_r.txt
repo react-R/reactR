@@ -53,6 +53,8 @@ render${capName} <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' @rdname ${name}-shiny
 ${name}_html <- function(id, style, class, ...) {
   tagList(
+    # Necessary for RStudio viewer version < 1.2
+    reactR::html_dependency_corejs(),
     reactR::html_dependency_react(),
     reactR::html_dependency_reacttools(),
     htmltools::tags$div(id = id, class = class)
