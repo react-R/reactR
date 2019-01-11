@@ -57,6 +57,9 @@ To create a new widget you can call `scaffoldReactWidget` to generate the basic 
 The following R code will create a package and add the `react-sparklines` dependency:
 
 ```{r eval = FALSE}
+# Set the current working directory to your home directory. The new widget will
+# be created in ~/reactSparklines
+setwd("~")
 # Create a directory 'reactSparklines' and populate it with skeletal package
 # If run within RStudio, this will create a new RStudio session
 usethis::create_package("reactSparklines")
