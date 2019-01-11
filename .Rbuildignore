@@ -1,4 +1,4 @@
-^examples/sparklineswidget/node_modules$
+^node_modules$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\build
@@ -7,3 +7,6 @@
 ^docs$
 ^\.travis\.yml$
 ^\assets
+^karma\.conf\.js$
+^package\.json$
+^yarn\.lock$
