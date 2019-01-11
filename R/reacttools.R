@@ -25,7 +25,8 @@ component <- function(name, varArgs = list()) {
   if (length(name) == 0 || !isUpper(substring(name, 1, 1))) {
     stop("Component name must be specified and start with an upper case character")
   }
-  htmltools::tag(name, varArgs)
+  component <- htmltools::tag(name, varArgs)
+  structure(component, class = c("reactR_component", oldClass(component)))
 }
 
 #' React component builder.
@@ -76,15 +77,16 @@ React <- structure(
 #' Prepare data that represents a single-element character vector, a React
 #' component, or an htmltools tag for sending to the client.
 #'
+#' Tag lists as returned by \code{\link[htmltools]{tagList}} are not currently
+#' supported.
+#'
 #' @param tag character vector or React component or
 #'   \code{\link[htmltools]{tag}}
 #'
 #' @return
 #' @export
-#'
-#' @examples
 reactMarkup <- function(tag) {
-  stopifnot(class(tag) == "shiny.tag"
+  stopifnot(inherits(tag, "shiny.tag")
             || (is.character(tag) && length(tag) == 1))
   list(tag = tag, class = "reactR.markup")
 }
