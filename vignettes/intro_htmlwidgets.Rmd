@@ -28,8 +28,6 @@ In addition, you'll need to install the following JavaScript tools on your machi
 
 To follow along in this vignette, you'll also need the following R packages:
 
-> QA Note: The necessary version of reactR is not yet available on CRAN. Please install reactR with `devtools::install_github("react-R/reactR@enhancements")`
-
 ```{r}
 install.packages(c("shiny", "devtools", "usethis", "htmlwidgets", "reactR"))
 ```
