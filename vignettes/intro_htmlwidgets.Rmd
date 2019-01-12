@@ -4,12 +4,12 @@ author: "Alan Dipert"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{htmlwidgets with reactR}
+  %\VignetteIndexEntry{htmlwidgets with reactR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  ---
+---
   
-  ```{r, echo=FALSE, include=FALSE}
+```{r, echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
