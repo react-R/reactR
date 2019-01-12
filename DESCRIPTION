@@ -2,7 +2,7 @@ Package: reactR
 Type: Package
 Title: React Helpers
 Version: 0.3.0
-Date: 2019-01-03
+Date: 2019-01-11
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -23,8 +23,8 @@ Authors@R: c(
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
-Description: Make it easy to use 'React' in R with helper
-              dependency functions, embedded 'Babel' 'transpiler',
+Description: Make it easy to use 'React' in R with 'htmlwidget' scaffolds,
+              helper dependency functions, an embedded 'Babel' 'transpiler',
               and examples.
 URL: https://github.com/react-R/reactR
 BugReports: https://github.com/react-R/reactR/issues
