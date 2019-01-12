@@ -1,5 +1,7 @@
 ^node_modules$
+^js-tests$
 ^pkgdown$
+^assets$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\build
