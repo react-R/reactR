@@ -1,6 +1,8 @@
 ---
-title: "Authoring htmlwidgets powered by react with reactR"
-author: "Alan Dipert"
+title: "Authoring htmlwidgets powered by React with reactR"
+author:
+  - Alan Dipert
+  - Carson Sievert
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
