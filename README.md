@@ -5,7 +5,7 @@
 
 # reactR
 
-`reactR` provides a set of convenience functions for using [`React`](https://facebook.github.io/react) in `R` with `htmlwidget` constructor templates and local JavaScript dependencies.  The `React` ecosystem is rich with comoponents that can enhance `R` web and shiny apps.  `scaffoldWidget` helps build `htmlwidgets` to integrate these `React` components as `R` `htmlwidgets`.  The local dependency functions are modeled after the `html_dependency_*` functions from RStudio's [`rmarkdown`](https://github.com/rstudio/rmarkdown) package.
+`reactR` provides a set of convenience functions for using [`React`](https://facebook.github.io/react) in `R` with `htmlwidget` constructor templates and local JavaScript dependencies.  The `React` ecosystem is rich with components that can enhance `R` web and Shiny apps.  `scaffoldReactWidget()` helps build `htmlwidgets` to integrate these `React` components as `R` `htmlwidgets`.  The local dependency functions are modeled after the `html_dependency_*` functions from RStudio's [`rmarkdown`](https://github.com/rstudio/rmarkdown) package.
 
 ## Installation
 
