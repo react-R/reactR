@@ -1,4 +1,5 @@
 ^node_modules$
+^pkgdown$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\build
@@ -10,3 +11,5 @@
 ^karma\.conf\.js$
 ^package\.json$
 ^yarn\.lock$
+^README\.Rmd$
+logo.svg
