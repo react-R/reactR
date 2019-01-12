@@ -11,3 +11,5 @@
 ^karma\.conf\.js$
 ^package\.json$
 ^yarn\.lock$
+^README\.Rmd$
+logo.svg
