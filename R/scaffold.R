@@ -5,9 +5,9 @@
 #'
 #' @param name Name of widget
 #' @param npmPkg Optional \href{https://npmjs.com/}{NPM} package upon which this
-#'   widget is based, as a two-element character vector of name and
-#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{version
-#'   range}. If you specify this parameter the package will be added to the
+#'   widget is based, a named list with two elements: \code{name} and
+#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{version}. If
+#'   you specify this parameter the package will be added to the
 #'   \code{dependency} section of the generated \code{package.json}.
 #' @param edit Automatically open the widget's JavaScript source file after
 #'   creating the scaffolding.
@@ -41,7 +41,7 @@ toDepJSON <- function(npmPkg) {
   if (is.null(npmPkg)) {
     ""
   } else {
-    do.call(sprintf, as.list(c('"%s": "%s"', npmPkg)))
+    sprintf('"%s": "%s"', npmPkg$name, npmPkg$version)
   }
 }
 
