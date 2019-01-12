@@ -6,6 +6,9 @@
 \usage{
 html_dependency_reacttools()
 }
+\value{
+\code{\link[htmltools]{htmlDependency}}
+}
 \description{
 Adds window.reactR.exposeComponents and window.reactR.hydrate
 }

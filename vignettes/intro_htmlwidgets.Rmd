@@ -44,6 +44,9 @@ To create a new widget you can call `scaffoldReactWidget` to generate the basic 
 The following R code will create a package named **sparklines**, then provide the templating for creating an htmlwidget powered by the `react-sparklines` npm package:
 
 ```{r}
+# Set the current working directory to your home directory. The new widget will
+# be created in ~/sparklines
+setwd("~")
 # Create a directory 'sparklines' and populate it with skeletal package
 # If run within RStudio, this will create a new RStudio session
 usethis::create_package("sparklines")
@@ -120,6 +123,8 @@ data = sampleData,
 sparklinesLine(color = "#56b45d"),
 sparklinesSpots(style = list(fill = "#56b45d"))
 )
+=======
+reactWidget('reactSparklines', 'output', SparklinesComponents, {});
 ```
 
 The following sections show how to implement this R interface from our scaffolded widget.
