@@ -96,7 +96,7 @@ knitr::include_graphics('./widget_app.jpg')
 
 ## Authoring a React binding
 
-At this point, we've built some scaffolding for an htmlwidget powered by React. Let's  modify it to create an interface to the `react-sparklines` library. Authoring the interface requires some changes on both the JavaScript and R side, but most of the hard thinking will be in figuring how best to design your interface. To give you an example of how this could work, let's build an interface to the `Sparklines` component of the 'spark-lines' library.
+At this point, we've built some scaffolding for an htmlwidget powered by React. Let's  modify it to create an interface to the `react-sparklines` library. Authoring the interface requires some changes on both the JavaScript and R side, but most of the hard thinking will be in figuring how best to design your interface. To give you an example of how this could work, let's build an interface to the `Sparklines` component of the react-sparklines library.
 
 ### First, outline an interface
 
