@@ -1,13 +1,11 @@
 
-# reactR <img src="logo.svg" align="right" alt="" width="120" />
+# reactR <img src="logo.svg" alt="reactR logo" width="100px" />
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
 [![Travis-CI Build
 Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
-
-# reactR
 
 `reactR` provides a set of convenience functions for using
 [`React`](https://facebook.github.io/react) in `R` with `htmlwidget`
