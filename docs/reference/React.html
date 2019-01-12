@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • reactR</title>
+<title>React component builder. � React • reactR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-vignette-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -95,21 +95,57 @@
       
       </header>
 
-      <div class="page-header">
-  <h1>Articles <small>version&nbsp;0.3.0</small></h1>
-</div>
-
-<div class="row">
-  <div class="col-md-9">
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="intro_htmlwidgets.html">Authoring htmlwidgets powered by React with reactR</a></li>
-        <li><a href="intro_reactR.html">Intro to reactR</a></li>
-      </ul>
+      <div class="row">
+  <div class="col-md-9 contents">
+    <div class="page-header">
+    <h1>React component builder.</h1>
     </div>
+
+    
+    <p><code>React</code> is a syntactically-convenient way to create instances of React
+components that can be sent to the browser for display. It is a list for
+which extract methods are defined, allowing
+object creation syntax like <code>React$MyComponent(x = 1)</code> where
+<code>MyComponent</code> is a React component you have exposed to Shiny in
+JavaScript.</p>
+    
+
+    <pre class="usage"><span class='no'>React</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An object of class <code>react_component_builder</code> of length 0.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Internally, the <code><a href='component.html'>component</a></code> function is used to create the
+component instance.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Create an instance of ParentComponent with two children,</span>
+<span class='co'># ChildComponent and OtherChildComponent.</span>
+<span class='no'>React</span>$<span class='fu'>ParentComponent</span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='no'>React</span>$<span class='fu'>ChildComponent</span>(),
+  <span class='no'>React</span>$<span class='fu'>OtherChildComponent</span>()
+)</div><div class='output co'>#&gt; &lt;ParentComponent x="1" y="2"&gt;
+#&gt;   &lt;ChildComponent&gt;&lt;/ChildComponent&gt;
+#&gt;   &lt;OtherChildComponent&gt;&lt;/OtherChildComponent&gt;
+#&gt; &lt;/ParentComponent&gt;</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

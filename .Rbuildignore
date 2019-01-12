@@ -1,3 +1,4 @@
+^node_modules$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\build
@@ -5,3 +6,7 @@
 ^cran-comments\.md$
 ^docs$
 ^\.travis\.yml$
+^\assets
+^karma\.conf\.js$
+^package\.json$
+^yarn\.lock$

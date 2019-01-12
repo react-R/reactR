@@ -1,8 +1,8 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.2.1
-Date: 2018-10-23
+Version: 0.3.0
+Date: 2019-01-11
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -14,16 +14,23 @@ Authors@R: c(
         , role = c("aut", "cre")
         , comment = "R interface"
         , email = "kent.russell@timelyportfolio.com"
+      ),
+      person(
+        "Alan", "Dipert"
+        , role = c("aut")
+        , comment = "R interface"
+        , email = "alan@rstudio.com"
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
-Description: Make it easy to use 'React' in R with helper
-              dependency functions, embedded 'Babel' 'transpiler',
+Description: Make it easy to use 'React' in R with 'htmlwidget' scaffolds,
+              helper dependency functions, an embedded 'Babel' 'transpiler',
               and examples.
-URL: https://github.com/timelyportfolio/reactR
-BugReports: https://github.com/timelyportfolio/reactR/issues
+URL: https://github.com/react-R/reactR
+BugReports: https://github.com/react-R/reactR/issues
 License: MIT + file LICENSE
 LazyData: TRUE
+Encoding: UTF-8
 Imports:
     htmltools
 Suggests:
@@ -32,5 +39,5 @@ Suggests:
     shiny,
     V8,
     knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

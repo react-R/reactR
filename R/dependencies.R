@@ -70,3 +70,18 @@ html_dependency_corejs <- function() {
     script = "shim.min.js"
   )
 }
+
+#' Adds window.reactR.exposeComponents and window.reactR.hydrate
+#'
+#' @return \code{\link[htmltools]{htmlDependency}}
+#' @importFrom htmltools htmlDependency
+#' @export
+html_dependency_reacttools <- function(){
+  htmltools::htmlDependency(
+    name = "reactwidget",
+    src = "www/react-tools",
+    version = "1.0.0",
+    package = "reactR",
+    script = c("react-tools.js")
+  )
+}

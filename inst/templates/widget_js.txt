@@ -1,0 +1,3 @@
+import { reactWidget } from 'reactR';
+
+reactWidget('${name}', 'output', {}, {});
