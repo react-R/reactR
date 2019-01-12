@@ -10,9 +10,9 @@ scaffoldReactWidget(name, npmPkg = NULL, edit = interactive())
 \item{name}{Name of widget}
 
 \item{npmPkg}{Optional \href{https://npmjs.com/}{NPM} package upon which this
-widget is based, as a two-element character vector of name and
-\href{https://docs.npmjs.com/files/package.json#dependencies}{version
-range}. If you specify this parameter the package will be added to the
+widget is based, a named list with two elements: \code{name} and
+\href{https://docs.npmjs.com/files/package.json#dependencies}{version}. If
+you specify this parameter the package will be added to the
 \code{dependency} section of the generated \code{package.json}.}
 
 \item{edit}{Automatically open the widget's JavaScript source file after

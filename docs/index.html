@@ -45,6 +45,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/intro_htmlwidgets.html">Authoring htmlwidgets powered by React with reactR</a>
+    </li>
+    <li>
       <a href="articles/intro_reactR.html">Intro to reactR</a>
     </li>
   </ul>
@@ -55,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/timelyportfolio/reactR">
+  <a href="https://github.com/react-R/reactR">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -73,55 +76,62 @@
   <div class="contents col-md-9">
     
 
+<p><img height="150px" alt="react-R logo" src="https://github.com/react-R/reactR/raw/enhancements/assets/logos/reactR-logo.png"></p>
 <div class="section level1">
 <div class="page-header"><h1>reactR</h1></div>
-<p>A set of convenience function with local dependencies for using <a href="https://facebook.github.io/react"><code>React</code></a> in <code>R</code>. This is modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
+<p><code>reactR</code> provides a set of convenience functions for using <a href="https://facebook.github.io/react"><code>React</code></a> in <code>R</code> with <code>htmlwidget</code> constructor templates and local JavaScript dependencies. The <code>React</code> ecosystem is rich with components that can enhance <code>R</code> web and Shiny apps. <code><a href="reference/scaffoldReactWidget.html">scaffoldReactWidget()</a></code> helps build <code>htmlwidgets</code> to integrate these <code>React</code> components as <code>R</code> <code>htmlwidgets</code>. The local dependency functions are modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
 <div class="section level2">
 <h2>Installation</h2>
-<p>You can install reactR from github with:</p>
+<p>You can install reactR from CRAN with <code>install.packages("reactR")</code>. For the development version, please use <code>devtools</code> as shown below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"timelyportfolio/reactR"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"react-R/reactR"</span>)</a></code></pre></div>
 </div>
 <div class="section level2">
-<h2>Example</h2>
+<h2>Creating htmlwidgets with React Components</h2>
+<p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R">react-R Github organization</a>.</p>
+</div>
+<div class="section level2">
+<h2>Examples</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(reactR)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(htmltools)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">browsable</span>(<span class="kw">tagList</span>(</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  tags<span class="op">$</span><span class="kw">script</span>(</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="st">"</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">    ReactDOM.render(</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">      React.createElement(</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">        'h1',</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">        null,</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">        'Powered by React'</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">      ),</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">      document.body</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">    )</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  "</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">  ),</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="co">#add core-js first to work in RStudio Viewer</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">  <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">))</a></code></pre></div>
-<p><code>reactR</code> also uses <code>V8</code> if available to transform <code>JSX</code> and <code>ES2015</code> code.</p>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  tags<span class="op">$</span><span class="kw">div</span>(<span class="dt">id =</span> <span class="st">"app"</span>),</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  tags<span class="op">$</span><span class="kw">script</span>(</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="st">"</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">    ReactDOM.render(</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">      React.createElement(</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">        'h1',</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">        null,</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">        'Powered by React'</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">      ),</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">      document.getElementById('app')</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">    )</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="st">  "</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  ),</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="co">#add core-js first to work in RStudio Viewer</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">  <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">))</a></code></pre></div>
+<p><code>reactR</code> also uses the <code>V8</code> package if available to transform <code>JSX</code> and <code>ES2015</code> code.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(reactR)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(htmltools)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">browsable</span>(</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">tagList</span>(</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    tags<span class="op">$</span><span class="kw">script</span>(</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">      <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.body)'</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">    ),</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="co"># add core-js shim first for React in RStudio Viewer</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">  )</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">)</a></code></pre></div>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    tags<span class="op">$</span><span class="kw">div</span>(<span class="dt">id =</span> <span class="st">"app"</span>),</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">    tags<span class="op">$</span><span class="kw">script</span>(</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">      <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.getElementById("app"))'</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    ),</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="co"># add core-js shim first for React in RStudio Viewer</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  )</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">)</a></code></pre></div>
 </div>
 <div class="section level2">
 <h2>Contributing and Code of Conduct</h2>
-<p>I welcome contributors. Help make this package great. Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>We welcome contributors and would love your participation. Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by the terms.</p>
 </div>
 </div>
 
@@ -132,9 +142,9 @@
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=reactR">https://​cran.r-project.org/​package=reactR</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/timelyportfolio/reactR">https://​github.com/​timelyportfolio/​reactR</a>
+<li>Browse source code at <br><a href="https://github.com/react-R/reactR">https://​github.com/​react-R/​reactR</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/timelyportfolio/reactR/issues">https://​github.com/​timelyportfolio/​reactR/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/react-R/reactR/issues">https://​github.com/​react-R/​reactR/​issues</a>
 </li>
 </ul>
 <h2>License</h2>
@@ -145,18 +155,20 @@
 </li>
 <li>Kent Russell <br><small class="roles"> Author, maintainer </small> <br><small>(R interface)</small>
 </li>
+<li>Alan Dipert <br><small class="roles"> Author </small> <br><small>(R interface)</small>
+</li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=reactR"><img src="http://www.r-pkg.org/badges/version/reactR" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://travis-ci.org/timelyportfolio/reactR"><img src="https://travis-ci.org/timelyportfolio/reactR.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://travis-ci.org/react-R/reactR"><img src="https://travis-ci.org/react-R/reactR.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 </ul>
 </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Facebook Inc, Kent Russell.</p>
+  <p>Developed by Facebook Inc, Kent Russell, Alan Dipert.</p>
 </div>
 
 <div class="pkgdown">
