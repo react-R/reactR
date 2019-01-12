@@ -1,34 +1,23 @@
 ---
-title: "htmlwidgets with reactR"
+title: "Authoring htmlwidgets powered by react with reactR"
 author: "Alan Dipert"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{htmlwidgets with reactR}
+%\VignetteIndexEntry{htmlwidgets with reactR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
+  ---
+  
+  ```{r, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
 
-## Introduction to htmlwidgets with reactR
+The [htmlwidgets](https://www.htmlwidgets.org) package provides a framework for creating R bindings to JavaScript libraries. Using the **htmlwidgets** package alone, it's not necessarily straight-forward to create an R binding to a [React](https://facebook.github.io/react/)-powered JavaScript library. The **reactR** package adds to the **htmlwidgets** framework to make it much easier to author **htmlwidgets** that are powered by React. This vignette will show you how to effectively leverage **reactR** to build an **htmlwidgets** package that interfaces with [react-sparklines](https://github.com/borisyankov/react-sparklines) React JavaScript library.
 
-The [htmlwidgets](https://www.htmlwidgets.org) package provides a framework for creating R bindings to JavaScript libraries. reactR adds to this framework by simplifying the creation of widgets that build on [React](https://facebook.github.io/react/)-based libraries or code.
+## Software pre-requisites
 
-In particular, reactR adds:
-
-* The `reactR::scaffoldReactWidget` function for generating a skeletal React-based htmlwidget, including JavaScript build tool configuration. It is analagous to `htmlwidgets::scaffoldWidget`.
-* An [htmlDependency](https://shiny.rstudio.com/articles/packaging-javascript.html), returned by `reactR::html_dependency_reacttools`, that adds `window.reactR` to the browser environment. Scaffolded widgets include a reference to this htmlDependency, as well as one to `reactR::html_dependency_react` which provides React itself.
-* The `window.reactR.reactWidget` JavaScript function, which creates an installs a named widget backed by a set of [React Components](https://reactjs.org/docs/react-component.html).
-* `reactR::reactMarkup`, which prepares an `htmltools::tag` or `reactR::component` to be sent to the browser and rendered by React.
-
-## Tutorial: Adapting a JavaScript library
-
-In the following tutorial, we will build a widget around the [react-sparklines](https://reactjs.org/docs/react-component.html) React-based JavaScript library.
-
-We'll start by preparing our machine for React and reactR widget development. Then, we'll scaffold an initial `reactSparklines` widget package. Finally, we'll add functionality that will make the widget easier to use.
-
-## Prepare your machine
-
-In order to develop a reactR widget, you'll need to install R and optionally RStudio. If you're on Windows, you should also install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+In order to develop a **reactR** widget, you'll need to install R and optionally RStudio. If you're on Windows, you should also install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 > For an excellent general introduction to R package concepts, check out the [R packages](http://r-pkgs.had.co.nz/) online book.
 
@@ -37,13 +26,11 @@ In addition, you'll need to install the following JavaScript tools on your machi
 * [Node.js](https://nodejs.org): JavaScript engine and runtime for development outside of browsers. Provides the `node` and `npm` commands.
 * [Yarn](https://yarnpkg.com/en/): Command-line dependency management tool, provides the `yarn` command.
 
-## Install dependencies
-
-Several packages must be installed to continue. You can install them like this:
+To follow along in this vignette, you'll also need the following R packages:
 
 > QA Note: The necessary version of reactR is not yet available on CRAN. Please install reactR with `devtools::install_github("react-R/reactR@enhancements")`
 
-```{r eval = FALSE}
+```{r}
 install.packages(c("shiny", "devtools", "usethis", "htmlwidgets", "reactR"))
 ```
 
@@ -52,60 +39,54 @@ install.packages(c("shiny", "devtools", "usethis", "htmlwidgets", "reactR"))
 To create a new widget you can call `scaffoldReactWidget` to generate the basic structure and build configuration. This function will:
 
 * Create the .R, .js, .yaml, and .json files required by your widget;
-* If provided, take an [npm]() package name and version as a two-element character vector. For example, the npm package `foo` at version `^1.2.0` would be expressed as `c("foo", "^1.2.0")`. The package, if provided, will be added to the new widget's `package.json` as a build dependency.
+* If provided, take an [npm](https://www.npmjs.com/) package name and version as a two-element character vector. For example, the npm package `foo` at version `^1.2.0` would be expressed as `c("foo", "^1.2.0")`. The package, if provided, will be added to the new widget's `package.json` as a build dependency.
 
-The following R code will create a package and add the `react-sparklines` dependency:
+The following R code will create a package named **sparklines**, then provide the templating for creating an htmlwidget powered by the `react-sparklines` npm package:
 
-```{r eval = FALSE}
+```{r}
 # Set the current working directory to your home directory. The new widget will
-# be created in ~/reactSparklines
+# be created in ~/sparklines
 setwd("~")
-# Create a directory 'reactSparklines' and populate it with skeletal package
+# Create a directory 'sparklines' and populate it with skeletal package
 # If run within RStudio, this will create a new RStudio session
-usethis::create_package("reactSparklines")
-# Set the current working directory to the one that was created unless a new
-# RStudio session has been launched.
-setwd("reactSparklines")
+usethis::create_package("sparklines")
 # Generate skeletal reactR widget code and supporting build configuration
-reactR::scaffoldReactWidget("reactSparklines", c("react-sparklines", "^1.7.0"))
+reactR::scaffoldReactWidget("sparklines", c("react-sparklines", "^1.7.0"))
 ```
-
-At this point, the `reactSparklines` contains a bare-bones widget in a package called `reactSparklines`.
 
 ## Building and installing
 
 ### Building the JavaScript
 
-The next step is to navigate to the `reactSparklines` directory in your terminal. Then, run the following commands:
+The next step is to navigate to the `sparklines` directory in your terminal. Then, run the following commands:
 
-```{shell}
+```{bash eval = FALSE}
 yarn install
-yarn run webpack --mode=development
+yarn run webpack
 ```
 
-* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**.
-* `yarn run webpack --mode=development` converts the [ES2015](https://babeljs.io/docs/en/learn/) JavaScript source file at `srcjs/reactSparklines.js` into `inst/htmlwidgets/reactSparklines.js`. The difference between the two is that the one in `inst/` bundles all dependencies. It is also compiled in a dialect of JavaScript that will run on a wider variety of old browsers.
+* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**. For further documentation on `yarn install`, see the [yarn documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
 
-For further documentation on `yarn install`, see the [yarn documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
+* `yarn run webpack` compiles the [ES2015](https://babeljs.io/docs/en/learn/) JavaScript source file at `srcjs/sparklines.js` into `inst/htmlwidgets/sparklines.js`. The later file is one actually used by the R package and includes all the relevant JavaScript dependencies in a version of JavaScript that most browsers understand. Note that, if you add `--mode=development` to the end of this command, it will include a [source map](https://developer.mozilla.org/en-US/docs/Tools/Debugger/How_to/Use_a_source_map) is included with the compiled JavaScript, which makes JavaScript debugging much easier, but hopefully you won't need to do much of any JavaScript debugging.
 
-`yarn run webpack` is not strictly a `yarn` command. In fact, `yarn run` simply delegates to the [webpack](https://webpack.js.org/) program. `development` is one of several [webpack modes](https://webpack.js.org/concepts/#mode). webpack's configuration is generated by `scaffoldReactWidget` in the file `webpack.config.js`.
+`yarn run webpack` is not strictly a `yarn` command. In fact, `yarn run` simply delegates to the [webpack](https://webpack.js.org/) program.  Webpack's configuration is generated by `scaffoldReactWidget` in the file `webpack.config.js`, but you can always change this configuration and/or modify the `yarn run webpack` command to suit your needs.
 
-### Building the package
+### Installing the R package
 
-While the JavaScript has been built, the `reactSparklines` package has not. Now that the JavaScript asset has been created, we can build it:
+Now that the widget's JavaScript is compiled, go ahead install the R package:
 
-```{r eval = FALSE}
+```{r}
 devtools::document()
 devtools::install(quick = TRUE)
 ```
 
 Alternatively, in RStudio, you can use the keyboard shortcuts `Ctrl+Shift+D` and `Ctrl-Shift-B` to document and build the package. (On macOS, the shortcuts are `Cmd+Shift+D` and `Cmd+Shift+B`)
 
-## Run example
+## Run the included demo
 
-Now that the widget's JavaScript has been compiled and the package has been installed, we can run `app.R` to see the widget in action:
+Now that the widget's JavaScript is compiled, and the R package is installed, run `app.R` to see a demo in action:
 
-```{r eval = FALSE}
+```{r}
 shiny::runApp()
 ```
 
@@ -115,189 +96,181 @@ Alternatively, in RStudio, you can open `app.R` and press `Ctrl-Shift-Enter` (`C
 knitr::include_graphics('./widget_app.jpg')
 ```
 
-## Implement Functionality
+## Authoring a react binding
 
-### JavaScript changes
+At this point, we've built some scaffolding for an htmlwidget powered by react -- let's  modify to create an interface to the `react-sparklines` library. Authoring the interface requires some changes on both the JavaScript and R side, but most of the hard thinking will be in figuring how best to design your interface. To give you an example of how this could work, let's build an interface to the `Sparklines` component of the 'spark-lines' library.
 
-At this point, we've scaffolded a widget and built its JavaScript, but we have not implemented any functionality provided by the `react-sparklines` library.
+### First, outline an interface
 
-To expose that functionality through our widget, we must modify the JavaScript in `srcjs/reactSparklines.js`. Currently, it looks like this:
+Consider the following example taken from the [react-sparklines documentation](http://borisyankov.github.io/react-sparklines/).
 
-```{js eval=FALSE}
-import { reactWidget } from 'reactR';
+```js
+import React from 'react';
+import { Sparklines } from 'react-sparklines';
 
-reactWidget('reactSparklines', 'output', {}, {});
+<Sparklines data={sampleData}>
+<SparklinesLine color="#56b45d" />
+<SparklinesSpots style={{ fill: "#56b45d" }} />
+</Sparklines>
 ```
 
-First, `reactWidget` is [imported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) from the module `'reactR'`. `'reactR'` is provided as an html dependency, but webpack is configured in `webpack.config.js` to consider it a module, so it's available to us here.
+You have some choice in terms of how to design an R interface to this sort of react library, but usually it makes sense to have one function per component and have the arguments to that function feed into the properties of that react component. In other words, our goal is to create an R function that allows users of our package to recreate this example with the following code:
 
-Then, there's a call to `reactWidget`, and we pass it four arguments:
-
-1. The name of the widget (`'reactSparklines'`)
-1. The type of the widget (`'output'`)
-1. The React components that should be exposed to the widget (here, `{}`: none)
-1. Additional configuration options (here, `{}`: none)
-
-In order to make our widget do something interesting, we must change the third argument by passing React components provided by `react-sparklines`. We can do it like this:
-
-
-```{js eval = FALSE}
-import * as SparklinesComponents from 'react-sparklines';
-import { reactWidget } from 'reactR';
-
+```r
+library(sparklines)
+sparklines(
+data = sampleData,
+sparklinesLine(color = "#56b45d"),
+sparklinesSpots(style = list(fill = "#56b45d"))
+)
+=======
 reactWidget('reactSparklines', 'output', SparklinesComponents, {});
 ```
 
-Instead of passing an empty object as the React components, we pass an object populated with all of the components exported by the `'react-sparklines'` module as `SparklinesComponents`.
+The following sections show how to implement this R interface from our scaffolded widget.
 
-We could also have exposed only a subset of the components exported by `react-sparklines` with code like the following:
+### R implementation
 
-```{js eval = FALSE}
-import { Sparklines, SparklinesLine } from 'react-sparklines';
+Consider the template that `reactR::scaffoldReactWidget()` provided for us:
+
+```{r}
+sparklines <- function(message, width = NULL, height = NULL, elementId = NULL) {
+  
+  # describe a React component to send to the browser for rendering.
+  content <- htmltools::tag("div", list(message))
+  
+  # create widget
+  htmlwidgets::createWidget(
+    name = 'sparklines',
+    reactR::reactMarkup(content),
+    width = width,
+    height = height,
+    package = 'sparklines',
+    elementId = elementId
+  )
+}
+```
+
+This function is designed to simply display a message within an HTML div using **reactR** and **htmlwidgets**. The critical piece here that makes it all work is `reactR::reactMarkup()`. This function can prepare a payload containing a mix of HTML tags (constructed via `htmltools::tag()`), React components (constructed via `reactR::component()`), or character vectors in a such way that the **reactR** and **htmlwidgets** toolchain will understand and know how to render in the browser (assuming we've imported our react component appropriately, as we cover later). Thus, to send a `<Sparklines>` react component instead of an HTML `<div>`, we could simply change:
+
+```r
+content <- htmltools::tag("div", list(message))
+```
+
+to
+
+```r
+reactR::component("Sparklines", list(message))
+```
+
+Remember, though, that we'd like `<Sparklines>` to consume a `data` property and also accept other valid components (e.g., `<SparklinesLine>`, `<SparklinesSpot>`, etc) from this library as children. So, we could change the body and signature of `sparklines()` in the following way:
+
+```{r}
+sparklines <- function(data, ..., width = NULL, height = NULL) {
+  
+  # describe a React component to send to the browser for rendering.
+  content <- reactR::component(
+    "Sparklines",
+    list(data = data, ...)
+  )
+  
+  # create widget
+  htmlwidgets::createWidget(
+    name = 'sparklines',
+    reactR::reactMarkup(content),
+    width = width,
+    height = height,
+    package = 'sparklines'
+  )
+}
+```
+
+At this point, we define functions that make it easy for the user to create the other components by adding these to the `R/reactSparklines.R`
+
+```{r}
+#' @export
+sparklinesLine <- function(...) {
+  reactR::React$SparklinesLine(...)
+}
+
+#' @export
+sparklinesSpots <- function(...) {
+  reactR::React$SparklinesSpots(...)
+}
+```
+
+### JavaScript changes
+
+In order for the **reactR** toolchain to know how to render components from the 'react-sparklines' library, we need to essentially register the react components on the JavaScript side. This can be done in the `srcjs/sparklines.js` file which currently looks like this:
+
+```{js}
 import { reactWidget } from 'reactR';
 
-reactWidget('reactSparklines', 'output', {
+reactWidget('sparklines', 'output', {});
+```
+
+First, `reactWidget` is [imported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) from the `'reactR'` JavaScript module. This function will essentially register the react components that we want inside the **reactR** and **htmlwidgets** toolchain. Note that the `'reactR'` JS module is  as an html dependency, but webpack is configured in `webpack.config.js` to consider it a module, so it's available to us here.
+
+Then, there's a call to `reactWidget`, and we pass it three arguments:
+
+1. The name of the widget (`'sparklines'`)
+1. The type of the widget (`'output'`)
+1. The React components that should be exposed to the widget. In this template, we didn't have to include any because it's just rendering an HTML div. 
+
+Instead of passing an empty object (`{}`) as the React components, we provide an object with all the components we need from the 'react-sparklines' module:
+
+```{js}
+import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
+import { reactWidget } from 'reactR';
+
+reactWidget('sparklines', 'output', {
   Sparklines: Sparklines,
-  SparklinesLine: SparklinesLine
-}, {});
+  SparklinesLine: SparklinesLine,
+  SparklinesSpots: SparklinesSpots
+});
 ```
 
-The primary difference between the two is the `import` syntax we chose to use.
+### Go for a spin
 
-After updating your `app.R`, run `yarn run webpack --mode=development` to rebuild the JavaScript.
+Now that we've made the necessary changes to the JavaScript and R source code, it's time to compile the JavaScript, install the R package
 
-### R changes
-
-The next code we'll need to modify to make `react-sparklines` work is on the R side, at the top of the file `R/reactSparklines.R`:
-
-```{r eval = FALSE}
-reactSparklines <- function(message, width = NULL, height = NULL, elementId = NULL) {
-
-  # describe a React component to send to the browser for rendering.
-  component <- reactR::reactMarkup(htmltools::tag("div", list(message)))
-
-  # create widget
-  htmlwidgets::createWidget(
-    name = 'reactSparklines',
-    component,
-    width = width,
-    height = height,
-    package = 'reactSparklines',
-    elementId = elementId
-  )
-}
+```bash
+# TODO: maybe we could provide a Makefile to compile JS and install R pkg?
+yarn install
+yarn run webpack --mode=development
+Rscript -e "devtools::document(); devtools::install(); sparklines::sparklines(rnorm(10))"
 ```
 
-This function is the one responsible for creating an instance of our widget. In the `server` function of the generated `app.R`, we use it like this:
+This should open up the `sparklines()` widget in your browser. If it does, congratulations, you just wrote your first React-based widget!
 
-```{R eval = FALSE}
-server <- function(input, output, session) {
-  output$widgetOutput <- renderReactSparklines(
-    reactSparklines("Hello world!")
-  )
-}
-```
+### Shiny integration
 
-In the code above, `renderReactSparklines` expects to receive the return value of `reactSparklines` as its argument.
+The scaffolding template already provides the glue you need to get your **reactR** widget to render in **shiny**. The two relevant functions are `renderSparklines()` and `sparklinesOutput()`. You shouldn't need to modify these functions -- they should work out of the box. You will, however, want to modify the example **shiny** app provided by the in the `app.R` file: 
 
-`reactSparklines` is a thin wrapper around `htmlwidgets::createWidget`. Its most important argument, `message`, is the one we must change the handling of. In the current implementation, the following happens to `message`:
-
-```{R eval = FALSE}
-component <- reactR::reactMarkup(htmltools::tag("div", list(message)))
-```
-
-1. We wrap `message` in a list
-1. We call `htmltools::tag` to create a `div` with the list we created as its children
-1. We call `reactR::reactMarkup` to prepare the tag to be rendered in the browser
-1. We assign to `component`
-
-Then, we pass `component` as the second argument of `htmlwidgets::createWidget`.
-
-Widgets created using reactR expect for this argument to be a representation of `markup`, or either an `htmltools::tag` or a `reactR::component`. When we called `reactR.reactWidget` in our JavaScript, we created and installed the browser-side implementation of a widget that expects to receive markup and then renders that markup in the widget's HTML container.
-
-Let's modify the `reactSparklines` function so that it handles `message` differently. In fact, let's change the meaning of that argument completely. Instead of a `message`, it should take an argument `data`, which is the vector of numbers to display as a sparkline graph:
-
-```{r eval = FALSE}
-reactSparklines <- function(data, width = NULL, height = NULL, elementId = NULL) {
-
-  # describe a React component to send to the browser for rendering.
-  component <- reactR::reactMarkup(reactR::component(
-    "Sparklines",
-    list(data = data, reactR::component("SparklinesLine"))
-  ))
-
-  # create widget
-  htmlwidgets::createWidget(
-    name = 'reactSparklines',
-    component,
-    width = width,
-    height = height,
-    package = 'reactSparklines',
-    elementId = elementId
-  )
-}
-```
-
-Now, we're using the `data` argument in a more sophisticated way. We're assigning it to the attribute `data` of the `Sparklines` component, as per the first example in the [react-sparklines documentation](http://borisyankov.github.io/react-sparklines/). Then, we create a `SparklinesLine` component to tell `react-sparklines` the format to display the data.
-
-Essentially, we're using R code that corresponds directly to the [JSX](https://reactjs.org/docs/introducing-jsx.html) syntax in the `react-sparklines` examples. This is a major benefit of using reactR: examples in JSX are generally easy to adapt.
-
-Our widget now assumes that `data` is a numeric vector, and relies on the fact that this vector becomes a JavaScript array once it's sent to the browser.
-
-After you've edited `R/reactSparklines.R`, run `devtools::install(quick = TRUE)` or hit `Ctrl-Shift-B` (macOS: `Cmd-Shift-B) to rebuild the package.
-
-## Trying it out
-
-It's finally time to modify `app.R` and test our widget modifications out. Open `app.R`, it should look like this:
-
-```{r eval = FALSE}
+```{r}
 library(shiny)
-library(reactSparklines)
+library(sparklines)
 
 ui <- fluidPage(
   titlePanel("reactR HTMLWidget Example"),
-  reactSparklinesOutput('widgetOutput')
+  sparklinesOutput('myWidget')
 )
 
 server <- function(input, output, session) {
-  output$widgetOutput <- renderReactSparklines(
-    reactSparklines("Hello world!")
-  )
+  output$myWidget <- rendersparklines({
+    sparklines(
+      data = rnorm(10),
+      sparklinesLine(color = "#56b45d"),
+      sparklinesSpots(style = list(fill = "#56b45d"))
+    )
+  })
 }
 
 shinyApp(ui, server)
 ```
 
-The thing we need to change is the argument to `reactSparklines`. It should no longer be a string, but a numeric vector to display as a sparkline graph. Here is the amended code:
+Now, when you run `shiny::runApp()`, you should see your vision become reality!
 
-```{r eval = FALSE}
-library(shiny)
-library(reactSparklines)
+## Further learning
 
-ui <- fluidPage(
-  titlePanel("reactR HTMLWidget Example"),
-  reactSparklinesOutput('widgetOutput')
-)
-
-server <- function(input, output, session) {
-  output$widgetOutput <- renderReactSparklines(
-    reactSparklines(sample.int(10, 10))
-  )
-}
-
-shinyApp(ui, server)
-```
-
-Now, when you run `app.R`, you should see something like the following:
-
-```{r echo=FALSE}
-knitr::include_graphics('./widget_app_improved.jpg')
-```
-
-Congratulations, you just wrote your first React-based widget!
-
-Another thing you can try is running `reactSparklines(data = sample.int(10, 10))` directly in the RStudio Console. You should see a sparkline graph appear in the Viewer.
-
-## Next steps
-
-We've reached the end of this tutorial, but if you'd like to see how a sparklines library could be further improved, you might be interested in our [sparklines-example](https://github.com/react-R/sparklines-example) project. It picks up where we leave off, by creating a kind of DSL that makes the other sparkline types easily accessible from R.
+This tutorial walked you through the steps taken you create an R interface to the react-sparklines library. The full example package is accessible at <https://github.com/react-R/sparklines-example>. Our intention is keep creating example packages under the <https://github.com/react-R> profile, so head there if you'd like to see example of interfacing to other react libraries.
