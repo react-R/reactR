@@ -94,7 +94,7 @@
                         <h4 class="author">Alan Dipert</h4>
                         <h4 class="author">Carson Sievert</h4>
             
-            <h4 class="date">2019-01-12</h4>
+            <h4 class="date">2019-01-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_htmlwidgets.Rmd"><code>vignettes/intro_htmlwidgets.Rmd</code></a></small>
       <div class="hidden name"><code>intro_htmlwidgets.Rmd</code></div>
@@ -283,7 +283,7 @@
 <div id="shiny-integration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shiny-integration" class="anchor"></a>Shiny integration</h3>
-<p>The scaffolding template already provides the glue you need to get your <strong>reactR</strong> widget to render in <strong>shiny</strong>. The two relevant functions are <code>renderSparklines()</code> and <code>sparklinesOutput()</code>. You shouldn’t need to modify these functions — they should work out of the box. You will, however, want to modify the example <strong>shiny</strong> app in the <code>app.R</code> file:</p>
+<p>The scaffolding template already provides the glue you need to get your <strong>reactR</strong> widget to render in <strong>Shiny</strong>. The two relevant functions are <code>renderSparklines()</code> and <code>sparklinesOutput()</code>. You shouldn’t need to modify these functions — they should work out of the box. You will, however, want to modify the example <strong>Shiny</strong> app in the <code>app.R</code> file:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sparklines)</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"></a>
@@ -293,7 +293,7 @@
 <a class="sourceLine" id="cb16-7" data-line-number="7">)</a>
 <a class="sourceLine" id="cb16-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">  output<span class="op">$</span>myWidget &lt;-<span class="st"> </span><span class="kw">rendersparklines</span>({</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">  output<span class="op">$</span>myWidget &lt;-<span class="st"> </span><span class="kw">renderSparklines</span>({</a>
 <a class="sourceLine" id="cb16-11" data-line-number="11">    <span class="kw">sparklines</span>(</a>
 <a class="sourceLine" id="cb16-12" data-line-number="12">      <span class="dt">data =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">10</span>),</a>
 <a class="sourceLine" id="cb16-13" data-line-number="13">      <span class="kw">sparklinesLine</span>(<span class="dt">color =</span> <span class="st">"#56b45d"</span>),</a>
