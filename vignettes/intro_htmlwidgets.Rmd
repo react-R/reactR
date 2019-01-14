@@ -243,7 +243,7 @@ This should open up the `sparklines()` widget in your browser. If it does, congr
 
 ### Shiny integration
 
-The scaffolding template already provides the glue you need to get your **reactR** widget to render in **shiny**. The two relevant functions are `renderSparklines()` and `sparklinesOutput()`. You shouldn't need to modify these functions — they should work out of the box. You will, however, want to modify the example **shiny** app in the `app.R` file:
+The scaffolding template already provides the glue you need to get your **reactR** widget to render in **Shiny**. The two relevant functions are `renderSparklines()` and `sparklinesOutput()`. You shouldn't need to modify these functions — they should work out of the box. You will, however, want to modify the example **Shiny** app in the `app.R` file:
 
 ```{r}
 library(shiny)
@@ -255,7 +255,7 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  output$myWidget <- rendersparklines({
+  output$myWidget <- renderSparklines({
     sparklines(
       data = rnorm(10),
       sparklinesLine(color = "#56b45d"),
