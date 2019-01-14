@@ -10,8 +10,11 @@ none
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 1 warnings | 0 note
 
+   Conversion of 'README.md' failed:
+   pandoc.exe: Could not fetch man/figures/logo.svg
+   man/figures/logo.svg: openBinaryFile: does not exist (No such file or directory)
 
 ## Reverse dependencies
 
