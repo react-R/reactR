@@ -1,5 +1,5 @@
 
-# reactR <img src="logo.svg" alt="reactR logo" width="100px" />
+# reactR <img src="vignettes/logo.svg" alt="reactR logo" width="100px" />
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
