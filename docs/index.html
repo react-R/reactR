@@ -114,6 +114,11 @@
 <a href="#creating-htmlwidgets-with-react-components" class="anchor"></a>Creating htmlwidgets with React Components</h2>
 <p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R">react-R Github organization</a>.</p>
 </div>
+<div id="shiny" class="section level2">
+<h2 class="hasAnchor">
+<a href="#shiny" class="anchor"></a>Shiny?</h2>
+<p>Currently, <code>htmlwidgets</code> built with <code>reactR</code> work well in Shiny as outputs. In the next version we hope to have a mechanism for input in Shiny contexts.</p>
+</div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
@@ -138,7 +143,7 @@
 <a class="sourceLine" id="cb2-19" data-line-number="19">  <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
 <a class="sourceLine" id="cb2-20" data-line-number="20">  <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
 <a class="sourceLine" id="cb2-21" data-line-number="21">))</a></code></pre></div>
-<p><code>reactR</code> also uses the <code>V8</code> package if available to transform <code>JSX</code> and <code>ES2015</code> code.</p>
+<p><code>reactR</code> uses the <code>V8</code> package if available to transform <code>JSX</code> and <code>ES2015</code> code with <code>babel</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(reactR)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(htmltools)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>

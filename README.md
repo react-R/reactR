@@ -34,6 +34,12 @@ reactR](https://react-r.github.io/reactR/articles/intro_htmlwidgets.html).
 Also, there are a variety of examples in the [react-R Github
 organization](https://github.com/react-R).
 
+## Shiny?
+
+Currently, `htmlwidgets` built with `reactR` work well in Shiny as
+outputs. In the next version we hope to have a mechanism for input in
+Shiny contexts.
+
 ## Examples
 
 ``` r
@@ -60,8 +66,8 @@ browsable(tagList(
 ))
 ```
 
-`reactR` also uses the `V8` package if available to transform `JSX` and
-`ES2015` code.
+`reactR` uses the `V8` package if available to transform `JSX` and
+`ES2015` code with `babel`.
 
 ``` r
 library(reactR)
