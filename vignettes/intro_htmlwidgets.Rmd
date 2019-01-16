@@ -41,17 +41,16 @@ To create a new widget you can call `scaffoldReactWidget` to generate the basic 
 * Create the .R, .js, .yaml, and .json files required by your widget;
 * If provided, take an [npm](https://www.npmjs.com/) package name and version as a named list with `name` and `version` elements. For example, the npm package `foo` at version `^1.2.0` would be expressed as `list(name = "foo", version = "^1.2.0")`. The package, if provided, will be added to the new widget's `package.json` as a build dependency.
 
-The following R code will create a package named **sparklines**, then provide the templating for creating an htmlwidget powered by the `react-sparklines` npm package:
+The following R code will create an R package named **sparklines**, then provide the templating for creating an htmlwidget powered by the `react-sparklines` npm package:
 
 ```{r}
-# Set the current working directory to your home directory. The new widget will
-# be created in ~/sparklines
-setwd("~")
-# Create a directory 'sparklines' and populate it with skeletal package
-# If run within RStudio, this will create a new RStudio session
-usethis::create_package("sparklines")
-# Generate skeletal reactR widget code and supporting build configuration
-reactR::scaffoldReactWidget("sparklines", c("react-sparklines", "^1.7.0"))
+# Create the R package
+usethis::create_package("~/sparklines")
+# Inject the widget templating
+withr::with_dir(
+  "~/sparklines", 
+  reactR::scaffoldReactWidget("sparklines", list(name = "react-sparklines", version = "^1.7.0"))
+)
 ```
 
 ## Building and installing
@@ -60,9 +59,9 @@ reactR::scaffoldReactWidget("sparklines", c("react-sparklines", "^1.7.0"))
 
 The next step is to navigate to the newly-created `sparklines` directory in your terminal. Then, run the following commands:
 
-```{bash eval = FALSE}
-yarn install
-yarn run webpack
+```{r}
+system("yarn install")
+system("yarn run webpack")
 ```
 
 * `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**. For further documentation on `yarn install`, see the [yarn documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
@@ -232,14 +231,16 @@ reactWidget('sparklines', 'output', {
 
 Now that we've made the necessary changes to the JavaScript and R source code, it's time to compile the JavaScript and install the R package:
 
-```bash
-# TODO: maybe we could provide a Makefile to compile JS and install R pkg?
-yarn install
-yarn run webpack --mode=development
-Rscript -e "devtools::document(); devtools::install(); sparklines::sparklines(rnorm(10))"
+```{r}
+system("yarn install")
+system("yarn run webpack")
+devtools::document()
+devtools::install()
+library(sparklines)
+sparklines(rnorm(10), sparklinesLine())
 ```
 
-This should open up the `sparklines()` widget in your browser. If it does, congratulations, you just wrote your first React-based widget!
+This should open up the `sparklines()` widget in your browser. If it does, congratulations, you created a React-based htmlwidget!
 
 ### Shiny integration
 
@@ -250,24 +251,24 @@ library(shiny)
 library(sparklines)
 
 ui <- fluidPage(
-  titlePanel("reactR HTMLWidget Example"),
-  sparklinesOutput('myWidget')
+  titlePanel("Sparklines library"),
+  sliderInput("n", label = "Number of samples", min = 2, max = 1000, value = 100),
+  sparklinesOutput("myWidget")
 )
 
 server <- function(input, output, session) {
-  output$myWidget <- renderSparklines({
-    sparklines(
-      data = rnorm(10),
-      sparklinesLine(color = "#56b45d"),
-      sparklinesSpots(style = list(fill = "#56b45d"))
-    )
-  })
+    output$myWidget <- renderSparklines({
+        sparklines(
+            rnorm(input$n),
+            sparklinesLine()
+        )
+    })
 }
 
 shinyApp(ui, server)
 ```
 
-Now, when you run `shiny::runApp()`, you should see your vision become reality!
+Now, when you run `shiny::runApp()`, you should see your react-based htmlwidget rendering in **shiny** app!
 
 ## Further learning
 
