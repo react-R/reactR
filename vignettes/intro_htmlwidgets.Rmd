@@ -51,7 +51,7 @@ setwd("~")
 # If run within RStudio, this will create a new RStudio session
 usethis::create_package("sparklines")
 # Generate skeletal reactR widget code and supporting build configuration
-reactR::scaffoldReactWidget("sparklines", c("react-sparklines", "^1.7.0"))
+reactR::scaffoldReactWidget("sparklines", list(name = "react-sparklines", version = "^1.7.0"))
 ```
 
 ## Building and installing
