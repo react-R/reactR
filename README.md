@@ -6,6 +6,7 @@
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
 [![Travis-CI Build
 Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
+[![Slack Status](http://reactr-slackin.herokuapp.com/badge.svg)](http://reactr-slackin.herokuapp.com/badge.svg)
 
 `reactR` provides a set of convenience functions for using
 [`React`](https://facebook.github.io/react) in `R` with `htmlwidget`
@@ -92,3 +93,7 @@ We welcome contributors and would love your participation. Please note
 that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to
 abide by the terms.
+
+## Community
+
+We operate a [Slack](https://slack.com) workspace you are [more than welcome to join](http://reactr-slackin.herokuapp.com/).
