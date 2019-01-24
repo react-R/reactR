@@ -33,7 +33,11 @@ scaffoldReactWidget <- function(name, npmPkg = NULL, edit = interactive()){
   addWebpackConfig(name)
   addWidgetJS(name, edit)
   addExampleApp(name)
-  updateRbuildignore()
+
+  usethis::use_build_ignore(c("node_modules", "srcjs"))
+  usethis::use_git_ignore(c("node_modules", "srcjs"))
+  lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
+
   message("To install dependencies from npm run: yarn install")
   message("To build JavaScript run: yarn run webpack --mode=development")
 }
@@ -147,18 +151,6 @@ addExampleApp <- function(name) {
     message('Created example app.R')
   } else {
     message("app.R already exists")
-  }
-}
-
-updateRbuildignore <- function() {
-  ignore_file <- '.Rbuildignore'
-  if (file.exists(ignore_file)
-      && !("^node_modules$" %in% readLines(ignore_file))) {
-    message('Adding node_modules to existing .Rbuildignore')
-    write("^node_modules$", ignore_file, append = TRUE)
-  } else if (!file.exists(ignore_file)) {
-    message('Creating .Rbuildignore and adding node_modules')
-    write("^node_modules$", ignore_file)
   }
 }
 

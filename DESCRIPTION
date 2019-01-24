@@ -38,6 +38,7 @@ Suggests:
     rmarkdown,
     shiny,
     V8,
-    knitr
+    knitr,
+    usethis
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
