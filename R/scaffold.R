@@ -4,11 +4,10 @@
 #' R package.
 #'
 #' @param name Name of widget
-#' @param npmPkg Optional \href{https://npmjs.com/}{NPM} package upon which this
-#'   widget is based, a named list with two elements: \code{name} and
-#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{version}. If
-#'   you specify this parameter the package will be added to the
-#'   \code{dependency} section of the generated \code{package.json}.
+#' @param npmPkgs Optional \href{https://npmjs.com/}{NPM} packages upon which
+#'   this widget is based which will be used to populate \code{package.json}.
+#'   Should be a named list of names to
+#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{versions}.
 #' @param edit Automatically open the widget's JavaScript source file after
 #'   creating the scaffolding.
 #'
@@ -16,7 +15,7 @@
 #'   you wish to add the widget to.
 #'
 #' @export
-scaffoldReactWidget <- function(name, npmPkg = NULL, edit = interactive()){
+scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
   if (!file.exists('DESCRIPTION')){
     stop(
       "You need to create a package to house your widget first!",
@@ -29,7 +28,7 @@ scaffoldReactWidget <- function(name, npmPkg = NULL, edit = interactive()){
   package <- read.dcf('DESCRIPTION')[[1,"Package"]]
   addWidgetConstructor(name, package, edit)
   addWidgetYAML(name, edit)
-  addPackageJSON(toDepJSON(npmPkg))
+  addPackageJSON(toDepJSON(npmPkgs))
   addWebpackConfig(name)
   addWidgetJS(name, edit)
   addExampleApp(name)
@@ -42,11 +41,11 @@ scaffoldReactWidget <- function(name, npmPkg = NULL, edit = interactive()){
   message("To build JavaScript run: yarn run webpack --mode=development")
 }
 
-toDepJSON <- function(npmPkg) {
-  if (is.null(npmPkg)) {
+toDepJSON <- function(npmPkgs) {
+  if (is.null(npmPkgs)) {
     ""
   } else {
-    sprintf('"%s": "%s"', npmPkg$name, npmPkg$version)
+    paste0(sprintf('"%s": "%s"', names(npmPkgs), npmPkgs), collapse = ",\n")
   }
 }
 
@@ -106,8 +105,8 @@ addWidgetYAML <- function(name, edit){
   if (edit) fileEdit(file_)
 }
 
-addPackageJSON <- function(npmPkg) {
-  tpl <- renderTemplate(slurp('templates/widget_package.json.txt'), list(npmPkg = npmPkg))
+addPackageJSON <- function(npmPkgs) {
+  tpl <- renderTemplate(slurp('templates/widget_package.json.txt'), list(npmPkgs = npmPkgs))
   if (!file.exists('package.json')) {
     cat(tpl, file = 'package.json')
     message('Created package.json')

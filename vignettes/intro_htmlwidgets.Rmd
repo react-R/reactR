@@ -49,7 +49,7 @@ usethis::create_package("~/sparklines")
 # Inject the widget templating
 withr::with_dir(
   "~/sparklines", 
-  reactR::scaffoldReactWidget("sparklines", list(name = "react-sparklines", version = "^1.7.0"))
+  reactR::scaffoldReactWidget("sparklines", list("react-sparklines" = "^1.7.0"))
 )
 ```
 
