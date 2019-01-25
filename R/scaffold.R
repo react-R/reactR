@@ -44,6 +44,8 @@ scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
 toDepJSON <- function(npmPkgs) {
   if (is.null(npmPkgs)) {
     ""
+  } else if (!length(names(npmPkgs))) {
+    stop("Must specify npm package names in the names attributes of npmPkgs")
   } else {
     paste0(sprintf('"%s": "%s"', names(npmPkgs), npmPkgs), collapse = ",\n")
   }
