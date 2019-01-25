@@ -57,7 +57,7 @@ withr::with_dir(
 
 ### Building the JavaScript
 
-The next step is to navigate to the newly-created `sparklines` directory in your terminal. Then, run the following commands:
+The next step is to navigate to the newly-created `sparklines` project and run the following R commands:
 
 ```{r}
 system("yarn install")
