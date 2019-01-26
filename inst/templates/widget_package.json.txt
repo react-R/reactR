@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    ${npmPkg}
+    ${npmPkgs}
   },
   "devDependencies": {
     "webpack": "^4.27.1",
