@@ -1,3 +1,13 @@
+# reactR 0.3.1
+
+* Add `usethis` dependency
+* Ignore node_modules in `.Rbuildignore` and `.gitignore`
+
+# reactR 0.3.0
+
+* Add htmlwidget scaffold and helpers (see [tutorial](https://react-r.github.io/reactR/articles/intro_htmlwidgets.html))
+* Update react and react-dom to 16.6.7
+
 # reactR 0.2.1
 
 * Update react and react-dom to 16.6.0
