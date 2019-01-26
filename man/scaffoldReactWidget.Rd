@@ -4,16 +4,15 @@
 \alias{scaffoldReactWidget}
 \title{Create implementation scaffolding for a React.js-based HTML widget}
 \usage{
-scaffoldReactWidget(name, npmPkg = NULL, edit = interactive())
+scaffoldReactWidget(name, npmPkgs = NULL, edit = interactive())
 }
 \arguments{
 \item{name}{Name of widget}
 
-\item{npmPkg}{Optional \href{https://npmjs.com/}{NPM} package upon which this
-widget is based, a named list with two elements: \code{name} and
-\href{https://docs.npmjs.com/files/package.json#dependencies}{version}. If
-you specify this parameter the package will be added to the
-\code{dependency} section of the generated \code{package.json}.}
+\item{npmPkgs}{Optional \href{https://npmjs.com/}{NPM} packages upon which
+this widget is based which will be used to populate \code{package.json}.
+Should be a named list of names to
+\href{https://docs.npmjs.com/files/package.json#dependencies}{versions}.}
 
 \item{edit}{Automatically open the widget's JavaScript source file after
 creating the scaffolding.}
