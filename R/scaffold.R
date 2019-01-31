@@ -34,7 +34,7 @@ scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
   addExampleApp(name)
 
   usethis::use_build_ignore(c("node_modules", "srcjs"))
-  usethis::use_git_ignore(c("node_modules", "srcjs"))
+  usethis::use_git_ignore(c("node_modules"))
   lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
 
   message("To install dependencies from npm run: yarn install")
