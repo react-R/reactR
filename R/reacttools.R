@@ -92,3 +92,34 @@ reactMarkup <- function(tag) {
   list(tag = tag, class = "reactR_markup")
 }
 
+#' Create a React-based input
+#'
+#' @param inputId The \code{input} slot that will be used to access the value.
+#' @param class Space-delimited list of CSS class names that should identify this input type in the browser.
+#' @param value Initial value.
+#' @param configuration
+#' @param container
+#' @param dependencies
+#'
+#' @return
+#' @export
+#'
+#' @examples
+createReactInput <- function(inputId,
+                             class,
+                             value,
+                             configuration = list(),
+                             container = htmltools::tags$div,
+                             dependencies = NULL) {
+  htmltools::tagList(
+    container(id = inputId, class = class),
+    htmltools::tags$script(id = sprintf("%s_value", inputId),
+                           type = "application/json",
+                           shiny:::toJSON(value)),
+    htmltools::tags$script(id = sprintf("%s_configuration", inputId),
+                           type = "application/json",
+                           shiny:::toJSON(configuration)),
+    html_dependency_react(),
+    html_dependency_reacttools()
+  )
+}
