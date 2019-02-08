@@ -1,3 +1,5 @@
+const webpackConfig = require('./webpack.config.js');
+
 module.exports = function (config) {
     config.set({
         frameworks: ['mocha', 'chai', 'source-map-support'],
@@ -7,18 +9,7 @@ module.exports = function (config) {
             'js-tests/*.jsx': ['webpack']
         },
         webpack: {
-            module: {
-                rules: [
-                    {
-                        test: [/\.js$/, /\.jsx$/],
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env', '@babel/preset-react']
-                        }
-                    }
-                ]
-            },
-            devtool: 'inline-source-map'
+          module: webpackConfig.module
         },
         webpackMiddleware: {
             stats: 'errors-only'
