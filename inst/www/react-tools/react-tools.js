@@ -81,7 +81,7 @@ window.reactR = (function () {
             type: type,
             factory: function (el, width, height) {
                 var lastValue,
-                    instance = null,
+                    instance = {},
                     renderValue = (function (value) {
                         if (actualOptions.renderOnResize) {
                             // value.tag might be a primitive string, in which
@@ -92,7 +92,7 @@ window.reactR = (function () {
                             }
                             lastValue = value;
                         }
-                        this.instance = ReactDOM.render(hydrate(components, value.tag), el);
+                        this.instance.component = ReactDOM.render(hydrate(components, value.tag), el);
                     });
                 return {
                     instance: instance,
