@@ -1,8 +1,8 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.3.0
-Date: 2019-01-11
+Version: 0.3.1
+Date: 2019-01-26
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -38,6 +38,7 @@ Suggests:
     rmarkdown,
     shiny,
     V8,
-    knitr
+    knitr,
+    usethis
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

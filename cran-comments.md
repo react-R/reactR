@@ -1,6 +1,6 @@
 ## Comments
 
-none
+resubmit; remove logo
 
 ## Test environments
 * local Windows 10 install, R 3.4.0
@@ -10,11 +10,7 @@ none
 
 ## R CMD check results
 
-0 errors | 1 warnings | 0 note
-
-   Conversion of 'README.md' failed:
-   pandoc.exe: Could not fetch man/figures/logo.svg
-   man/figures/logo.svg: openBinaryFile: does not exist (No such file or directory)
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
 

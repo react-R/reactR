@@ -24,5 +24,5 @@ babel_transform <- function(code=""){
     )
   )
   ctx$assign('code', code)
-  ctx$get('Babel.transform(code,{ presets: ["es2015","react"] }).code')
+  ctx$get('Babel.transform(code,{ presets: [["es2015", {modules: false}],"react"] }).code')
 }
