@@ -22,7 +22,8 @@ module.exports = {
         'react': 'window.React',
         'react-dom': 'window.ReactDOM',
         'jquery': 'window.jQuery',
-        'shiny': 'window.Shiny'
+        'shiny': 'window.Shiny',
+        'htmlwidgets': 'window.HTMLWidgets'
     },
     stats: {
         colors: true

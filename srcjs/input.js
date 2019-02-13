@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Shiny from 'shiny';
 import $ from 'jquery';
 
-/* 
+/*
  * This default receiveMessage implementation expects data to contain whole
  * configuration and value properties. If either is present, it will be set and
  * the component will be re-rendered. Because receiveMessage is typically used
@@ -32,7 +32,7 @@ const defaultOptions = {
 };
 
 /**
- * Installs a new Shiny input binding based on a React component.  
+ * Installs a new Shiny input binding based on a React component.
  *
  * @param {string} selector - jQuery selector that should identify the set of
  * container elements within the scope argument of Shiny.InputBinding.find.
@@ -47,12 +47,12 @@ const defaultOptions = {
  */
 export function reactInput(selector,
                            name,
-                           component, 
+                           component,
                            options) {
   options = Object.assign({}, defaultOptions, options);
   Shiny.inputBindings.register(new class extends Shiny.InputBinding {
 
-    /* 
+    /*
      * Methods override those in Shiny.InputBinding
      */
 
@@ -78,7 +78,7 @@ export function reactInput(selector,
       options.receiveMessage.call(this, el, data);
     }
 
-    /* 
+    /*
      * Methods not present in Shiny.InputBinding but accessible to users
      * through `this` in receiveMessage
      * */

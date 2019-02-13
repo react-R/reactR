@@ -97,24 +97,24 @@ reactMarkup <- function(tag) {
 #' @param inputId The \code{input} slot that will be used to access the value.
 #' @param class Space-delimited list of CSS class names that should identify
 #'   this input type in the browser.
-#' @param value Initial value.
 #' @param dependencies HTML dependencies to include in addition to those
 #'   supporting React. Must contain at least one dependency, that of the input's
 #'   implementation.
+#' @param default Initial value.
 #' @param configuration Static configuration data.
-#' @param container A function to generate an HTML element to contain the input.
+#' @param container Function to generate an HTML element to contain the input.
 #'
-#' @return A Shiny input suitable for inclusion in a UI.
+#' @return Shiny input suitable for inclusion in a UI.
 #' @export
 #'
-#' @examples
 createReactInput <- function(inputId,
                              class,
-                             value,
                              dependencies,
+                             default = NULL,
                              configuration = list(),
                              container = htmltools::tags$div) {
   if(length(dependencies) < 1) stop("Must include at least one HTML dependency.")
+  value <- restoreInput(id = inputId, default = default)
   htmltools::tagList(
     container(id = inputId, class = class),
     htmltools::tags$script(id = sprintf("%s_value", inputId),
