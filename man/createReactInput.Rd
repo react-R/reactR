@@ -17,14 +17,14 @@ this input type in the browser.}
 supporting React. Must contain at least one dependency, that of the input's
 implementation.}
 
+\item{default}{Initial value.}
+
 \item{configuration}{Static configuration data.}
 
-\item{container}{A function to generate an HTML element to contain the input.}
-
-\item{value}{Initial value.}
+\item{container}{Function to generate an HTML element to contain the input.}
 }
 \value{
-A Shiny input suitable for inclusion in a UI.
+Shiny input suitable for inclusion in a UI.
 }
 \description{
 Create a React-based input
