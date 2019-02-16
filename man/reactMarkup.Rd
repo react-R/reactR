@@ -16,6 +16,6 @@ A reactR markup object suitable for being passed to
   \code{\link[htmlwidgets]{createWidget}} as widget instance data.
 }
 \description{
-Tag lists as returned by \code{\link[htmltools]{tagList}} are not currently
+Tag lists as returned by \code{htmltools tagList} are not currently
 supported.
 }
