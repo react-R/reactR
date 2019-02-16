@@ -1,5 +1,6 @@
 ^node_modules$
 ^js-tests$
+^srcjs$
 ^pkgdown$
 ^assets$
 ^.*\.Rproj$
@@ -15,3 +16,4 @@
 ^yarn\.lock$
 ^README\.Rmd$
 logo.svg
+webpack.config.js
