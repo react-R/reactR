@@ -1,0 +1,40 @@
+
+slurp <- function(file) {
+  paste(readLines(
+    system.file(file, package = 'reactR')
+  ), collapse = "\n")
+}
+
+# Perform a series of pattern replacements on str.
+# Example: renderTemplate("foo ${x} bar ${y} baz ${x}", list(x = 1, y = 2))
+# Produces: "foo 1 bar 2 baz 1"
+renderTemplate <- function(str, substitutions) {
+  Reduce(function(str, name) {
+    gsub(paste0("\\$\\{", name, "\\}"), substitutions[[name]], str)
+  }, names(substitutions), str)
+}
+
+capitalize <- function(s) {
+  gsub("^(.)", perl = TRUE, replacement = '\\U\\1', s)
+}
+
+toDepJSON <- function(npmPkgs) {
+  if (is.null(npmPkgs)) {
+    ""
+  } else if (!length(names(npmPkgs))) {
+    stop("Must specify npm package names in the names attributes of npmPkgs")
+  } else {
+    paste0(sprintf('"%s": "%s"', names(npmPkgs), npmPkgs), collapse = ",\n")
+  }
+}
+
+renderFile <- function(outputFile, templateFile, description = '', substitutions = list()) {
+  if (!file.exists(outputFile)) {
+    dir.create(dirname(outputFile), recursive = TRUE)
+    cat(renderTemplate(slurp(templateFile), substitutions), file = outputFile)
+    message("Created ", description, " ", outputFile)
+  } else {
+    message(outputFile, " already exists")
+  }
+  outputFile
+}
