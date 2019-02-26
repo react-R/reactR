@@ -46,8 +46,3 @@ renderFile <- function(outputFile, templateFile, description = '', substitutions
   outputFile
 }
 
-# Workaround for https://github.com/r-lib/usethis/issues/643, otherwise would
-# use usethis::use_build_ignore
-buildIgnoreDirs <- function(dirs) {
-  usethis::write_union(".Rbuildignore", paste0("^", dirs))
-}
