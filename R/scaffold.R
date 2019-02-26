@@ -52,7 +52,7 @@ addWidgetConstructor <- function(name, package, edit){
       capName = capitalize(name)
     )
   )
-  if (edit) file.edit(file)
+  if (edit) utils::file.edit(file)
 }
 
 addWidgetYAML <- function(name, edit){
@@ -61,7 +61,7 @@ addWidgetYAML <- function(name, edit){
     "templates/widget_yaml.txt",
     "boilerplate for widget dependencies"
   )
-  if (edit) file.edit(file)
+  if (edit) utils::file.edit(file)
 }
 
 addPackageJSON <- function(npmPkgs) {
@@ -89,7 +89,7 @@ addWidgetJS <- function(name, edit){
     'boilerplate for widget JavaScript bindings',
     list(name = name)
   )
-  if (edit) file.edit(file)
+  if (edit) utils::file.edit(file)
 }
 
 addExampleApp <- function(name) {

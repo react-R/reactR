@@ -114,7 +114,7 @@ createReactInput <- function(inputId,
                              configuration = list(),
                              container = htmltools::tags$div) {
   if(length(dependencies) < 1) stop("Must include at least one HTML dependency.")
-  value <- restoreInput(id = inputId, default = default)
+  value <- shiny::restoreInput(id = inputId, default = default)
   htmltools::tagList(
     container(id = inputId, class = class),
     htmltools::tags$script(id = sprintf("%s_value", inputId),
