@@ -22,9 +22,7 @@ scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
       call. = F
     )
   }
-  if (!file.exists('inst')){
-    dir.create('inst')
-  }
+
   package <- read.dcf('DESCRIPTION')[[1,"Package"]]
   addWidgetConstructor(name, package, edit)
   addWidgetYAML(name, edit)
