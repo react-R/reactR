@@ -33,7 +33,7 @@ scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
   addWidgetJS(name, edit)
   addExampleApp(name)
 
-  usethis::use_build_ignore(c("node_modules", "srcjs"))
+  buildIgnoreDirs(c("node_modules", "srcjs"))
   usethis::use_git_ignore(c("node_modules"))
   lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
 
