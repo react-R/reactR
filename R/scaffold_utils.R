@@ -1,8 +1,14 @@
-
 slurp <- function(file) {
   paste(readLines(
     system.file(file, package = 'reactR')
   ), collapse = "\n")
+}
+
+# invoke file.edit in a way that will bind to the RStudio editor
+# when running inside RStudio
+fileEdit <- function(file) {
+  fileEditFunc <- eval(parse(text = "file.edit"), envir = globalenv())
+  fileEditFunc(file)
 }
 
 # Perform a series of pattern replacements on str.
