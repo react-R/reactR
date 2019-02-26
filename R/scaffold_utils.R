@@ -28,6 +28,7 @@ toDepJSON <- function(npmPkgs) {
   }
 }
 
+# Wraps renderTemplate for convenient use from scaffold functions.
 renderFile <- function(outputFile, templateFile, description = '', substitutions = list()) {
   if (!file.exists(outputFile)) {
     dir.create(dirname(outputFile), recursive = TRUE)
