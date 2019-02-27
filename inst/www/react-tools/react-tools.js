@@ -126,7 +126,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-/* 
+/*
  * This default receiveMessage implementation expects data to contain whole
  * configuration and value properties. If either is present, it will be set and
  * the component will be re-rendered. Because receiveMessage is typically used
@@ -160,7 +160,7 @@ var defaultOptions = {
   receiveMessage: defaultReceiveMessage
 };
 /**
- * Installs a new Shiny input binding based on a React component.  
+ * Installs a new Shiny input binding based on a React component.
  *
  * @param {string} selector - jQuery selector that should identify the set of
  * container elements within the scope argument of Shiny.InputBinding.find.
@@ -190,7 +190,7 @@ function reactInput(selector, name, component, options) {
     _createClass(_class, [{
       key: "find",
 
-      /* 
+      /*
        * Methods override those in Shiny.InputBinding
        */
       value: function find(scope) {
@@ -223,7 +223,7 @@ function reactInput(selector, name, component, options) {
       value: function receiveMessage(el, data) {
         options.receiveMessage.call(this, el, data);
       }
-      /* 
+      /*
        * Methods not present in Shiny.InputBinding but accessible to users
        * through `this` in receiveMessage
        * */
@@ -287,7 +287,7 @@ __webpack_require__.r(__webpack_exports__);
 window.reactR = {
   reactInput: _input__WEBPACK_IMPORTED_MODULE_1__["reactInput"],
   reactWidget: _widget__WEBPACK_IMPORTED_MODULE_0__["reactWidget"],
-  hydrate: hydrate
+  hydrate: _widget__WEBPACK_IMPORTED_MODULE_0__["hydrate"]
 };
 
 /***/ }),
@@ -390,7 +390,7 @@ function isTag(value) {
 
 function reactWidget(name, type, components, options) {
   var actualOptions = mergeOptions(options);
-  Object(htmlwidgets__WEBPACK_IMPORTED_MODULE_0__["widget"])({
+  htmlwidgets__WEBPACK_IMPORTED_MODULE_0___default.a.widget({
     name: name,
     type: type,
     factory: function factory(el, width, height) {
