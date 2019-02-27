@@ -1,0 +1,26 @@
+#' <Add Title>
+#'
+#' <Add Description>
+#'
+#' @importFrom shiny restoreInput
+#' @importFrom reactR createReactInput
+#' @importFrom htmltools htmlDependency tags
+#'
+#' @export
+${name}Input <- function(inputId, default = "") {
+  value <- restoreInput(id = inputId, default = default)
+  createReactInput(
+    inputId,
+    "${name}",
+    htmlDependency(
+      name = "${name}-input",
+      version = "1.0.0",
+      src = "www/${name}",
+      package = "${name}",
+      script = "${name}.js"
+    ),
+    value,
+    list(),
+    tags$span
+  )
+}

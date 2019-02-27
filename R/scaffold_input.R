@@ -1,0 +1,52 @@
+#' Create implementation scaffolding for a React.js-based Shiny input.
+#'
+#' Add the minimal code required to implement a React.js-based Shiny input to an
+#' R package.
+#'
+#' @param name Name of input
+#' @param npmPkgs Optional \href{https://npmjs.com/}{NPM} packages upon which
+#'   this input is based which will be used to populate \code{package.json}.
+#'   Should be a named list of names to
+#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{versions}.
+#' @param edit Automatically open the input's source files after creating the
+#'   scaffolding.
+#'
+#' @note This function must be executed from the root directory of the package
+#'   you wish to add the input to.
+#'
+#' @export
+scaffoldReactInput <- function(name, npmPkgs = NULL, edit = interactive()) {
+  if (!file.exists('DESCRIPTION')){
+    stop(
+      "You need to create a package to house your widget first!",
+      call. = F
+    )
+  }
+
+  package <- read.dcf('DESCRIPTION')[[1,"Package"]]
+
+  # Add input constructor
+  renderFile(
+    sprintf("R/%s.R", name),
+    "templates/input_r.txt",
+    "boilerplate for input constructor",
+    list(
+      name = name,
+      package = package,
+      capName = capitalize(name)
+    )
+  )
+  # addInputConstructor(name, package, edit)
+  # addInputJSON(toDepJSON(npmPkgs))
+  # addWebpackConfig(name)
+  # addWidgetJS(name, edit)
+  # addExampleApp(name)
+  #
+  # usethis::use_build_ignore(c("node_modules", "srcjs"))
+  # usethis::use_git_ignore(c("node_modules"))
+  # lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
+  #
+  # message("To install dependencies from npm run: yarn install")
+  # message("To build JavaScript run: yarn run webpack --mode=development")
+}
+
