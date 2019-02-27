@@ -16,37 +16,61 @@
 #'
 #' @export
 scaffoldReactInput <- function(name, npmPkgs = NULL, edit = interactive()) {
-  if (!file.exists('DESCRIPTION')){
-    stop(
-      "You need to create a package to house your widget first!",
-      call. = F
-    )
-  }
+  package <- getPackage()
 
-  package <- read.dcf('DESCRIPTION')[[1,"Package"]]
-
-  # Add input constructor
-  renderFile(
+  file <- renderFile(
     sprintf("R/%s.R", name),
     "templates/input_r.txt",
     "boilerplate for input constructor",
     list(
       name = name,
-      package = package,
-      capName = capitalize(name)
+      package = package
     )
   )
-  # addInputConstructor(name, package, edit)
-  # addInputJSON(toDepJSON(npmPkgs))
-  # addWebpackConfig(name)
-  # addWidgetJS(name, edit)
-  # addExampleApp(name)
-  #
-  # usethis::use_build_ignore(c("node_modules", "srcjs"))
-  # usethis::use_git_ignore(c("node_modules"))
-  # lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
-  #
-  # message("To install dependencies from npm run: yarn install")
-  # message("To build JavaScript run: yarn run webpack --mode=development")
+  if (edit) fileEdit(file)
+
+  renderFile(
+    'package.json',
+    'templates/package.json.txt',
+    'project metadata',
+    list(npmPkgs = toDepJSON(npmPkgs))
+  )
+
+  renderFile(
+    'webpack.config.js',
+    'templates/webpack.config.js.txt',
+    'webpack configuration',
+    list(
+      name = name,
+      outputPath = sprintf("inst/www/%s/%s", package, name)
+    )
+  )
+
+  renderFile(
+    sprintf('srcjs/%s.jsx', name),
+    'templates/input_js.txt',
+    'JavaScript implementation',
+    list(
+      name = name,
+      package = package
+    )
+  )
+
+  renderFile(
+    'app.R',
+    'templates/input_app.R.txt',
+    'example app',
+    list(
+      name = name,
+      package = package
+    )
+  )
+
+  usethis::use_build_ignore(c("node_modules", "srcjs"))
+  usethis::use_git_ignore(c("node_modules"))
+  lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
+
+  message("To install dependencies from npm run: yarn install")
+  message("To build JavaScript run: yarn run webpack --mode=development")
 }
 

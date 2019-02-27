@@ -16,14 +16,8 @@
 #'
 #' @export
 scaffoldReactWidget <- function(name, npmPkgs = NULL, edit = interactive()){
-  if (!file.exists('DESCRIPTION')){
-    stop(
-      "You need to create a package to house your widget first!",
-      call. = F
-    )
-  }
+  package <- getPackage()
 
-  package <- read.dcf('DESCRIPTION')[[1,"Package"]]
   addWidgetConstructor(name, package, edit)
   addWidgetYAML(name, edit)
   addPackageJSON(toDepJSON(npmPkgs))
@@ -65,7 +59,7 @@ addWidgetYAML <- function(name, edit){
 addPackageJSON <- function(npmPkgs) {
   renderFile(
     'package.json',
-    'templates/widget_package.json.txt',
+    'templates/package.json.txt',
     'project metadata',
     list(npmPkgs = npmPkgs)
   )
@@ -74,9 +68,12 @@ addPackageJSON <- function(npmPkgs) {
 addWebpackConfig <- function(name) {
   renderFile(
     'webpack.config.js',
-    'templates/widget_webpack.config.js.txt',
+    'templates/webpack.config.js.txt',
     'webpack configuration',
-    list(name = name)
+    list(
+      name = name,
+      outputPath = 'inst/htmlwidgets'
+    )
   )
 }
 
