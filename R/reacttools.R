@@ -77,7 +77,7 @@ React <- structure(
 #' Prepare data that represents a single-element character vector, a React
 #' component, or an htmltools tag for sending to the client.
 #'
-#' Tag lists as returned by \code{\link[htmltools]{tagList}} are not currently
+#' Tag lists as returned by \code{htmltools tagList} are not currently
 #' supported.
 #'
 #' @param tag character vector or React component or
