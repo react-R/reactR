@@ -91,9 +91,7 @@ shiny::runApp()
 
 Alternatively, in RStudio, you can open `app.R` and press `Ctrl-Shift-Enter` (`Cmd-Shift-Enter` on macOS). You should see something like the following appear in the Viewer pane:
 
-```{r echo=FALSE}
-knitr::include_graphics('./widget_app.jpg')
-```
+![](./widget_app.jpg)
 
 ## Authoring a React binding
 
@@ -271,6 +269,8 @@ shinyApp(ui, server)
 ```
 
 Now, when you run `shiny::runApp()`, you should see your react-based htmlwidget rendering in **shiny** app!
+
+![](./widget_app_improved.jpg)
 
 ## Further learning
 
