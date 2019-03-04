@@ -307,10 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDimension", function() { return formatDimension; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTag", function() { return isTag; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reactWidget", function() { return reactWidget; });
-/* harmony import */ var htmlwidgets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! htmlwidgets */ "htmlwidgets");
-/* harmony import */ var htmlwidgets__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(htmlwidgets__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 /**
  * Recursively transforms tag, a JSON representation of an instance of a
@@ -319,7 +316,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @param {Object} components
  * @param {Object} tag
  */
-
 function hydrate(components, tag) {
   if (typeof tag === 'string') return tag;
 
@@ -390,7 +386,7 @@ function isTag(value) {
 
 function reactWidget(name, type, components, options) {
   var actualOptions = mergeOptions(options);
-  htmlwidgets__WEBPACK_IMPORTED_MODULE_0___default.a.widget({
+  window.HTMLWidgets.widget({
     name: name,
     type: type,
     factory: function factory(el, width, height) {
@@ -423,17 +419,6 @@ function reactWidget(name, type, components, options) {
     }
   });
 }
-
-/***/ }),
-
-/***/ "htmlwidgets":
-/*!*************************************!*\
-  !*** external "window.HTMLWidgets" ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = window.HTMLWidgets;
 
 /***/ }),
 
