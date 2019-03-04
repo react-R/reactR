@@ -1,5 +1,3 @@
-import HTMLWidgets from 'htmlwidgets';
-
 /**
  * Recursively transforms tag, a JSON representation of an instance of a
  * React component and its children, into a React element suitable for
@@ -77,7 +75,7 @@ export function isTag(value) {
  */
 export function reactWidget(name, type, components, options) {
     var actualOptions = mergeOptions(options);
-    HTMLWidgets.widget({
+    window.HTMLWidgets.widget({
         name: name,
         type: type,
         factory: function (el, width, height) {
