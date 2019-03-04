@@ -24,3 +24,14 @@ ${name}Input <- function(inputId, default = "") {
     tags$span
   )
 }
+
+#' <Add Title>
+#'
+#' <Add Description>
+#'
+#' @export
+update${capName}Input <- function(session, inputId, value, configuration = NULL) {
+  message <- list(value = value)
+  if (!is.null(configuration)) message$configuration <- configuration
+  session$sendInputMessage(inputId, message);
+}

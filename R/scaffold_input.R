@@ -24,6 +24,7 @@ scaffoldReactInput <- function(name, npmPkgs = NULL, edit = interactive()) {
     "boilerplate for input constructor",
     list(
       name = name,
+      capName = capitalize(name),
       package = package
     )
   )
