@@ -391,6 +391,7 @@ function reactWidget(name, type, components, options) {
     type: type,
     factory: function factory(el, width, height) {
       var lastValue,
+          instance = {},
           renderValue = function renderValue(value) {
         if (actualOptions.renderOnResize) {
           // value.tag might be a primitive string, in which
@@ -403,10 +404,11 @@ function reactWidget(name, type, components, options) {
           lastValue = value;
         }
 
-        ReactDOM.render(hydrate(components, value.tag), el);
+        this.instance.component = ReactDOM.render(hydrate(components, value.tag), el);
       };
 
       return {
+        instance: instance,
         renderValue: renderValue,
         resize: function resize(newWidth, newHeight) {
           if (actualOptions.renderOnResize) {
