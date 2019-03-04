@@ -79,7 +79,7 @@ addWebpackConfig <- function(name) {
 
 addWidgetJS <- function(name, edit){
   file <- renderFile(
-    sprintf('srcjs/%s.js', name),
+    sprintf('srcjs/%s.jsx', name),
     'templates/widget_js.txt',
     'boilerplate for widget JavaScript bindings',
     list(name = name)
