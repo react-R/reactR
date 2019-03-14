@@ -29,3 +29,21 @@ Shiny input suitable for inclusion in a UI.
 \description{
 Create a React-based input
 }
+\examples{
+myInput <- function(inputId, default = "") {
+  # The value of createReactInput should be returned from input constructor functions.
+  createReactInput(
+    inputId,
+    "myinput",
+    # At least one htmlDependency must be provided -- the JavaScript implementation of the input.
+    htmlDependency(
+      name = "my-input",
+      version = "1.0.0",
+      src = "www/mypackage/myinput",
+      package = "mypackage",
+      script = "myinput.js"
+    ),
+    default
+  )
+}
+}

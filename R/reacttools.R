@@ -107,6 +107,23 @@ reactMarkup <- function(tag) {
 #' @return Shiny input suitable for inclusion in a UI.
 #' @export
 #'
+#' @examples
+#' myInput <- function(inputId, default = "") {
+#'   # The value of createReactInput should be returned from input constructor functions.
+#'   createReactInput(
+#'     inputId,
+#'     "myinput",
+#'     # At least one htmlDependency must be provided -- the JavaScript implementation of the input.
+#'     htmlDependency(
+#'       name = "my-input",
+#'       version = "1.0.0",
+#'       src = "www/mypackage/myinput",
+#'       package = "mypackage",
+#'       script = "myinput.js"
+#'     ),
+#'     default
+#'   )
+#' }
 createReactInput <- function(inputId,
                              class,
                              dependencies,
