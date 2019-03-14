@@ -15,7 +15,7 @@
 #'   you wish to add the input to.
 #'
 #' @export
-scaffoldReactInput <- function(name, npmPkgs = NULL, edit = interactive()) {
+scaffoldReactShinyInput <- function(name, npmPkgs = NULL, edit = interactive()) {
   package <- getPackage()
 
   file <- renderFile(
