@@ -8,7 +8,6 @@
 #'
 #' @export
 ${name}Input <- function(inputId, default = "") {
-  value <- restoreInput(id = inputId, default = default)
   createReactInput(
     inputId,
     "${name}",
@@ -19,7 +18,7 @@ ${name}Input <- function(inputId, default = "") {
       package = "${package}",
       script = "${name}.js"
     ),
-    value,
+    default,
     list(),
     tags$span
   )
