@@ -16,6 +16,7 @@
 #'
 #' @export
 scaffoldReactShinyInput <- function(name, npmPkgs = NULL, edit = interactive()) {
+  assertNameValid(name)
   package <- getPackage()
 
   file <- renderFile(

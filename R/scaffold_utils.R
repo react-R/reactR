@@ -52,3 +52,16 @@ getPackage <- function() {
   }
   read.dcf('DESCRIPTION')[[1,"Package"]]
 }
+
+validName <- function(name) {
+  grepl("^[[:alpha:]]+[[:alnum:]]*$", name)
+}
+
+# Constraining names prevents the user from encountering obscure CSS problems
+# and JavaScript errors after scaffolding.
+assertNameValid <- function(name) {
+  if (!validName(name)) {
+    msg <- sprintf("Name '%s' is invalid, names must begin with an alphabetic character and must contain only alphabetic and numeric characters", name)
+    stop(msg, call. = FALSE)
+  }
+}
