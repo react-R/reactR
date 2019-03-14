@@ -90,12 +90,12 @@
 /*!************************!*\
   !*** ./srcjs/input.js ***!
   \************************/
-/*! exports provided: reactInput */
+/*! exports provided: reactShinyInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reactInput", function() { return reactInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reactShinyInput", function() { return reactShinyInput; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
@@ -132,7 +132,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  * the component will be re-rendered. Because receiveMessage is typically used
  * by input authors to perform incremental updates, this default implementation
  * can be overriden by the user with the receiveMessage arguments to
- * reactInput.
+ * reactShinyInput.
  */
 
 function defaultReceiveMessage(el, _ref) {
@@ -174,7 +174,7 @@ var defaultOptions = {
  *   incremental value updates.
  */
 
-function reactInput(selector, name, component, options) {
+function reactShinyInput(selector, name, component, options) {
   options = Object.assign({}, defaultOptions, options);
   shiny__WEBPACK_IMPORTED_MODULE_2___default.a.inputBindings.register(new (
   /*#__PURE__*/
@@ -216,7 +216,8 @@ function reactInput(selector, name, component, options) {
       }
     }, {
       key: "unsubscribe",
-      value: function unsubscribe(el, callback) {// TODO
+      value: function unsubscribe(el, callback) {// TODO at a minimum, 'undo' subscribe() actions (remove callback from data)
+        // Figure out the right way to un-render the component
       }
     }, {
       key: "receiveMessage",
@@ -227,6 +228,8 @@ function reactInput(selector, name, component, options) {
        * Methods not present in Shiny.InputBinding but accessible to users
        * through `this` in receiveMessage
        * */
+      // TODO Initialize value and config in initialize() method, don't sync back
+      // to DOM
 
     }, {
       key: "getInputValue",
@@ -285,7 +288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.reactR = {
-  reactInput: _input__WEBPACK_IMPORTED_MODULE_1__["reactInput"],
+  reactShinyInput: _input__WEBPACK_IMPORTED_MODULE_1__["reactShinyInput"],
   reactWidget: _widget__WEBPACK_IMPORTED_MODULE_0__["reactWidget"],
   hydrate: _widget__WEBPACK_IMPORTED_MODULE_0__["hydrate"]
 };
