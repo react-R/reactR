@@ -72,7 +72,8 @@ export function reactInput(selector,
       this.render(el);
     }
     unsubscribe(el, callback) {
-      // TODO
+      // TODO at a minimum, 'undo' subscribe() actions (remove callback from data)
+      // Figure out the right way to un-render the component
     }
     receiveMessage(el, data) {
       options.receiveMessage.call(this, el, data);
@@ -83,6 +84,8 @@ export function reactInput(selector,
      * through `this` in receiveMessage
      * */
 
+    // TODO Initialize value and config in initialize() method, don't sync back
+    // to DOM
     getInputValue(el) {
       return JSON.parse($(el).next().text());
     }
