@@ -1,8 +1,8 @@
 import { reactWidget, hydrate } from './widget';
-import { reactInput } from './input';
+import { reactShinyInput } from './input';
 
 window.reactR = {
-  reactInput: reactInput,
+  reactShinyInput: reactShinyInput,
   reactWidget: reactWidget,
   hydrate: hydrate
 };

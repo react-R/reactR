@@ -205,7 +205,7 @@ R side, we must create our own intermediate component that wraps one of
 Open `srcjs/colorpicker.jsx` and paste the following in:
 
 ```js
-import { reactInput } from 'reactR';
+import { reactShinyInput } from 'reactR';
 import { SketchPicker } from 'react-color';
 
 const PickerInput = ({ configuration, value, setValue }) => {
@@ -217,7 +217,7 @@ const PickerInput = ({ configuration, value, setValue }) => {
   );
 };
 
-reactInput('.colorpicker', 'colorpicker', PickerInput);
+reactShinyInput('.colorpicker', 'colorpicker', PickerInput);
 ```
 
 The above code creates a new [function

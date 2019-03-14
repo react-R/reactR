@@ -9,7 +9,7 @@ import $ from 'jquery';
  * the component will be re-rendered. Because receiveMessage is typically used
  * by input authors to perform incremental updates, this default implementation
  * can be overriden by the user with the receiveMessage arguments to
- * reactInput.
+ * reactShinyInput.
  */
 function defaultReceiveMessage(el, { configuration, value }) {
   let dirty = false;
@@ -45,7 +45,7 @@ const defaultOptions = {
  *   the default. Typically overridden as an optimization to perform
  *   incremental value updates.
  */
-export function reactInput(selector,
+export function reactShinyInput(selector,
                            name,
                            component,
                            options) {

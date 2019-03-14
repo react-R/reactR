@@ -1,7 +1,7 @@
-import { reactInput } from 'reactR';
+import { reactShinyInput } from 'reactR';
 
 const TextInput = ({ configuration, value, setValue }) => {
   return <input type='text' value={value} onChange={e => setValue(e.target.value)}/>;
 };
 
-reactInput('.${name}', '${package}.${name}', TextInput);
+reactShinyInput('.${name}', '${package}.${name}', TextInput);
