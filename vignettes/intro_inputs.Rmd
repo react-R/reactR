@@ -189,7 +189,7 @@ props:
 * `setValue`: A function to call with the input's new value when one is created
 
 The `configuration` and `value` props are initially populated on the R side, as
-arguments to the `createReactInput` function inside the input's constructor
+arguments to the `createReactShinyInput` function inside the input's constructor
 function. In the case of our newly-scaffolded input, that happens in
 `R/colorpicker.R`.
 

@@ -109,8 +109,8 @@ reactMarkup <- function(tag) {
 #'
 #' @examples
 #' myInput <- function(inputId, default = "") {
-#'   # The value of createReactInput should be returned from input constructor functions.
-#'   createReactInput(
+#'   # The value of createReactShinyInput should be returned from input constructor functions.
+#'   createReactShinyInput(
 #'     inputId,
 #'     "myinput",
 #'     # At least one htmlDependency must be provided -- the JavaScript implementation of the input.
@@ -124,7 +124,7 @@ reactMarkup <- function(tag) {
 #'     default
 #'   )
 #' }
-createReactInput <- function(inputId,
+createReactShinyInput <- function(inputId,
                              class,
                              dependencies,
                              default = NULL,

@@ -3,12 +3,12 @@
 #' <Add Description>
 #'
 #' @importFrom shiny restoreInput
-#' @importFrom reactR createReactInput
+#' @importFrom reactR createReactShinyInput
 #' @importFrom htmltools htmlDependency tags
 #'
 #' @export
 ${name}Input <- function(inputId, default = "") {
-  createReactInput(
+  createReactShinyInput(
     inputId,
     "${name}",
     htmlDependency(
