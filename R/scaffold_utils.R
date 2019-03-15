@@ -48,7 +48,7 @@ renderFile <- function(outputFile, templateFile, description = '', substitutions
 
 getPackage <- function() {
   if (!file.exists('DESCRIPTION')) {
-    stop("You need to create a package to house your widget first!", call. = FALSE)
+    stop("The current directory doesn't contain a package. You're either in the wrong directory, or need to create a package to house your widget.", call. = FALSE)
   }
   read.dcf('DESCRIPTION')[[1,"Package"]]
 }
