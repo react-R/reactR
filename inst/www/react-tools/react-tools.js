@@ -209,6 +209,12 @@ function reactShinyInput(selector, name, component, options) {
         this.render(el);
       }
     }, {
+      key: "initialize",
+      value: function initialize(el) {
+        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('value', JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().text()));
+        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('configuration', JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().next().text()));
+      }
+    }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
         jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('callback', callback);
@@ -216,8 +222,9 @@ function reactShinyInput(selector, name, component, options) {
       }
     }, {
       key: "unsubscribe",
-      value: function unsubscribe(el, callback) {// TODO at a minimum, 'undo' subscribe() actions (remove callback from data)
-        // Figure out the right way to un-render the component
+      value: function unsubscribe(el, callback) {
+        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).removeData('callback');
+        react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(null, el);
       }
     }, {
       key: "receiveMessage",
@@ -228,28 +235,26 @@ function reactShinyInput(selector, name, component, options) {
        * Methods not present in Shiny.InputBinding but accessible to users
        * through `this` in receiveMessage
        * */
-      // TODO Initialize value and config in initialize() method, don't sync back
-      // to DOM
 
     }, {
       key: "getInputValue",
       value: function getInputValue(el) {
-        return JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().text());
+        return jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('value');
       }
     }, {
       key: "setInputValue",
       value: function setInputValue(el, value) {
-        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().text(JSON.stringify(value));
+        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('value', value);
       }
     }, {
       key: "getInputConfiguration",
       value: function getInputConfiguration(el) {
-        return JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().next().text());
+        return jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('configuration');
       }
     }, {
       key: "setInputConfiguration",
-      value: function setInputConfiguration(el, value) {
-        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).next().next().text(JSON.stringify(value));
+      value: function setInputConfiguration(el, configuration) {
+        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('configuration', configuration);
       }
     }, {
       key: "getCallback",
