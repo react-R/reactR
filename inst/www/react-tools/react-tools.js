@@ -410,7 +410,9 @@ function reactWidget(name, type, components, options) {
           }
 
           lastValue = value;
-        }
+        } // with functional stateless components this will be null
+        // see https://reactjs.org/docs/react-dom.html#render for more details
+
 
         this.instance.component = ReactDOM.render(hydrate(components, value.tag), el);
       };
