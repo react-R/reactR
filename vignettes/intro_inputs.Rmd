@@ -72,7 +72,7 @@ provide the templating for creating an input powered by the
 ```{r}
 # Create the R package
 usethis::create_package("~/colorpicker")
-# Inject the widget templating
+# Scaffold initial input implementation files
 withr::with_dir(
   "~/colorpicker",
   reactR::scaffoldReactShinyInput("colorpicker", list("react-color" = "^2.17.0"), edit = FALSE)
@@ -83,7 +83,7 @@ withr::with_dir(
 
 ### Building the JavaScript
 
-The next step is to navigate to the newly-created `sparklines` project and run
+The next step is to navigate to the newly-created `colorpicker` project and run
 the following commands in the terminal:
 
 ```
@@ -98,8 +98,8 @@ yarn run webpack
   documentation on `yarn install`, see the [yarn
   documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
 
-* `yarn run webpack` compiles the [ES2015](https://babeljs.io/docs/en/learn/)
-  JavaScript source file at `srcjs/colorpicker.jsx` into
+* `yarn run webpack` compiles the [modern JavaScript](https://babeljs.io/docs/en/babel-preset-env) 
+  with [JSX](https://babeljs.io/docs/en/babel-preset-react) source file at `srcjs/colorpicker.jsx` into
   `www/colorpicker/colorpicker/colorpicker.js`. The latter file is the one
   actually used by the R package and includes all the relevant JavaScript
   dependencies in a dialect of JavaScript that most browsers understand.
@@ -120,7 +120,7 @@ devtools::document()
 devtools::install(quick = TRUE)
 ```
 
-Alternatively, in RStudio, you can use the keyboard shortcuts `Ctrl+Shift+D` and
+In RStudio, you can use the keyboard shortcuts `Ctrl+Shift+D` and
 `Ctrl-Shift-B` to document and build the package. (On macOS, the shortcuts are
 `Cmd+Shift+D` and `Cmd+Shift+B`)
 
@@ -133,7 +133,7 @@ run `app.R` to see a demo in action:
 shiny::runApp()
 ```
 
-Alternatively, in RStudio, you can open `app.R` and press `Ctrl-Shift-Enter`
+In RStudio, you can open `app.R` and press `Ctrl-Shift-Enter`
 (`Cmd-Shift-Enter` on macOS). You should see something like the following appear
 in the Viewer pane:
 
@@ -141,7 +141,7 @@ in the Viewer pane:
 
 ## Authoring a React input
 
-At this point, we've built some scaffolding for an input powered by React.
+At this point, we have a working (if simple) React-powered text input.
 Let's modify it to create an interface to the `react-color` library.
 
 ### Connecting Shiny with React
@@ -177,7 +177,8 @@ take](http://casesandberg.github.io/react-color/#api) the following
   color, that will be called when the new color is selected
 
 These operations are conceptually similar enough to the API expected of Shiny
-inputs that `reactR` can assist with mapping components to inputs.
+inputs that `reactR` can assist with integrating React components into Shiny 
+as inputs.
 
 It does so by introducing a convention for wrapping components like those
 provided by `react-color` with an intermediate component that accepts these
@@ -234,7 +235,7 @@ package.
 After rebuilding the JavaScript and the package, try running `app.R` again. You
 should see something like this:
 
-![](./input_sketchpicker_working.jpg)
+![](./input_sketchpicker.gif)
 
 When you select new colors, you should see the `textOutput` update accordingly.
 
