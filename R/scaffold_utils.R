@@ -54,7 +54,7 @@ getPackage <- function() {
 }
 
 validName <- function(name) {
-  grepl("^[[:alpha:]]+[[:alnum:]]*$", name)
+  grepl("^[[:alpha:]_][[:alnum:]_]*$", name)
 }
 
 # Constraining names prevents the user from encountering obscure CSS problems
