@@ -67,13 +67,17 @@ export function reactShinyInput(selector,
       this.getCallback(el)();
       this.render(el);
     }
+    initialize(el) {
+      $(el).data('value', JSON.parse($(el).next().text()));
+      $(el).data('configuration', JSON.parse($(el).next().next().text()));
+    }
     subscribe(el, callback) {
       $(el).data('callback', callback);
       this.render(el);
     }
     unsubscribe(el, callback) {
-      // TODO at a minimum, 'undo' subscribe() actions (remove callback from data)
-      // Figure out the right way to un-render the component
+      $(el).removeData('callback');
+      ReactDOM.render(null, el);
     }
     receiveMessage(el, data) {
       options.receiveMessage.call(this, el, data);
@@ -84,19 +88,17 @@ export function reactShinyInput(selector,
      * through `this` in receiveMessage
      * */
 
-    // TODO Initialize value and config in initialize() method, don't sync back
-    // to DOM
     getInputValue(el) {
-      return JSON.parse($(el).next().text());
+      return $(el).data('value');
     }
     setInputValue(el, value) {
-      $(el).next().text(JSON.stringify(value));
+      $(el).data('value', value);
     }
     getInputConfiguration(el) {
-      return JSON.parse($(el).next().next().text());
+      return $(el).data('configuration');
     }
-    setInputConfiguration(el, value) {
-      $(el).next().next().text(JSON.stringify(value));
+    setInputConfiguration(el, configuration) {
+      $(el).data('configuration', configuration);
     }
     getCallback(el) {
       return $(el).data('callback');
