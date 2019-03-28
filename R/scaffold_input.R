@@ -68,7 +68,7 @@ scaffoldReactShinyInput <- function(name, npmPkgs = NULL, edit = interactive()) 
     )
   )
 
-  usethis::use_build_ignore(c("node_modules", "srcjs"))
+  usethis::use_build_ignore(c("node_modules", "srcjs", "app.R", "package.json", "webpack.config.js", "yarn.lock"))
   usethis::use_git_ignore(c("node_modules"))
   lapply(c("htmltools", "shiny", "reactR"), usethis::use_package)
 
