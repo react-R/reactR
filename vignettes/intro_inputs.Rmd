@@ -120,9 +120,9 @@ devtools::document()
 devtools::install(quick = TRUE)
 ```
 
-In RStudio, you can use the keyboard shortcuts `Ctrl+Shift+D` and
+In RStudio, you can use the keyboard shortcuts `Ctrl-Shift-D` and
 `Ctrl-Shift-B` to document and build the package. (On macOS, the shortcuts are
-`Cmd+Shift+D` and `Cmd+Shift+B`)
+`Cmd-Shift-D` and `Cmd-Shift-B`)
 
 ## Run the included demo
 
@@ -235,7 +235,9 @@ package.
 After rebuilding the JavaScript and the package, try running `app.R` again. You
 should see something like this:
 
-![](./input_sketchpicker.gif)
+<video autoplay muted>
+  <source src="./input_sketchpicker.mp4"/>
+</video>
 
 When you select new colors, you should see the `textOutput` update accordingly.
 
