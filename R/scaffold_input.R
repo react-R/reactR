@@ -70,7 +70,7 @@ scaffoldReactShinyInput <- function(name, npmPkgs = NULL, edit = interactive()) 
 
   usethis::use_build_ignore(c("node_modules", "srcjs"))
   usethis::use_git_ignore(c("node_modules"))
-  lapply(c("htmltools", "htmlwidgets", "reactR"), usethis::use_package)
+  lapply(c("htmltools", "shiny", "reactR"), usethis::use_package)
 
   message("To install dependencies from npm run: yarn install")
   message("To build JavaScript run: yarn run webpack --mode=development")
