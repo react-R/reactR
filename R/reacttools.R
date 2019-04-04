@@ -1,3 +1,9 @@
+# A robust name string is a valid
+# - CSS class
+# - JavaScript variable name
+# - R variable name
+robustName <- "^[[:alpha:]_][[:alnum:]_]*$"
+
 isUpper <- function(s) {
   grepl("^[[:upper:]]+$", s)
 }

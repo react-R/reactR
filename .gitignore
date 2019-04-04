@@ -9,3 +9,4 @@ node_modules
 reactR.Rcheck
 reactR_*.tar.gz
 *.swp
+.DS_Store
