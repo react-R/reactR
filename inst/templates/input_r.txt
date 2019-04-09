@@ -11,7 +11,7 @@ ${name}Input <- function(inputId, default = "") {
   reactR::createReactShinyInput(
     inputId,
     "${name}",
-    htmlDependency(
+    htmltools::htmlDependency(
       name = "${name}-input",
       version = "1.0.0",
       src = "www/${package}/${name}",
