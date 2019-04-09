@@ -8,7 +8,7 @@
 #'
 #' @export
 ${name}Input <- function(inputId, default = "") {
-  createReactShinyInput(
+  reactR::createReactShinyInput(
     inputId,
     "${name}",
     htmlDependency(
