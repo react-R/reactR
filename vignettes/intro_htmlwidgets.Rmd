@@ -49,7 +49,7 @@ usethis::create_package("~/sparklines")
 # Inject the widget templating
 withr::with_dir(
   "~/sparklines", 
-  reactR::scaffoldReactWidget("sparklines", list("react-sparklines" = "^1.7.0"))
+  reactR::scaffoldReactWidget("sparklines", list("react-sparklines" = "^1.7.0"), edit = FALSE)
 )
 ```
 
@@ -91,15 +91,15 @@ shiny::runApp()
 
 Alternatively, in RStudio, you can open `app.R` and press `Ctrl-Shift-Enter` (`Cmd-Shift-Enter` on macOS). You should see something like the following appear in the Viewer pane:
 
-```{r echo=FALSE}
-knitr::include_graphics('./widget_app.jpg')
-```
+![](./widget_app.jpg)
 
 ## Authoring a React binding
 
 At this point, we've built some scaffolding for an htmlwidget powered by React. Let's  modify it to create an interface to the `react-sparklines` library. Authoring the interface requires some changes on both the JavaScript and R side, but most of the hard thinking will be in figuring how best to design your interface. To give you an example of how this could work, let's build an interface to the `Sparklines` component of the react-sparklines library.
 
 ### First, outline an interface
+
+> Note that the examples in this section are just to demonstrate API possibilities and need not be pasted into any file.
 
 Consider the following example taken from the [react-sparklines documentation](http://borisyankov.github.io/react-sparklines/).
 
@@ -182,7 +182,7 @@ sparklines <- function(data, ..., width = NULL, height = NULL) {
 }
 ```
 
-At this point, we define functions that make it easy for the user to create the other components by adding these to  `R/reactSparklines.R`
+At this point, we define functions that make it easy for the user to create the other components by adding these to  `R/sparklines.R`
 
 ```{r}
 #' @export
@@ -269,6 +269,8 @@ shinyApp(ui, server)
 ```
 
 Now, when you run `shiny::runApp()`, you should see your react-based htmlwidget rendering in **shiny** app!
+
+![](./widget_app_improved.jpg)
 
 ## Further learning
 

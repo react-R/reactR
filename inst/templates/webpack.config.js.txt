@@ -1,15 +1,17 @@
 var path = require('path');
 
 module.exports = {
-    entry: path.join(__dirname, 'srcjs', '${name}.js'),
+    mode: 'development',
+    entry: path.join(__dirname, 'srcjs', '${name}.jsx'),
     output: {
-        path: path.join(__dirname, 'inst', 'htmlwidgets'),
+        path: path.join(__dirname, 'inst', 'www', '${package}', '${name}'),
+        path: path.join(__dirname, '${outputPath}'),
         filename: '${name}.js'
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: 'babel-loader',
                 options: {
                     presets: ['@babel/preset-env', '@babel/preset-react']

@@ -1,0 +1,36 @@
+#' <Add Title>
+#'
+#' <Add Description>
+#'
+#' @importFrom shiny restoreInput
+#' @importFrom reactR createReactShinyInput
+#' @importFrom htmltools htmlDependency tags
+#'
+#' @export
+${name}Input <- function(inputId, default = "") {
+  reactR::createReactShinyInput(
+    inputId,
+    "${name}",
+    htmltools::htmlDependency(
+      name = "${name}-input",
+      version = "1.0.0",
+      src = "www/${package}/${name}",
+      package = "${package}",
+      script = "${name}.js"
+    ),
+    default,
+    list(),
+    htmltools::tags$span
+  )
+}
+
+#' <Add Title>
+#'
+#' <Add Description>
+#'
+#' @export
+update${capName}Input <- function(session, inputId, value, configuration = NULL) {
+  message <- list(value = value)
+  if (!is.null(configuration)) message$configuration <- configuration
+  session$sendInputMessage(inputId, message);
+}

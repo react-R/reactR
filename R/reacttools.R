@@ -1,3 +1,9 @@
+# A robust name string is a valid
+# - CSS class
+# - JavaScript variable name
+# - R variable name
+robustName <- "^[[:alpha:]_][[:alnum:]_]*$"
+
 isUpper <- function(s) {
   grepl("^[[:upper:]]+$", s)
 }
@@ -92,3 +98,57 @@ reactMarkup <- function(tag) {
   list(tag = tag, class = "reactR_markup")
 }
 
+#' Create a React-based input
+#'
+#' @param inputId The \code{input} slot that will be used to access the value.
+#' @param class Space-delimited list of CSS class names that should identify
+#'   this input type in the browser.
+#' @param dependencies HTML dependencies to include in addition to those
+#'   supporting React. Must contain at least one dependency, that of the input's
+#'   implementation.
+#' @param default Initial value.
+#' @param configuration Static configuration data.
+#' @param container Function to generate an HTML element to contain the input.
+#'
+#' @return Shiny input suitable for inclusion in a UI.
+#' @export
+#'
+#' @examples
+#' myInput <- function(inputId, default = "") {
+#'   # The value of createReactShinyInput should be returned from input constructor functions.
+#'   createReactShinyInput(
+#'     inputId,
+#'     "myinput",
+#'     # At least one htmlDependency must be provided -- the JavaScript implementation of the input.
+#'     htmlDependency(
+#'       name = "my-input",
+#'       version = "1.0.0",
+#'       src = "www/mypackage/myinput",
+#'       package = "mypackage",
+#'       script = "myinput.js"
+#'     ),
+#'     default
+#'   )
+#' }
+createReactShinyInput <- function(inputId,
+                             class,
+                             dependencies,
+                             default = NULL,
+                             configuration = list(),
+                             container = htmltools::tags$div) {
+  if(length(dependencies) < 1) stop("Must include at least one HTML dependency.")
+  value <- shiny::restoreInput(id = inputId, default = default)
+  htmltools::tagList(
+    html_dependency_corejs(),
+    html_dependency_react(),
+    html_dependency_reacttools(),
+    container(id = inputId, class = class),
+    htmltools::tags$script(id = sprintf("%s_value", inputId),
+                           type = "application/json",
+                           jsonlite::toJSON(value, auto_unbox = TRUE)),
+    htmltools::tags$script(id = sprintf("%s_configuration", inputId),
+                           type = "application/json",
+                           jsonlite::toJSON(configuration, auto_unbox = TRUE)),
+    dependencies
+  )
+}
