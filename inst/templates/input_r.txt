@@ -20,7 +20,7 @@ ${name}Input <- function(inputId, default = "") {
     ),
     default,
     list(),
-    tags$span
+    htmltools::tags$span
   )
 }
 
