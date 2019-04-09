@@ -71,7 +71,7 @@ R package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -95,6 +95,9 @@ R package." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/intro_htmlwidgets.html">Authoring htmlwidgets powered by React with reactR</a>
+    </li>
+    <li>
+      <a href="../articles/intro_inputs.html">Authoring inputs powered by React with reactR</a>
     </li>
     <li>
       <a href="../articles/intro_reactR.html">Intro to reactR</a>
@@ -126,7 +129,7 @@ R package." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create implementation scaffolding for a React.js-based HTML widget</h1>
-    <small class="dont-index">Source: <a href='https://github.com/react-R/reactR/blob/master/R/scaffold.R'><code>R/scaffold.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/react-R/reactR/blob/master/R/scaffold_widget.R'><code>R/scaffold_widget.R</code></a></small>
     <div class="hidden name"><code>scaffoldReactWidget.Rd</code></div>
     </div>
 
@@ -137,7 +140,7 @@ R package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>scaffoldReactWidget</span>(<span class='no'>name</span>, <span class='kw'>npmPkg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>edit</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>())</pre>
+    <pre class="usage"><span class='fu'>scaffoldReactWidget</span>(<span class='no'>name</span>, <span class='kw'>npmPkgs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>edit</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,12 +150,11 @@ R package.</p>
       <td><p>Name of widget</p></td>
     </tr>
     <tr>
-      <th>npmPkg</th>
-      <td><p>Optional <a href='https://npmjs.com/'>NPM</a> package upon which this
-widget is based, a named list with two elements: <code>name</code> and
-<a href='https://docs.npmjs.com/files/package.json#dependencies'>version</a>. If
-you specify this parameter the package will be added to the
-<code>dependency</code> section of the generated <code>package.json</code>.</p></td>
+      <th>npmPkgs</th>
+      <td><p>Optional <a href='https://npmjs.com/'>NPM</a> packages upon which
+this widget is based which will be used to populate <code>package.json</code>.
+Should be a named list of names to
+<a href='https://docs.npmjs.com/files/package.json#dependencies'>versions</a>.</p></td>
     </tr>
     <tr>
       <th>edit</th>

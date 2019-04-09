@@ -1,3 +1,7 @@
+# reactR 0.4.0
+
+* Add Shiny input scaffold and functionality; [tutorial]() and [pull 22](https://github.com/react-R/reactR/pull/22) thanks @alandipert
+
 # reactR 0.3.1
 
 * Update react and react-dom to 16.8.1

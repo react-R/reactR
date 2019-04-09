@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -60,6 +60,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/intro_htmlwidgets.html">Authoring htmlwidgets powered by React with reactR</a>
+    </li>
+    <li>
+      <a href="../articles/intro_inputs.html">Authoring inputs powered by React with reactR</a>
     </li>
     <li>
       <a href="../articles/intro_reactR.html">Intro to reactR</a>
@@ -93,7 +96,7 @@
                         <h4 class="author">Alan Dipert</h4>
                         <h4 class="author">Carson Sievert</h4>
             
-            <h4 class="date">2019-01-18</h4>
+            <h4 class="date">2019-04-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_htmlwidgets.Rmd"><code>vignettes/intro_htmlwidgets.Rmd</code></a></small>
       <div class="hidden name"><code>intro_htmlwidgets.Rmd</code></div>
@@ -128,15 +131,14 @@
 <li>Create the .R, .js, .yaml, and .json files required by your widget;</li>
 <li>If provided, take an <a href="https://www.npmjs.com/">npm</a> package name and version as a named list with <code>name</code> and <code>version</code> elements. For example, the npm package <code>foo</code> at version <code>^1.2.0</code> would be expressed as <code><a href="https://www.rdocumentation.org/packages/base/topics/list">list(name = "foo", version = "^1.2.0")</a></code>. The package, if provided, will be added to the new widget’s <code>package.json</code> as a build dependency.</li>
 </ul>
-<p>The following R code will create a package named <strong>sparklines</strong>, then provide the templating for creating an htmlwidget powered by the <code>react-sparklines</code> npm package:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Set the current working directory to your home directory. The new widget will</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co"># be created in ~/sparklines</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/getwd">setwd</a></span>(<span class="st">"~"</span>)</a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># Create a directory 'sparklines' and populate it with skeletal package</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co"># If run within RStudio, this will create a new RStudio session</span></a>
-<a class="sourceLine" id="cb2-6" title="6">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"sparklines"</span>)</a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co"># Generate skeletal reactR widget code and supporting build configuration</span></a>
-<a class="sourceLine" id="cb2-8" title="8">reactR<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/reactR/topics/scaffoldReactWidget">scaffoldReactWidget</a></span>(<span class="st">"sparklines"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">name =</span> <span class="st">"react-sparklines"</span>, <span class="dt">version =</span> <span class="st">"^1.7.0"</span>))</a></code></pre></div>
+<p>The following R code will create an R package named <strong>sparklines</strong>, then provide the templating for creating an htmlwidget powered by the <code>react-sparklines</code> npm package:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Create the R package</span></a>
+<a class="sourceLine" id="cb2-2" title="2">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"~/sparklines"</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"># Inject the widget templating</span></a>
+<a class="sourceLine" id="cb2-4" title="4">withr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/withr/topics/with_dir">with_dir</a></span>(</a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="st">"~/sparklines"</span>, </a>
+<a class="sourceLine" id="cb2-6" title="6">  reactR<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/reactR/topics/scaffoldReactWidget">scaffoldReactWidget</a></span>(<span class="st">"sparklines"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"react-sparklines"</span> =<span class="st"> "^1.7.0"</span>), <span class="dt">edit =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb2-7" title="7">)</a></code></pre></div>
 </div>
 <div id="building-and-installing" class="section level2">
 <h2 class="hasAnchor">
@@ -144,9 +146,9 @@
 <div id="building-the-javascript" class="section level3">
 <h3 class="hasAnchor">
 <a href="#building-the-javascript" class="anchor"></a>Building the JavaScript</h3>
-<p>The next step is to navigate to the newly-created <code>sparklines</code> directory in your terminal. Then, run the following commands:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">yarn</span> install</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="ex">yarn</span> run webpack</a></code></pre></div>
+<p>The next step is to navigate to the newly-created <code>sparklines</code> project and run the following R commands:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system">system</a></span>(<span class="st">"yarn install"</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system">system</a></span>(<span class="st">"yarn run webpack"</span>)</a></code></pre></div>
 <ul>
 <li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://yarnpkg.com/lang/en/docs/cli/install/">yarn documentation</a>.</p></li>
 <li><p><code>yarn run webpack</code> compiles the <a href="https://babeljs.io/docs/en/learn/">ES2015</a> JavaScript source file at <code>srcjs/sparklines.js</code> into <code>inst/htmlwidgets/sparklines.js</code>. The later file is one actually used by the R package and includes all the relevant JavaScript dependencies in a version of JavaScript that most browsers understand. Note that, if you add <code>--mode=development</code> to the end of this command, it will include a <a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger/How_to/Use_a_source_map">source map</a> is included with the compiled JavaScript, which makes JavaScript debugging much easier, but hopefully you won’t need to do much of any JavaScript debugging.</p></li>
@@ -168,6 +170,7 @@
 <p>Now that the widget’s JavaScript is compiled, and the R package is installed, run <code>app.R</code> to see a demo in action:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">shiny<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">runApp</a></span>()</a></code></pre></div>
 <p>Alternatively, in RStudio, you can open <code>app.R</code> and press <code>Ctrl-Shift-Enter</code> (<code>Cmd-Shift-Enter</code> on macOS). You should see something like the following appear in the Viewer pane:</p>
+<p><img src="widget_app.jpg"></p>
 </div>
 <div id="authoring-a-react-binding" class="section level2">
 <h2 class="hasAnchor">
@@ -176,6 +179,9 @@
 <div id="first-outline-an-interface" class="section level3">
 <h3 class="hasAnchor">
 <a href="#first-outline-an-interface" class="anchor"></a>First, outline an interface</h3>
+<blockquote>
+<p>Note that the examples in this section are just to demonstrate API possibilities and need not be pasted into any file.</p>
+</blockquote>
 <p>Consider the following example taken from the <a href="http://borisyankov.github.io/react-sparklines/">react-sparklines documentation</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> <span class="op">{</span> Sparklines <span class="op">}</span> <span class="im">from</span> <span class="st">'react-sparklines'</span><span class="op">;</span></a>
@@ -234,7 +240,7 @@
 <a class="sourceLine" id="cb11-15" title="15">    <span class="dt">package =</span> <span class="st">'sparklines'</span></a>
 <a class="sourceLine" id="cb11-16" title="16">  )</a>
 <a class="sourceLine" id="cb11-17" title="17">}</a></code></pre></div>
-<p>At this point, we define functions that make it easy for the user to create the other components by adding these to <code>R/reactSparklines.R</code></p>
+<p>At this point, we define functions that make it easy for the user to create the other components by adding these to <code>R/sparklines.R</code></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co">#' @export</span></a>
 <a class="sourceLine" id="cb12-2" title="2">sparklinesLine &lt;-<span class="st"> </span><span class="cf">function</span>(...) {</a>
 <a class="sourceLine" id="cb12-3" title="3">  reactR<span class="op">::</span>React<span class="op">$</span><span class="kw">SparklinesLine</span>(...)</a>
@@ -273,11 +279,13 @@
 <h3 class="hasAnchor">
 <a href="#go-for-a-spin" class="anchor"></a>Go for a spin</h3>
 <p>Now that we’ve made the necessary changes to the JavaScript and R source code, it’s time to compile the JavaScript and install the R package:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># </span><span class="al">TODO</span><span class="co">: maybe we could provide a Makefile to compile JS and install R pkg?</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="ex">yarn</span> install</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="ex">yarn</span> run webpack --mode=development</a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="ex">Rscript</span> -e <span class="st">"devtools::document(); devtools::install(); sparklines::sparklines(rnorm(10))"</span></a></code></pre></div>
-<p>This should open up the <code>sparklines()</code> widget in your browser. If it does, congratulations, you just wrote your first React-based widget!</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system">system</a></span>(<span class="st">"yarn install"</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system">system</a></span>(<span class="st">"yarn run webpack"</span>)</a>
+<a class="sourceLine" id="cb15-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>()</a>
+<a class="sourceLine" id="cb15-4" title="4">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install">install</a></span>()</a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sparklines)</a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="kw">sparklines</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">10</span>), <span class="kw">sparklinesLine</span>())</a></code></pre></div>
+<p>This should open up the <code>sparklines()</code> widget in your browser. If it does, congratulations, you created a React-based htmlwidget!</p>
 </div>
 <div id="shiny-integration" class="section level3">
 <h3 class="hasAnchor">
@@ -287,22 +295,23 @@
 <a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sparklines)</a>
 <a class="sourceLine" id="cb16-3" title="3"></a>
 <a class="sourceLine" id="cb16-4" title="4">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(</a>
-<a class="sourceLine" id="cb16-5" title="5">  <span class="kw">titlePanel</span>(<span class="st">"reactR HTMLWidget Example"</span>),</a>
-<a class="sourceLine" id="cb16-6" title="6">  <span class="kw">sparklinesOutput</span>(<span class="st">'myWidget'</span>)</a>
-<a class="sourceLine" id="cb16-7" title="7">)</a>
-<a class="sourceLine" id="cb16-8" title="8"></a>
-<a class="sourceLine" id="cb16-9" title="9">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb16-10" title="10">  output<span class="op">$</span>myWidget &lt;-<span class="st"> </span><span class="kw">renderSparklines</span>({</a>
-<a class="sourceLine" id="cb16-11" title="11">    <span class="kw">sparklines</span>(</a>
-<a class="sourceLine" id="cb16-12" title="12">      <span class="dt">data =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb16-13" title="13">      <span class="kw">sparklinesLine</span>(<span class="dt">color =</span> <span class="st">"#56b45d"</span>),</a>
-<a class="sourceLine" id="cb16-14" title="14">      <span class="kw">sparklinesSpots</span>(<span class="dt">style =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">fill =</span> <span class="st">"#56b45d"</span>))</a>
-<a class="sourceLine" id="cb16-15" title="15">    )</a>
-<a class="sourceLine" id="cb16-16" title="16">  })</a>
+<a class="sourceLine" id="cb16-5" title="5">  <span class="kw">titlePanel</span>(<span class="st">"Sparklines library"</span>),</a>
+<a class="sourceLine" id="cb16-6" title="6">  <span class="kw">sliderInput</span>(<span class="st">"n"</span>, <span class="dt">label =</span> <span class="st">"Number of samples"</span>, <span class="dt">min =</span> <span class="dv">2</span>, <span class="dt">max =</span> <span class="dv">1000</span>, <span class="dt">value =</span> <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb16-7" title="7">  <span class="kw">sparklinesOutput</span>(<span class="st">"myWidget"</span>)</a>
+<a class="sourceLine" id="cb16-8" title="8">)</a>
+<a class="sourceLine" id="cb16-9" title="9"></a>
+<a class="sourceLine" id="cb16-10" title="10">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb16-11" title="11">    output<span class="op">$</span>myWidget &lt;-<span class="st"> </span><span class="kw">renderSparklines</span>({</a>
+<a class="sourceLine" id="cb16-12" title="12">        <span class="kw">sparklines</span>(</a>
+<a class="sourceLine" id="cb16-13" title="13">            <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(input<span class="op">$</span>n),</a>
+<a class="sourceLine" id="cb16-14" title="14">            <span class="kw">sparklinesLine</span>()</a>
+<a class="sourceLine" id="cb16-15" title="15">        )</a>
+<a class="sourceLine" id="cb16-16" title="16">    })</a>
 <a class="sourceLine" id="cb16-17" title="17">}</a>
 <a class="sourceLine" id="cb16-18" title="18"></a>
 <a class="sourceLine" id="cb16-19" title="19"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
-<p>Now, when you run <code><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">shiny::runApp()</a></code>, you should see your vision become reality!</p>
+<p>Now, when you run <code><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">shiny::runApp()</a></code>, you should see your react-based htmlwidget rendering in <strong>shiny</strong> app!</p>
+<p><img src="widget_app_improved.jpg"></p>
 </div>
 </div>
 <div id="further-learning" class="section level2">

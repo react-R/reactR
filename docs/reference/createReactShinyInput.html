@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • reactR</title>
+<title>Create a React-based input — createReactShinyInput • reactR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,7 +37,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Create a React-based input — createReactShinyInput" />
+
+<meta property="og:description" content="Create a React-based input" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +57,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -124,19 +127,85 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Create a React-based input</h1>
+    <small class="dont-index">Source: <a href='https://github.com/react-R/reactR/blob/master/R/reacttools.R'><code>R/reacttools.R</code></a></small>
+    <div class="hidden name"><code>createReactShinyInput.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="intro_htmlwidgets.html">Authoring htmlwidgets powered by React with reactR</a></li>
-        <li><a href="intro_inputs.html">Authoring inputs powered by React with reactR</a></li>
-        <li><a href="intro_reactR.html">Intro to reactR</a></li>
-      </ul>
+    <div class="ref-description">
+    
+    <p>Create a React-based input</p>
+    
     </div>
+
+    <pre class="usage"><span class='fu'>createReactShinyInput</span>(<span class='no'>inputId</span>, <span class='no'>class</span>, <span class='no'>dependencies</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>configuration</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(), <span class='kw'>container</span> <span class='kw'>=</span> <span class='kw pkg'>htmltools</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/htmltools/topics/builder'>tags</a></span>$<span class='no'>div</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>inputId</th>
+      <td><p>The <code>input</code> slot that will be used to access the value.</p></td>
+    </tr>
+    <tr>
+      <th>class</th>
+      <td><p>Space-delimited list of CSS class names that should identify
+this input type in the browser.</p></td>
+    </tr>
+    <tr>
+      <th>dependencies</th>
+      <td><p>HTML dependencies to include in addition to those
+supporting React. Must contain at least one dependency, that of the input's
+implementation.</p></td>
+    </tr>
+    <tr>
+      <th>default</th>
+      <td><p>Initial value.</p></td>
+    </tr>
+    <tr>
+      <th>configuration</th>
+      <td><p>Static configuration data.</p></td>
+    </tr>
+    <tr>
+      <th>container</th>
+      <td><p>Function to generate an HTML element to contain the input.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Shiny input suitable for inclusion in a UI.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>myInput</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>inputId</span>, <span class='no'>default</span> <span class='kw'>=</span> <span class='st'>""</span>) {
+  <span class='co'># The value of createReactShinyInput should be returned from input constructor functions.</span>
+  <span class='fu'>createReactShinyInput</span>(
+    <span class='no'>inputId</span>,
+    <span class='st'>"myinput"</span>,
+    <span class='co'># At least one htmlDependency must be provided -- the JavaScript implementation of the input.</span>
+    <span class='fu'>htmlDependency</span>(
+      <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my-input"</span>,
+      <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.0.0"</span>,
+      <span class='kw'>src</span> <span class='kw'>=</span> <span class='st'>"www/mypackage/myinput"</span>,
+      <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"mypackage"</span>,
+      <span class='kw'>script</span> <span class='kw'>=</span> <span class='st'>"myinput.js"</span>
+    ),
+    <span class='no'>default</span>
+  )
+}</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 
