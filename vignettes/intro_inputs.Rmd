@@ -70,8 +70,8 @@ provide the templating for creating an input powered by the
 `react-color` library on npm:
 
 ```{r}
-# Create the R package
-usethis::create_package("~/colorpicker")
+# Create the R package (rstudio=TRUE is recommended if you're not already comfortable with your terminal)
+usethis::create_package("~/colorpicker", rstudio = TRUE)
 # Scaffold initial input implementation files
 withr::with_dir(
   "~/colorpicker",
@@ -79,14 +79,15 @@ withr::with_dir(
 )
 ```
 
+
 ## Building and installing
 
 ### Building the JavaScript
 
 The next step is to navigate to the newly-created `colorpicker` project and run
-the following commands in the terminal:
+the following commands in the terminal. If you're new the terminal, we recommending opening your newly created RStudio  `~/colorpicker/colorpicker.Rproj` project file, then running the following in the [RStudio terminal tab](https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal):
 
-```
+```r
 yarn install
 yarn run webpack
 ```
@@ -172,38 +173,42 @@ accomplish these, `react-color` components can [optionally
 take](http://casesandberg.github.io/react-color/#api) the following
 [props](https://reactjs.org/docs/components-and-props.html):
 
-* `color`: accepts a string of a hex color like `'#333'`
-* `onChangeComplete`: accepts a function taking a single argument, the new
-  color, that will be called when the new color is selected
+* [`color`](http://casesandberg.github.io/react-color/#api-color): accepts a 
+  string of a hex color like `'#333'`
+* [`onChangeComplete`](http://casesandberg.github.io/react-color/#api-onChangeComplete): 
+  accepts a JavaScript function taking a single argument, the new `color`, that 
+  will be called when the new color is selected
 
-These operations are conceptually similar enough to the API expected of Shiny
-inputs that `reactR` can assist with integrating React components into Shiny 
-as inputs.
+Since this React component calls a configurable function (i.e., `onChangeComplete`) when the input (i.e., color) value changes, we can supply a function to inform Shiny about these changes. You could, in theory, do this by writing your own custom Shiny input wrapper around this component, but `reactR` provides some conventions to make it much easier. These conventions have two main parts (R and JavaScript):
 
-It does so by introducing a convention for wrapping components like those
-provided by `react-color` with an intermediate component that accepts these
-props:
+1. Use `reactR::createReactShinyInput()` to construct the user-facing R input and route any user-supplied options (e.g., the `default` input value and other `configuration`) to the React component. This part was already done for us in the `R/colorpicker.R` file of our colorpicker project:
 
-* `configuration`: A configuration object containing data from R used to
-  parameterize the input's behavior
-* `value`: The input's values over time, beginning with the default
-* `setValue`: A function to call with the input's new value when one is created
+```r
+colorpickerInput <- function(inputId, default = "") {
+  reactR::createReactShinyInput(
+    inputId = inputId,
+    class = "colorpicker",
+    dependencies = htmltools::htmlDependency(
+      name = "colorpicker-input",
+      version = "1.0.0",
+      src = "www/colorpicker/colorpicker",
+      package = "colorpicker",
+      script = "colorpicker.js"
+    ),
+    default = default,
+    configuration = list(),
+    container = htmltools::tags$span
+  )
+}
+```
 
-The `configuration` and `value` props are initially populated on the R side, as
-arguments to the `createReactShinyInput` function inside the input's constructor
-function. In the case of our newly-scaffolded input, that happens in
-`R/colorpicker.R`.
+2. Design an *intermediate* React component that routes information from `colorpickerInput()` to the `<SketchPicker>` component and informs Shiny when a new color is chosen. This intermediate component should be a [functional component](https://reactjs.org/docs/components-and-props.html#function-and-class-components) with three arguments:
 
-The `setValue` function is what causes new values to be sent to R, and also what
-triggers the "intermediate" component to repaint itself.
+* `configuration`: The JSON equivalent of the `configuration` argument from `reactR::createReactShinyInput()`. In this particular example, `configuration` isn't used.
+* `value`: The input's values over time, beginning with the `default` supplied from `reactR::createReactShinyInput()`.
+* `setValue`: A JavaScript function to call with the input's new value when one is created. This function is not user supplied, but rather an internal hook for informing Shiny about changes to the component's current state (i.e. value). 
 
-So, in order to make the components delivered by `react-color` accessible on the
-R side, we must create our own intermediate component that wraps one of
-`react-color`'s pickers.
-
-### Create intermediate component
-
-Open `srcjs/colorpicker.jsx` and paste the following in:
+Consider the following intermediate component, `PickerInput`. Note how this intermediate component allows one to set the default `value` from R and also calls `setValue()` inside `onChangeComplete` in order to inform Shiny about new color values. 
 
 ```js
 import { reactShinyInput } from 'reactR';
@@ -218,22 +223,13 @@ const PickerInput = ({ configuration, value, setValue }) => {
   );
 };
 
+// Note the first argument here should match the `class` 
+// argument of the reactR::createReactShinyInput() from step 1
 reactShinyInput('.colorpicker', 'colorpicker', PickerInput);
 ```
 
-The above code creates a new [function
-component](https://reactjs.org/docs/components-and-props.html#function-and-class-components)
-called `PickerInput` that expects the props supplied by reactR and renders a
-parameterized `SketchPicker` from `react-color`. The `configuration` value is
-not yet used.
-
-After saving the file, run `yarn run webpack` in the terminal and rebuild the
-package.
-
-## Trying it out
-
-After rebuilding the JavaScript and the package, try running `app.R` again. You
-should see something like this:
+Open the `srcjs/colorpicker.jsx` file in your colorpicker project and paste this code into it. After saving the file, run `yarn run webpack` in the terminal, re-install the
+package, then run `shiny::runApp()` again
 
 <video autoplay muted>
   <source src="./input_sketchpicker.mp4"/>
