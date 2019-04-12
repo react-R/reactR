@@ -208,7 +208,7 @@ colorpickerInput <- function(inputId, default = "") {
 * `value`: The input's values over time, beginning with the `default` supplied from `reactR::createReactShinyInput()`.
 * `setValue`: A JavaScript function to call with the input's new value when one is created. This function is not user supplied, but rather an internal hook for informing Shiny about changes to the component's current state (i.e. value). 
 
-Consider the following intermediate component, `PickerInput`. Note how this intermediate component allows one to set the default `value` from R and also calls `setValue()` inside `onChangeComplete` in order to inform Shiny about new color values. 
+Consider the following intermediate component, `PickerInput`. Note how this intermediate component allows one to set the default `value` from R and also calls `setValue()` inside `onChangeComplete` in order to inform Shiny about new color values. Finally, `reactR.reactShinyInput()` registers this intermediate component as a custom Shiny input binding named `colorpicker`.
 
 ```js
 import { reactShinyInput } from 'reactR';
