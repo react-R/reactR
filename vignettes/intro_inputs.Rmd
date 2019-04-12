@@ -202,7 +202,7 @@ colorpickerInput <- function(inputId, default = "") {
 }
 ```
 
-2. Design an *intermediate* React component that routes information from `colorpickerInput()` to the `<SketchPicker>` component and informs Shiny when a new color is chosen. This intermediate component should be a [functional component](https://reactjs.org/docs/components-and-props.html#function-and-class-components) with three arguments:
+2. Design an *intermediate* React component that routes information from `colorpickerInput()` to the `<SketchPicker>` component and also inform Shiny when a new color is chosen. This intermediate component should be a [functional component](https://reactjs.org/docs/components-and-props.html#function-and-class-components) with three arguments:
 
 * `configuration`: The JSON equivalent of the `configuration` argument from `reactR::createReactShinyInput()`. In this particular example, `configuration` isn't used.
 * `value`: The input's values over time, beginning with the `default` supplied from `reactR::createReactShinyInput()`.
