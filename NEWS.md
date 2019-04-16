@@ -1,6 +1,6 @@
 # reactR 0.4.0
 
-* Add Shiny input scaffold and functionality; [tutorial]() and [pull 22](https://github.com/react-R/reactR/pull/22) thanks @alandipert
+* Add Shiny input scaffold and functionality; [tutorial](https://react-r.github.io/reactR/articles/intro_inputs.html) and [pull 22](https://github.com/react-R/reactR/pull/22) thanks @alandipert
 
 # reactR 0.3.1
 
