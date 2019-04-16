@@ -103,7 +103,7 @@
 </h1></div>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<p><code>reactR</code> provides a set of convenience functions for using <a href="https://facebook.github.io/react"><code>React</code></a> in <code>R</code> with <code>htmlwidget</code> constructor templates and local JavaScript dependencies. The <code>React</code> ecosystem is rich with components that can enhance <code>R</code> web and Shiny apps. <code><a href="reference/scaffoldReactWidget.html">scaffoldReactWidget()</a></code> helps build <code>htmlwidgets</code> to integrate these <code>React</code> components as <code>R</code> <code>htmlwidgets</code>. The local dependency functions are modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
+<p><code>reactR</code> provides a set of convenience functions for using <a href="https://facebook.github.io/react"><code>React</code></a> in <code>R</code> with <code>htmlwidget</code> constructor templates and local JavaScript dependencies. The <code>React</code> ecosystem is rich with components that can enhance <code>R</code> web and Shiny apps. <code><a href="reference/scaffoldReactWidget.html">scaffoldReactWidget()</a></code> helps build <code>htmlwidgets</code> to integrate these <code>React</code> components as <code>R</code> <code>htmlwidgets</code>. <code><a href="reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput()</a></code> does the same for <code>Shiny</code> inputs. The local dependency functions are modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -116,14 +116,15 @@
 <a href="#creating-htmlwidgets-with-react-components" class="anchor"></a>Creating htmlwidgets with React Components</h2>
 <p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R">react-R Github organization</a>.</p>
 </div>
-<div id="shiny" class="section level2">
+<div id="shiny-outputs-and-inputs" class="section level2">
 <h2 class="hasAnchor">
-<a href="#shiny" class="anchor"></a>Shiny?</h2>
-<p>Currently, <code>htmlwidgets</code> built with <code>reactR</code> work well in Shiny as outputs. In the next version we hope to have a mechanism for input in Shiny contexts.</p>
+<a href="#shiny-outputs-and-inputs" class="anchor"></a>Shiny Outputs and Inputs</h2>
+<p><code>htmlwidgets</code> built with <code>reactR</code> work well in Shiny as outputs. In version <code>0.4.0</code> Alan Dipert has added the ability to easily create React-based official <code>Shiny</code> inputs with helpers and scaffolds. Please see the <a href="https://react-r.github.io/reactR/articles/intro_inputs.html">tutorial</a> for more details.</p>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
+<p>Below are examples of using <code>reactR</code> directly.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(reactR)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(htmltools)</a>
 <a class="sourceLine" id="cb2-3" title="3"></a>
@@ -206,6 +207,7 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=reactR"><img src="https://www.r-pkg.org/badges/version/reactR" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://travis-ci.org/react-R/reactR"><img src="https://travis-ci.org/react-R/reactR.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://reactr-slackin.herokuapp.com/"><img src="https://reactr-slackin.herokuapp.com/badge.svg" alt="Slack Status"></a></li>
 </ul>
 </div>
 </div>
