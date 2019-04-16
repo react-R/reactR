@@ -8,7 +8,7 @@
 ^README\.Rmd$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^build$
+^buildupdate$
 ^docs$
 ^cran-comments\.md$
 ^karma\.conf\.js$
