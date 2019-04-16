@@ -6,6 +6,8 @@
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
 [![Travis-CI Build
 Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
+[![Slack
+Status](https://reactr-slackin.herokuapp.com/badge.svg)](https://reactr-slackin.herokuapp.com/)
 
 `reactR` provides a set of convenience functions for using
 [`React`](https://facebook.github.io/react) in `R` with `htmlwidget`
