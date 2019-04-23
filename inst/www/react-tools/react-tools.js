@@ -197,6 +197,11 @@ function reactShinyInput(selector, name, component, options) {
         return jquery__WEBPACK_IMPORTED_MODULE_3___default()(scope).find(selector);
       }
     }, {
+      key: "getType",
+      value: function getType(el) {
+        return name;
+      }
+    }, {
       key: "getValue",
       value: function getValue(el) {
         return this.getInputValue(el);
