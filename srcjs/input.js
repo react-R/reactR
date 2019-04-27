@@ -59,9 +59,6 @@ export function reactShinyInput(selector,
     find(scope) {
       return $(scope).find(selector);
     }
-    getType(el) {
-      return name;
-    }
     getValue(el) {
       return this.getInputValue(el);
     }
