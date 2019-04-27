@@ -1,7 +1,3 @@
-# master
-
-* Add support for `shiny::registerInputHandler` in Shiny inputs; [pull 26](https://github.com/react-R/reactR/pull/26)
-
 # reactR 0.4.0
 
 * Add Shiny input scaffold and functionality; [tutorial](https://react-r.github.io/reactR/articles/intro_inputs.html) and [pull 22](https://github.com/react-R/reactR/pull/22) thanks @alandipert
