@@ -28,7 +28,8 @@ function defaultReceiveMessage(el, { configuration, value }) {
 }
 
 const defaultOptions = {
-  receiveMessage: defaultReceiveMessage
+  receiveMessage: defaultReceiveMessage,
+  type: false
 };
 
 /**
@@ -44,6 +45,16 @@ const defaultOptions = {
  * - receiveMessage: Implementation of Shiny.InputBinding to use in place of
  *   the default. Typically overridden as an optimization to perform
  *   incremental value updates.
+ * - type: `false`, a string, or a function.
+ *     - `false` (the default): denotes that the value produced by this input
+ *       should not be intercepted by any handlers registered in R on the
+ *       server using shiny::registerInputHandler().
+ *     - string: denotes the input's *type* and should correspond to the
+ *       type parameter of shiny::registerInputHandler().
+ *     - function: A function called with `this` bound to the InputBinding
+ *       instance and passed a single argument, the input's containing DOM
+ *       element. The function should return either `false` or a string
+ *       corresponding to the type parameter of shiny::registerInputHandler().
  */
 export function reactShinyInput(selector,
                            name,
@@ -82,11 +93,20 @@ export function reactShinyInput(selector,
     receiveMessage(el, data) {
       options.receiveMessage.call(this, el, data);
     }
+    getType(el) {
+      if (typeof options.type === 'function') {
+        return options.type.call(this, el);
+      } else if (options.type === false || typeof options.type === 'string') {
+        return options.type;
+      } else {
+        throw new Error('options.type must be false, a string, or a function');
+      }
+    }
 
     /*
      * Methods not present in Shiny.InputBinding but accessible to users
      * through `this` in receiveMessage
-     * */
+     */
 
     getInputValue(el) {
       return $(el).data('value');
