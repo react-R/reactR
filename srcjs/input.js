@@ -100,7 +100,6 @@ export function reactShinyInput(selector,
       this.render(el);
     }
     unsubscribe(el, callback) {
-      $(el).removeData('callback');
       ReactDOM.render(null, el);
     }
     receiveMessage(el, data) {
