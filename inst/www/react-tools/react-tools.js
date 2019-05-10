@@ -248,7 +248,6 @@ function reactShinyInput(selector, name, component, options) {
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el, callback) {
-        jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).removeData('callback');
         react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(null, el);
       }
     }, {
