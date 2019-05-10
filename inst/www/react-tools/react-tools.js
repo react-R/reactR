@@ -158,7 +158,8 @@ function defaultReceiveMessage(el, _ref) {
 
 var defaultOptions = {
   receiveMessage: defaultReceiveMessage,
-  type: false
+  type: false,
+  ratePolicy: null
 };
 /**
  * Installs a new Shiny input binding based on a React component.
@@ -183,6 +184,18 @@ var defaultOptions = {
  *       instance and passed a single argument, the input's containing DOM
  *       element. The function should return either `false` or a string
  *       corresponding to the type parameter of shiny::registerInputHandler().
+ * - ratePolicy: A rate policy object as defined in the documentation for
+ *     getRatePolicy(): https://shiny.rstudio.com/articles/building-inputs.html
+ *     A rate policy object has two members:
+ *     - `policy`: Valid values are the strings "direct", "debounce", and
+ *       "throttle". "direct" means that all events are sent immediately.
+ *     - `delay`: Number indicating the number of milliseconds that should be
+ *       used when debouncing or throttling. Has no effect if the policy is
+ *       direct.
+ *     The specified rate policy is only applied when `true` is passed as the
+ *     second argument to the `setValue` function passed as a prop to the
+ *     input component.
+ *
  */
 
 function reactShinyInput(selector, name, component, options) {
@@ -215,8 +228,9 @@ function reactShinyInput(selector, name, component, options) {
     }, {
       key: "setValue",
       value: function setValue(el, value) {
+        var rateLimited = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
         this.setInputValue(el, value);
-        this.getCallback(el)();
+        this.getCallback(el)(rateLimited);
         this.render(el);
       }
     }, {
@@ -252,6 +266,11 @@ function reactShinyInput(selector, name, component, options) {
         } else {
           throw new Error('options.type must be false, a string, or a function');
         }
+      }
+    }, {
+      key: "getRatePolicy",
+      value: function getRatePolicy() {
+        return options.ratePolicy;
       }
       /*
        * Methods not present in Shiny.InputBinding but accessible to users
