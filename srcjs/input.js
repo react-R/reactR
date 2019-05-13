@@ -29,7 +29,8 @@ function defaultReceiveMessage(el, { configuration, value }) {
 
 const defaultOptions = {
   receiveMessage: defaultReceiveMessage,
-  type: false
+  type: false,
+  ratePolicy: null
 };
 
 /**
@@ -55,6 +56,18 @@ const defaultOptions = {
  *       instance and passed a single argument, the input's containing DOM
  *       element. The function should return either `false` or a string
  *       corresponding to the type parameter of shiny::registerInputHandler().
+ * - ratePolicy: A rate policy object as defined in the documentation for
+ *     getRatePolicy(): https://shiny.rstudio.com/articles/building-inputs.html
+ *     A rate policy object has two members:
+ *     - `policy`: Valid values are the strings "direct", "debounce", and
+ *       "throttle". "direct" means that all events are sent immediately.
+ *     - `delay`: Number indicating the number of milliseconds that should be
+ *       used when debouncing or throttling. Has no effect if the policy is
+ *       direct.
+ *     The specified rate policy is only applied when `true` is passed as the
+ *     second argument to the `setValue` function passed as a prop to the
+ *     input component.
+ *
  */
 export function reactShinyInput(selector,
                            name,
@@ -73,9 +86,9 @@ export function reactShinyInput(selector,
     getValue(el) {
       return this.getInputValue(el);
     }
-    setValue(el, value) {
+    setValue(el, value, rateLimited = false) {
       this.setInputValue(el, value);
-      this.getCallback(el)();
+      this.getCallback(el)(rateLimited);
       this.render(el);
     }
     initialize(el) {
@@ -87,7 +100,6 @@ export function reactShinyInput(selector,
       this.render(el);
     }
     unsubscribe(el, callback) {
-      $(el).removeData('callback');
       ReactDOM.render(null, el);
     }
     receiveMessage(el, data) {
@@ -101,6 +113,9 @@ export function reactShinyInput(selector,
       } else {
         throw new Error('options.type must be false, a string, or a function');
       }
+    }
+    getRatePolicy() {
+      return options.ratePolicy;
     }
 
     /*
