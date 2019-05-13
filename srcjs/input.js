@@ -87,9 +87,28 @@ export function reactShinyInput(selector,
       return this.getInputValue(el);
     }
     setValue(el, value, rateLimited = false) {
-      this.setInputValue(el, value);
-      this.getCallback(el)(rateLimited);
-      this.render(el);
+      /*
+       * We have to check whether $(el).data('callback') is undefined here
+       * in case shiny::renderUI() is involved. If an input is contained in a
+       * shiny::uiOutput(), the following strange thing happens occasionally:
+       *
+       *   1. setValue() is bound to an el in this.render(), below
+       *   2. An event that will call setValue() is enqueued
+       *   3. While the event is still enqueued, el is unbound and removed
+       *      from the DOM by the JS code associated with shiny::uiOutput()
+       *      - That code uses jQuery .html() in output_binding_html.js
+       *      - .html() removes el from the DOM and clears ist data and events
+       *   4. By the time the setValue() bound to the original el is invoked,
+       *      el has been unbound and its data cleared.
+       *
+       *  Since the original input is gone along with its callback, it
+       *  seems to make the most sense to do nothing.
+       */
+      if ($(el).data('callback') !== undefined) {
+        this.setInputValue(el, value);
+        this.getCallback(el)(rateLimited);
+        this.render(el);
+      }
     }
     initialize(el) {
       $(el).data('value', JSON.parse($(el).next().text()));
@@ -99,7 +118,7 @@ export function reactShinyInput(selector,
       $(el).data('callback', callback);
       this.render(el);
     }
-    unsubscribe(el, callback) {
+    unsubscribe(el) {
       ReactDOM.render(null, el);
     }
     receiveMessage(el, data) {
