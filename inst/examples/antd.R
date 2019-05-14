@@ -137,7 +137,9 @@ class App extends React.Component {
         <antd.Steps current={current} size="small">
           {steps.map(item => <antd.Steps.Step key={item.title} title={item.title} />)}
         </antd.Steps>
-      <div className="steps-content">{steps[this.state.current].content}</div>
+      <div className="steps-content" style={{minHeight: "600px", display: "flex", alignItems: "center"}}>
+        {steps[this.state.current].content}
+      </div>
       <div className="steps-action">
         {
           this.state.current < steps.length - 1
