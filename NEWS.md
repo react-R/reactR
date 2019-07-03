@@ -1,8 +1,10 @@
-# master
+# reactR 0.4.1
 
 * Add support for `shiny::registerInputHandler` in Shiny inputs; [pull 28](https://github.com/react-R/reactR/pull/28)
 
 * Add support for Shiny rate limit [pull 29](https://github.com/react-R/reactR/pull/29)
+
+* Update react to `16.8.6`
 
 # reactR 0.4.0
 
