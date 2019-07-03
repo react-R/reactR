@@ -168,7 +168,7 @@ of the dependencies is important, so please add <code><a href='html_dependency_r
     <span class='no'>tags</span>$<span class='fu'>script</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/htmltools/topics/HTML'>HTML</a></span>(
 <span class='st'>"
   var obs = mobx.observable({val: null})
-  mobx.autorun(function() =&gt; {
+  mobx.autorun(function() {
     document.querySelector('#test').innerText = obs.val
   })
   setInterval(
@@ -178,8 +178,7 @@ of the dependencies is important, so please add <code><a href='html_dependency_r
 "</span>
     ))
   )
-)
-
+)</div><span class='co'># NOT RUN {</span>
 <span class='co'># use with react</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>htmltools</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>reactR</span>)
@@ -203,7 +202,8 @@ of the dependencies is important, so please add <code><a href='html_dependency_r
 "</span>
     )))
   )
-)</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: V8</span></div></pre>
+)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

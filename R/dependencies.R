@@ -109,7 +109,7 @@ html_dependency_reacttools <- function(){
 #'     tags$script(HTML(
 #' "
 #'   var obs = mobx.observable({val: null})
-#'   mobx.autorun(function() => {
+#'   mobx.autorun(function() {
 #'     document.querySelector('#test').innerText = obs.val
 #'   })
 #'   setInterval(
@@ -121,6 +121,7 @@ html_dependency_reacttools <- function(){
 #'   )
 #' )
 #'
+#' \dontrun{
 #' # use with react
 #' library(htmltools)
 #' library(reactR)
@@ -145,6 +146,7 @@ html_dependency_reacttools <- function(){
 #'     )))
 #'   )
 #' )
+#' }
 
 html_dependency_mobx <- function(react = TRUE){
   hd <- htmltools::htmlDependency(

@@ -28,7 +28,7 @@ browsable(
     tags$script(HTML(
 "
   var obs = mobx.observable({val: null})
-  mobx.autorun(function() => {
+  mobx.autorun(function() {
     document.querySelector('#test').innerText = obs.val
   })
   setInterval(
@@ -40,6 +40,7 @@ browsable(
   )
 )
 
+\dontrun{
 # use with react
 library(htmltools)
 library(reactR)
@@ -64,4 +65,5 @@ browsable(
     )))
   )
 )
+}
 }
