@@ -85,3 +85,78 @@ html_dependency_reacttools <- function(){
     script = c("react-tools.js")
   )
 }
+
+#' Dependencies for 'mobx'
+#'
+#' Add JavaScript 'mobx' and 'mobx-react' dependency.  When using with 'react', the order
+#' of the dependencies is important, so please add \code{html_dependency_react()} before
+#' \code{html_dependency_mobx()}.
+#'
+#' @param react \code{logical} to add react 'mobx' dependencies.
+#'
+#' @return \code{\link[htmltools]{htmlDependency}}
+#' @importFrom htmltools htmlDependency
+#' @export
+#'
+#' @examples
+#' library(htmltools)
+#' library(reactR)
+#'
+#' browsable(
+#'   tagList(
+#'     html_dependency_mobx(react = FALSE),
+#'     div(id="test"),
+#'     tags$script(HTML(
+#' "
+#'   var obs = mobx.observable({val: null})
+#'   mobx.autorun(function() => {
+#'     document.querySelector('#test').innerText = obs.val
+#'   })
+#'   setInterval(
+#'     function() {obs.val++},
+#'     1000
+#'   )
+#' "
+#'     ))
+#'   )
+#' )
+#'
+#' # use with react
+#' library(htmltools)
+#' library(reactR)
+#'
+#' browsable(
+#'   tagList(
+#'     html_dependency_react(),
+#'     html_dependency_mobx(),
+#'     div(id="test"),
+#'     tags$script(HTML(babel_transform(
+#' "
+#'   var obs = mobx.observable({val: null})
+#'   var App = mobxReact.observer((props) => <div>{props.obs.val}</div>)
+#'
+#'   ReactDOM.render(<App obs = {obs}/>, document.querySelector('#test'))
+#'
+#'   setInterval(
+#'     function() {obs.val++},
+#'     1000
+#'   )
+#' "
+#'     )))
+#'   )
+#' )
+
+html_dependency_mobx <- function(react = TRUE){
+  hd <- htmltools::htmlDependency(
+    name = "mobx",
+    version = "4.11.0",
+    src = system.file("www/mobx",package="reactR"),
+    script = c("mobx.umd.min.js")
+  )
+
+  if(react) {
+     hd$script <- c(hd$script,"mobx-react-lite.js", "mobx-react.umd.js")
+  }
+
+  hd
+}

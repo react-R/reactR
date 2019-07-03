@@ -6,6 +6,8 @@
 
 * Update react to `16.8.6`
 
+* Add `mobx` dependencies available through `html_dependency_mobx()`
+
 # reactR 0.4.0
 
 * Add Shiny input scaffold and functionality; [tutorial](https://react-r.github.io/reactR/articles/intro_inputs.html) and [pull 22](https://github.com/react-R/reactR/pull/22) thanks @alandipert

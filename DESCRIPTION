@@ -2,12 +2,17 @@ Package: reactR
 Type: Package
 Title: React Helpers
 Version: 0.4.1
-Date: 2019-05-14
+Date: 2019-07-03
 Authors@R: c(
       person(
         "Facebook", "Inc"
         , role = c("aut", "cph")
         , comment = "React library in lib, https://facebook.github.io/react; see AUTHORS for full list of contributors"
+      ),
+      person(
+        "Michel","Weststrate",
+        , role = c("aut", "cph")
+        , comment = "mobx library in lib, https://github.com/mobxjs"
       ),
       person(
         "Kent", "Russell"
