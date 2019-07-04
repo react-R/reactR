@@ -18,6 +18,8 @@ of the dependencies is important, so please add \code{html_dependency_react()} b
 \code{html_dependency_mobx()}.
 }
 \examples{
+if(interactive()) {
+
 library(htmltools)
 library(reactR)
 
@@ -39,6 +41,7 @@ browsable(
     ))
   )
 )
+}
 
 \dontrun{
 # use with react

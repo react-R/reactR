@@ -99,6 +99,8 @@ html_dependency_reacttools <- function(){
 #' @export
 #'
 #' @examples
+#' if(interactive()) {
+#'
 #' library(htmltools)
 #' library(reactR)
 #'
@@ -120,6 +122,7 @@ html_dependency_reacttools <- function(){
 #'     ))
 #'   )
 #' )
+#' }
 #'
 #' \dontrun{
 #' # use with react
