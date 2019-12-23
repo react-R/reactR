@@ -1,3 +1,7 @@
+## Resubmission Notes
+* Provide full url for `CONDUCT.MD`
+
+
 ## Test environments
 * local Windows 10 install, R 3.4.0
 * rhub check_for_cran

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -109,12 +109,13 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install reactR from CRAN with <code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages("reactR")</a></code>. For the development version, please use <code>devtools</code> as shown below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"react-R/reactR"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/remote-reexports">install_github</a></span>(<span class="st">"react-R/reactR"</span>)</a></code></pre></div>
 </div>
 <div id="creating-htmlwidgets-with-react-components" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating-htmlwidgets-with-react-components" class="anchor"></a>Creating htmlwidgets with React Components</h2>
 <p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R">react-R Github organization</a>.</p>
+<p><a href="https://github.com/glin/reactable"><code>reactable</code></a> is a very well-built <code>htmlwidget</code> leveraging this functionality.</p>
 </div>
 <div id="shiny-outputs-and-inputs" class="section level2">
 <h2 class="hasAnchor">
@@ -156,8 +157,8 @@
 <a class="sourceLine" id="cb3-7" title="7">    tags<span class="op">$</span><span class="kw">script</span>(</a>
 <a class="sourceLine" id="cb3-8" title="8">      <span class="kw"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.getElementById("app"))'</span>)</a>
 <a class="sourceLine" id="cb3-9" title="9">    ),</a>
-<a class="sourceLine" id="cb3-10" title="10">    <span class="co"># add core-js shim first for React in RStudio Viewer</span></a>
-<a class="sourceLine" id="cb3-11" title="11">    <span class="kw"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="co"># add core-js shim first for React in older versions of RStudio Viewer</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="co">#html_dependency_corejs(),</span></a>
 <a class="sourceLine" id="cb3-12" title="12">    <span class="kw"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()</a>
 <a class="sourceLine" id="cb3-13" title="13">  )</a>
 <a class="sourceLine" id="cb3-14" title="14">)</a></code></pre></div>
@@ -165,7 +166,7 @@
 <div id="contributing-and-code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing-and-code-of-conduct" class="anchor"></a>Contributing and Code of Conduct</h2>
-<p>We welcome contributors and would love your participation. Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by the terms.</p>
+<p>We welcome contributors and would love your participation. Please note that this project is released with a <a href="https://github.com/react-R/reactR/blob/master/CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by the terms.</p>
 </div>
 </div>
   </div>

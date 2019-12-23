@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
                         <h4 class="author">Alan Dipert</h4>
                         <h4 class="author">Carson Sievert</h4>
             
-            <h4 class="date">2019-07-03</h4>
+            <h4 class="date">2019-12-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_htmlwidgets.Rmd"><code>vignettes/intro_htmlwidgets.Rmd</code></a></small>
       <div class="hidden name"><code>intro_htmlwidgets.Rmd</code></div>
@@ -133,7 +133,7 @@
 </ul>
 <p>The following R code will create an R package named <strong>sparklines</strong>, then provide the templating for creating an htmlwidget powered by the <code>react-sparklines</code> npm package:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Create the R package</span></a>
-<a class="sourceLine" id="cb2-2" title="2">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"~/sparklines"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span>(<span class="st">"~/sparklines"</span>)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co"># Inject the widget templating</span></a>
 <a class="sourceLine" id="cb2-4" title="4">withr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/withr/topics/with_dir">with_dir</a></span>(</a>
 <a class="sourceLine" id="cb2-5" title="5">  <span class="st">"~/sparklines"</span>, </a>

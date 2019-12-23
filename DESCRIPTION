@@ -1,8 +1,8 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.4.1
-Date: 2019-07-03
+Version: 0.4.2
+Date: 2019-12-23
 Authors@R: c(
       person(
         "Facebook", "Inc"
