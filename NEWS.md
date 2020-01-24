@@ -1,3 +1,9 @@
+# reactR 0.4.2
+
+* Update react to `16.12.0`
+
+* Update core-js to `2.6.11`
+
 # reactR 0.4.1
 
 * Add support for `shiny::registerInputHandler` in Shiny inputs; [pull 28](https://github.com/react-R/reactR/pull/28)
