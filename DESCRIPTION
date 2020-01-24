@@ -2,7 +2,7 @@ Package: reactR
 Type: Package
 Title: React Helpers
 Version: 0.4.2
-Date: 2019-12-23
+Date: 2020-01-23
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -46,5 +46,5 @@ Suggests:
     knitr,
     usethis,
     jsonlite
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
