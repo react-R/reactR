@@ -4,8 +4,14 @@
 \alias{createReactShinyInput}
 \title{Create a React-based input}
 \usage{
-createReactShinyInput(inputId, class, dependencies, default = NULL,
-  configuration = list(), container = htmltools::tags$div)
+createReactShinyInput(
+  inputId,
+  class,
+  dependencies,
+  default = NULL,
+  configuration = list(),
+  container = htmltools::tags$div
+)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}

@@ -38,6 +38,9 @@ reactR](https://react-r.github.io/reactR/articles/intro_htmlwidgets.html).
 Also, there are a variety of examples in the [react-R Github
 organization](https://github.com/react-R).
 
+[`reactable`](https://github.com/glin/reactable) is a very well-built
+`htmlwidget` leveraging this functionality.
+
 ## Shiny Outputs and Inputs
 
 `htmlwidgets` built with `reactR` work well in Shiny as outputs. In
@@ -88,8 +91,8 @@ browsable(
     tags$script(
       babel_transform('ReactDOM.render(<h1>Powered By React/JSX</h1>,document.getElementById("app"))')
     ),
-    # add core-js shim first for React in RStudio Viewer
-    html_dependency_corejs(),
+    # add core-js shim first for React in older versions of RStudio Viewer
+    #html_dependency_corejs(),
     html_dependency_react()
   )
 )
@@ -99,5 +102,5 @@ browsable(
 
 We welcome contributors and would love your participation. Please note
 that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by the terms.
+Conduct](https://github.com/react-R/reactR/blob/master/CONDUCT.md). By
+participating in this project you agree to abide by the terms.
