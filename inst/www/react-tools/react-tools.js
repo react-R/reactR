@@ -229,9 +229,29 @@ function reactShinyInput(selector, name, component, options) {
       key: "setValue",
       value: function setValue(el, value) {
         var rateLimited = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-        this.setInputValue(el, value);
-        this.getCallback(el)(rateLimited);
-        this.render(el);
+
+        /*
+         * We have to check whether $(el).data('callback') is undefined here
+         * in case shiny::renderUI() is involved. If an input is contained in a
+         * shiny::uiOutput(), the following strange thing happens occasionally:
+         *
+         *   1. setValue() is bound to an el in this.render(), below
+         *   2. An event that will call setValue() is enqueued
+         *   3. While the event is still enqueued, el is unbound and removed
+         *      from the DOM by the JS code associated with shiny::uiOutput()
+         *      - That code uses jQuery .html() in output_binding_html.js
+         *      - .html() removes el from the DOM and clears ist data and events
+         *   4. By the time the setValue() bound to the original el is invoked,
+         *      el has been unbound and its data cleared.
+         *
+         *  Since the original input is gone along with its callback, it
+         *  seems to make the most sense to do nothing.
+         */
+        if (jquery__WEBPACK_IMPORTED_MODULE_3___default()(el).data('callback') !== undefined) {
+          this.setInputValue(el, value);
+          this.getCallback(el)(rateLimited);
+          this.render(el);
+        }
       }
     }, {
       key: "initialize",
@@ -247,7 +267,7 @@ function reactShinyInput(selector, name, component, options) {
       }
     }, {
       key: "unsubscribe",
-      value: function unsubscribe(el, callback) {
+      value: function unsubscribe(el) {
         react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(null, el);
       }
     }, {
@@ -307,7 +327,8 @@ function reactShinyInput(selector, name, component, options) {
         var element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(component, {
           configuration: this.getInputConfiguration(el),
           value: this.getValue(el),
-          setValue: this.setValue.bind(this, el)
+          setValue: this.setValue.bind(this, el),
+          elid: el.id
         });
         react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(element, el);
       }
