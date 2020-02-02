@@ -328,7 +328,7 @@ function reactShinyInput(selector, name, component, options) {
           configuration: this.getInputConfiguration(el),
           value: this.getValue(el),
           setValue: this.setValue.bind(this, el),
-          elid: el
+          el: el
         });
         react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(element, el);
       }
