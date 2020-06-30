@@ -1,3 +1,9 @@
+# reactR 0.4.3
+
+* Add element to Shiny input [pull 41](https://github.com/react-R/reactR/pull/41)
+
+* Upgrade npm dependencies
+
 # reactR 0.4.2
 
 * Update react to `16.12.0`
