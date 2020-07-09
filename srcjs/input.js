@@ -161,7 +161,8 @@ export function reactShinyInput(selector,
       const element = React.createElement(component, {
         configuration: this.getInputConfiguration(el),
         value: this.getValue(el),
-        setValue: this.setValue.bind(this, el)
+        setValue: this.setValue.bind(this, el),
+        el: el
       });
       ReactDOM.render(element, el);
     }
