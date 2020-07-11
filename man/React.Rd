@@ -4,7 +4,9 @@
 \name{React}
 \alias{React}
 \title{React component builder.}
-\format{An object of class \code{react_component_builder} of length 0.}
+\format{
+An object of class \code{react_component_builder} of length 0.
+}
 \usage{
 React
 }
