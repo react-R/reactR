@@ -60,7 +60,7 @@
 
 * Update to react `15.5.0`
 * Update to babel `6.24.0`
-* Add [office-fabric-react](http://dev.office.com/fabric) example
+* Add [fluent-ui(fabric)](https://developer.microsoft.com/en-us/fluentui#/get-started#fluent-ui-react) example
 * Build doc site with `pkgdown`
 
 # reactR 0.1.1

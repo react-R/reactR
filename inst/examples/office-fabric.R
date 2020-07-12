@@ -3,9 +3,9 @@ library(reactR)
 
 fabric <- htmlDependency(
   name = "office-fabric-ui-react",
-  version = "5.23.0",
-  src = c(href="https://unpkg.com/office-ui-fabric-react/dist"),
-  script = "office-ui-fabric-react.js",
+  version = "7.121.12",
+  src = c(href="https://unpkg.com/office-ui-fabric-react@7.121.12/dist/"),
+  script = "office-ui-fabric-react.min.js",
   stylesheet = "css/fabric.min.css"
 )
 
