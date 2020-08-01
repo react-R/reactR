@@ -2,7 +2,6 @@
 #'
 #' <Add Description>
 #'
-#' @importFrom shiny restoreInput
 #' @importFrom reactR createReactShinyInput
 #' @importFrom htmltools htmlDependency tags
 #'
