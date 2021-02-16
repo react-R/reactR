@@ -50,7 +50,7 @@ render${capName} <- function(expr, env = parent.frame(), quoted = FALSE) {
 }
 
 #' Called by HTMLWidgets to produce the widget's root element.
-#' @rdname ${name}-shiny
+#' @noRd
 ${name}_html <- function(id, style, class, ...) {
   htmltools::tagList(
     # Necessary for RStudio viewer version < 1.2
