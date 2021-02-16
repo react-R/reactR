@@ -14,7 +14,7 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-[Shiny](http://shiny.rstudio.com/) comes with a large library of input
+[Shiny](https://shiny.rstudio.com/) comes with a large library of input
 [widgets](https://shiny.rstudio.com/gallery/widget-gallery.html) for collecting
 input from the user and conveying input data to R.
 
