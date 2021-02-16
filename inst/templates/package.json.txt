@@ -9,6 +9,8 @@
     "@babel/core": "^7.2.0",
     "babel-loader": "^8.0.4",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-react": "^7.0.0"
+    "@babel/preset-react": "^7.0.0",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0"
   }
 }
