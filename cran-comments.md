@@ -1,3 +1,5 @@
+Resubmission to fix links for CRAN
+
 ## Test environments
 * local Windows 10 install, R 3.6.2
 * rhub check_for_cran

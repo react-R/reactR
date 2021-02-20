@@ -7,7 +7,7 @@ Authors@R: c(
       person(
         "Facebook", "Inc"
         , role = c("aut", "cph")
-        , comment = "React library in lib, https://facebook.github.io/react; see AUTHORS for full list of contributors"
+        , comment = "React library in lib, https://reactjs.org/; see AUTHORS for full list of contributors"
       ),
       person(
         "Michel","Weststrate",
