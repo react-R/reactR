@@ -11,7 +11,7 @@ vignette: >
 
 ## Why reactR?
 
-[`react`](https://facebook.github.io/react/) has become incredibly popular, and the ecosystem around `react` is robust.  `reactR` aims to allow `R` users to more easily incorporate `react` and `JSX`.
+[`react`](https://reactjs.org/) has become incredibly popular, and the ecosystem around `react` is robust.  `reactR` aims to allow `R` users to more easily incorporate `react` and `JSX`.
 
 ## Install
 
