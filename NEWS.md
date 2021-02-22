@@ -1,3 +1,13 @@
+# reactR 0.4.4
+
+* Update react to `16.12.0`
+
+* Add `style-loader` and `css-loader` to webpack config [pull 50](https://github.com/react-R/reactR/pull/50)
+
+* Update to `PACKAGE::widget_html.WIDGETNAME` for new `htmlwidgets` convention [pull 49](https://github.com/react-R/reactR/pull/49)
+
+* Clean up template [pull 45](https://github.com/react-R/reactR/pull/45)
+
 # reactR 0.4.3
 
 * Add element to Shiny input [pull 41](https://github.com/react-R/reactR/pull/41)
@@ -60,7 +70,7 @@
 
 * Update to react `15.5.0`
 * Update to babel `6.24.0`
-* Add [fluent-ui(fabric)](https://developer.microsoft.com/en-us/fluentui#/get-started#fluent-ui-react) example
+* Add fluent-ui(fabric) example
 * Build doc site with `pkgdown`
 
 # reactR 0.1.1

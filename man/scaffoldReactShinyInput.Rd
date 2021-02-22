@@ -9,10 +9,10 @@ scaffoldReactShinyInput(name, npmPkgs = NULL, edit = interactive())
 \arguments{
 \item{name}{Name of input}
 
-\item{npmPkgs}{Optional \href{https://npmjs.com/}{NPM} packages upon which
+\item{npmPkgs}{Optional \href{https://www.npmjs.com/}{NPM} packages upon which
 this input is based which will be used to populate \code{package.json}.
 Should be a named list of names to
-\href{https://docs.npmjs.com/files/package.json#dependencies}{versions}.}
+\href{https://docs.npmjs.com/files/package.json/}{versions}.}
 
 \item{edit}{Automatically open the input's source files after creating the
 scaffolding.}

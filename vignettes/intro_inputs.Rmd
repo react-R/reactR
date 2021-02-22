@@ -14,7 +14,7 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-[Shiny](http://shiny.rstudio.com/) comes with a large library of input
+[Shiny](https://shiny.rstudio.com/) comes with a large library of input
 [widgets](https://shiny.rstudio.com/gallery/widget-gallery.html) for collecting
 input from the user and conveying input data to R.
 
@@ -37,14 +37,14 @@ optionally RStudio. If you're on Windows, you should also install
 [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 > For an excellent general introduction to R package concepts, check out the [R
-> packages](http://r-pkgs.had.co.nz/) online book.
+> packages](https://r-pkgs.org/) online book.
 
 In addition, you'll need to install the following JavaScript tools on your
 machine:
 
 * [Node.js](https://nodejs.org): JavaScript engine and runtime for development
   outside of browsers. Provides the `node` and `npm` commands.
-* [Yarn](https://yarnpkg.com/en/): Command-line dependency management tool,
+* [Yarn](https://classic.yarnpkg.com/en/): Command-line dependency management tool,
   provides the `yarn` command.
 
 To follow along in this vignette, you'll also need the following R packages:
@@ -97,7 +97,7 @@ yarn run webpack
   It will be updated whenever you change dependencies and run `yarn install`.
   **Note: you only need to run it after modifying package.json**. For further
   documentation on `yarn install`, see the [yarn
-  documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
+  documentation](https://classic.yarnpkg.com/en/docs/cli/install/).
 
 * `yarn run webpack` compiles the [modern JavaScript](https://babeljs.io/docs/en/babel-preset-env) 
   with [JSX](https://babeljs.io/docs/en/babel-preset-react) source file at `srcjs/colorpicker.jsx` into

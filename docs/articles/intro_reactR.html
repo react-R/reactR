@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,7 +77,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/react-R/reactR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,13 +91,13 @@
 
       
 
-      </header><script src="intro_reactR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="intro_reactR_files/react-16.12.0/react.min.js"></script><script src="intro_reactR_files/react-16.12.0/react-dom.min.js"></script><div class="row">
+      </header><script src="intro_reactR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="intro_reactR_files/react-17.0.0/react.min.js"></script><script src="intro_reactR_files/react-17.0.0/react-dom.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Intro to reactR</h1>
                         <h4 class="author">Kent Russell</h4>
             
-            <h4 class="date">2020-07-12</h4>
+            <h4 class="date">2021-02-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_reactR.Rmd"><code>vignettes/intro_reactR.Rmd</code></a></small>
       <div class="hidden name"><code>intro_reactR.Rmd</code></div>
@@ -109,7 +109,7 @@
 <div id="why-reactr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-reactr" class="anchor"></a>Why reactR?</h2>
-<p><a href="https://facebook.github.io/react/"><code>react</code></a> has become incredibly popular, and the ecosystem around <code>react</code> is robust. <code>reactR</code> aims to allow <code>R</code> users to more easily incorporate <code>react</code> and <code>JSX</code>.</p>
+<p><a href="https://reactjs.org/"><code>react</code></a> has become incredibly popular, and the ecosystem around <code>react</code> is robust. <code>reactR</code> aims to allow <code>R</code> users to more easily incorporate <code>react</code> and <code>JSX</code>.</p>
 </div>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
@@ -128,9 +128,9 @@
 
 </div>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactR</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">htmltools</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/htmlDependencies.html">attachDependencies</a></span>(
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">htmltools</span>)</pre></body></html></div>
+<pre><code>## Warning: package 'htmltools' was built under R version 3.6.3</code></pre>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/htmlDependencies.html">attachDependencies</a></span>(
   <span class="no">tags</span>$<span class="fu">script</span>(
   <span class="st">"
     ReactDOM.render(
@@ -159,12 +159,12 @@
 <div id="blog-post" class="section level2">
 <h2 class="hasAnchor">
 <a href="#blog-post" class="anchor"></a>Blog Post</h2>
-<p>For more on how we can use R and React, see the blog post <a href="http://www.jsinr.me/2017/11/19/react-in-r/">React in R</a>. Also, there are many more examples in the Github repo at <a href="https://github.com/timelyportfolio/reactR/tree/master/inst/examples">inst/examples</a>.</p>
+<p>For more on how we can use R and React, see the blog post <a href="https://www.jsinr.me/2017/11/19/react-in-r/">React in R</a>. Also, there are many more examples in the Github repo at <a href="https://github.com/react-R/reactR/tree/master/inst/examples">inst/examples</a>.</p>
 </div>
 <div id="using-jsx" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-jsx" class="anchor"></a>Using JSX</h2>
-<p><a href="https://facebook.github.io/react/docs/jsx-in-depth.html"><code>JSX</code></a> helps ease some of the burden caused by <code>React.createElement</code>. <code>reactR</code> provides a <code><a href="../reference/babel_transform.html">babel_transform()</a></code> function to use <code>JSX</code>. Hopefully, in the future, we can convince RStudio to modify <code>htmltools</code> to work directly with <code>JSX</code> (see <a href="https://github.com/rstudio/htmltools/pull/72">issue</a>).</p>
+<p><a href="https://reactjs.org/docs/jsx-in-depth.html"><code>JSX</code></a> helps ease some of the burden caused by <code>React.createElement</code>. <code>reactR</code> provides a <code><a href="../reference/babel_transform.html">babel_transform()</a></code> function to use <code>JSX</code>. Hopefully, in the future, we can convince RStudio to modify <code>htmltools</code> to work directly with <code>JSX</code> (see <a href="https://github.com/rstudio/htmltools/pull/72">issue</a>).</p>
 </div>
   </div>
 

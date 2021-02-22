@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,7 +77,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/react-R/reactR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@
       <h1 data-toc-skip>Authoring inputs powered by React with reactR</h1>
                         <h4 class="author">Alan Dipert and Carson Sievert</h4>
             
-            <h4 class="date">2020-07-12</h4>
+            <h4 class="date">2021-02-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_inputs.Rmd"><code>vignettes/intro_inputs.Rmd</code></a></small>
       <div class="hidden name"><code>intro_inputs.Rmd</code></div>
@@ -106,7 +106,7 @@
 
     
     
-<p><a href="http://shiny.rstudio.com/">Shiny</a> comes with a large library of input <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">widgets</a> for collecting input from the user and conveying input data to R.</p>
+<p><a href="https://shiny.rstudio.com/">Shiny</a> comes with a large library of input <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">widgets</a> for collecting input from the user and conveying input data to R.</p>
 <p>If you want a kind of input <em>not</em> provided by Shiny — like a color picker, or a different kind of slider — you’ve always been able to build your own. Shiny’s input system is <a href="https://shiny.rstudio.com/articles/building-inputs.html">extensible</a>. All that’s required is an understanding of certain conventions and a little custom JavaScript.</p>
 <p>reactR provides additional tools to ease the creation of new Shiny inputs implemented using React. In the following tutorial, we will demonstrate these tools by implementing a new Shiny color picker input that wraps the <a href="https://github.com/casesandberg/react-color">react-color</a> library.</p>
 <div id="software-pre-requisites" class="section level2">
@@ -114,14 +114,14 @@
 <a href="#software-pre-requisites" class="anchor"></a>Software pre-requisites</h2>
 <p>In order to develop a <strong>reactR</strong> Shiny input, you’ll need to install R and optionally RStudio. If you’re on Windows, you should also install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
 <blockquote>
-<p>For an excellent general introduction to R package concepts, check out the <a href="http://r-pkgs.had.co.nz/">R packages</a> online book.</p>
+<p>For an excellent general introduction to R package concepts, check out the <a href="https://r-pkgs.org/">R packages</a> online book.</p>
 </blockquote>
 <p>In addition, you’ll need to install the following JavaScript tools on your machine:</p>
 <ul>
 <li>
 <a href="https://nodejs.org">Node.js</a>: JavaScript engine and runtime for development outside of browsers. Provides the <code>node</code> and <code>npm</code> commands.</li>
 <li>
-<a href="https://yarnpkg.com/en/">Yarn</a>: Command-line dependency management tool, provides the <code>yarn</code> command.</li>
+<a href="https://classic.yarnpkg.com/en/">Yarn</a>: Command-line dependency management tool, provides the <code>yarn</code> command.</li>
 </ul>
 <p>To follow along in this vignette, you’ll also need the following R packages:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"shiny"</span>, <span class="st">"devtools"</span>, <span class="st">"usethis"</span>, <span class="st">"reactR"</span>))</pre></body></html></div>
@@ -138,7 +138,7 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Create the R package (rstudio=TRUE is recommended if you're not already comfortable with your terminal)</span>
 <span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span>(<span class="st">"~/colorpicker"</span>, <span class="kw">rstudio</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co"># Scaffold initial input implementation files</span>
-<span class="kw pkg">withr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/withr/man/with_dir.html">with_dir</a></span>(
+<span class="kw pkg">withr</span><span class="kw ns">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_dir.html">with_dir</a></span>(
   <span class="st">"~/colorpicker"</span>,
   <span class="kw pkg">reactR</span><span class="kw ns">::</span><span class="fu"><a href="../reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput</a></span>(<span class="st">"colorpicker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"react-color"</span> <span class="kw">=</span> <span class="st">"^2.17.0"</span>), <span class="kw">edit</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 )</pre></body></html></div>
@@ -153,7 +153,7 @@
 <pre><code>yarn install
 yarn run webpack</code></pre>
 <ul>
-<li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://yarnpkg.com/lang/en/docs/cli/install/">yarn documentation</a>.</p></li>
+<li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://classic.yarnpkg.com/en/docs/cli/install/">yarn documentation</a>.</p></li>
 <li><p><code>yarn run webpack</code> compiles the <a href="https://babeljs.io/docs/en/babel-preset-env">modern JavaScript</a> with <a href="https://babeljs.io/docs/en/babel-preset-react">JSX</a> source file at <code>srcjs/colorpicker.jsx</code> into <code>www/colorpicker/colorpicker/colorpicker.js</code>. The latter file is the one actually used by the R package and includes all the relevant JavaScript dependencies in a dialect of JavaScript that most browsers understand.</p></li>
 </ul>
 <p><code>yarn run webpack</code> is not strictly a <code>yarn</code> command. In fact, <code>yarn run</code> simply delegates to the <a href="https://webpack.js.org/">webpack</a> program. Webpack’s configuration is generated by <code>scaffoldReactShinyInput</code> in the file <code>webpack.config.js</code>, but you can always change this configuration and/or modify the <code>yarn run webpack</code> command to suit your needs.</p>

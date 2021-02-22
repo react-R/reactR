@@ -4,10 +4,10 @@
 #' R package.
 #'
 #' @param name Name of widget
-#' @param npmPkgs Optional \href{https://npmjs.com/}{NPM} packages upon which
+#' @param npmPkgs Optional \href{https://www.npmjs.com/}{NPM} packages upon which
 #'   this widget is based which will be used to populate \code{package.json}.
 #'   Should be a named list of names to
-#'   \href{https://docs.npmjs.com/files/package.json#dependencies}{versions}.
+#'   \href{https://docs.npmjs.com/files/package.json/}{versions}.
 #' @param edit Automatically open the widget's JavaScript source file after
 #'   creating the scaffolding.
 #'

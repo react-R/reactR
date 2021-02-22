@@ -15,18 +15,18 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-The [htmlwidgets](https://www.htmlwidgets.org) package provides a framework for creating R bindings to JavaScript libraries. Using the **htmlwidgets** package alone, it's not necessarily straight-forward to create an R binding to a [React](https://facebook.github.io/react/)-powered JavaScript library. The **reactR** package builds on the **htmlwidgets** framework to make it much easier to author **htmlwidgets** that are powered by React. This vignette will show you how to effectively leverage **reactR** to build an **htmlwidgets** package that interfaces with [react-sparklines](https://github.com/borisyankov/react-sparklines) React JavaScript library.
+The [htmlwidgets](https://www.htmlwidgets.org) package provides a framework for creating R bindings to JavaScript libraries. Using the **htmlwidgets** package alone, it's not necessarily straight-forward to create an R binding to a [React](https://reactjs.org/)-powered JavaScript library. The **reactR** package builds on the **htmlwidgets** framework to make it much easier to author **htmlwidgets** that are powered by React. This vignette will show you how to effectively leverage **reactR** to build an **htmlwidgets** package that interfaces with [react-sparklines](https://github.com/borisyankov/react-sparklines) React JavaScript library.
 
 ## Software pre-requisites
 
 In order to develop a **reactR** widget, you'll need to install R and optionally RStudio. If you're on Windows, you should also install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
-> For an excellent general introduction to R package concepts, check out the [R packages](http://r-pkgs.had.co.nz/) online book.
+> For an excellent general introduction to R package concepts, check out the [R packages](https://r-pkgs.org/) online book.
 
 In addition, you'll need to install the following JavaScript tools on your machine:
 
 * [Node.js](https://nodejs.org): JavaScript engine and runtime for development outside of browsers. Provides the `node` and `npm` commands.
-* [Yarn](https://yarnpkg.com/en/): Command-line dependency management tool, provides the `yarn` command.
+* [Yarn](https://classic.yarnpkg.com/en/): Command-line dependency management tool, provides the `yarn` command.
 
 To follow along in this vignette, you'll also need the following R packages:
 
@@ -64,7 +64,7 @@ system("yarn install")
 system("yarn run webpack")
 ```
 
-* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**. For further documentation on `yarn install`, see the [yarn documentation](https://yarnpkg.com/lang/en/docs/cli/install/).
+* `yarn install` downloads all of the dependencies listed in `package.json` and creates a new file, `yarn.lock`. You should add this file to revision control. It will be updated whenever you change dependencies and run `yarn install`. **Note: you only need to run it after modifying package.json**. For further documentation on `yarn install`, see the [yarn documentation](https://classic.yarnpkg.com/en/docs/cli/install/).
 
 * `yarn run webpack` compiles the [ES2015](https://babeljs.io/docs/en/learn/) JavaScript source file at `srcjs/sparklines.js` into `inst/htmlwidgets/sparklines.js`. The later file is one actually used by the R package and includes all the relevant JavaScript dependencies in a version of JavaScript that most browsers understand. Note that, if you add `--mode=development` to the end of this command, it will include a [source map](https://developer.mozilla.org/en-US/docs/Tools/Debugger/How_to/Use_a_source_map) is included with the compiled JavaScript, which makes JavaScript debugging much easier, but hopefully you won't need to do much of any JavaScript debugging.
 

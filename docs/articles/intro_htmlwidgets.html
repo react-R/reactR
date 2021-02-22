@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,7 +77,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/react-R/reactR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,7 +98,7 @@
                         <h4 class="author">Alan Dipert</h4>
                         <h4 class="author">Carson Sievert</h4>
             
-            <h4 class="date">2020-07-12</h4>
+            <h4 class="date">2021-02-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_htmlwidgets.Rmd"><code>vignettes/intro_htmlwidgets.Rmd</code></a></small>
       <div class="hidden name"><code>intro_htmlwidgets.Rmd</code></div>
@@ -107,20 +107,20 @@
 
     
     
-<p>The <a href="https://www.htmlwidgets.org">htmlwidgets</a> package provides a framework for creating R bindings to JavaScript libraries. Using the <strong>htmlwidgets</strong> package alone, it’s not necessarily straight-forward to create an R binding to a <a href="https://facebook.github.io/react/">React</a>-powered JavaScript library. The <strong>reactR</strong> package builds on the <strong>htmlwidgets</strong> framework to make it much easier to author <strong>htmlwidgets</strong> that are powered by React. This vignette will show you how to effectively leverage <strong>reactR</strong> to build an <strong>htmlwidgets</strong> package that interfaces with <a href="https://github.com/borisyankov/react-sparklines">react-sparklines</a> React JavaScript library.</p>
+<p>The <a href="https://www.htmlwidgets.org">htmlwidgets</a> package provides a framework for creating R bindings to JavaScript libraries. Using the <strong>htmlwidgets</strong> package alone, it’s not necessarily straight-forward to create an R binding to a <a href="https://reactjs.org/">React</a>-powered JavaScript library. The <strong>reactR</strong> package builds on the <strong>htmlwidgets</strong> framework to make it much easier to author <strong>htmlwidgets</strong> that are powered by React. This vignette will show you how to effectively leverage <strong>reactR</strong> to build an <strong>htmlwidgets</strong> package that interfaces with <a href="https://github.com/borisyankov/react-sparklines">react-sparklines</a> React JavaScript library.</p>
 <div id="software-pre-requisites" class="section level2">
 <h2 class="hasAnchor">
 <a href="#software-pre-requisites" class="anchor"></a>Software pre-requisites</h2>
 <p>In order to develop a <strong>reactR</strong> widget, you’ll need to install R and optionally RStudio. If you’re on Windows, you should also install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
 <blockquote>
-<p>For an excellent general introduction to R package concepts, check out the <a href="http://r-pkgs.had.co.nz/">R packages</a> online book.</p>
+<p>For an excellent general introduction to R package concepts, check out the <a href="https://r-pkgs.org/">R packages</a> online book.</p>
 </blockquote>
 <p>In addition, you’ll need to install the following JavaScript tools on your machine:</p>
 <ul>
 <li>
 <a href="https://nodejs.org">Node.js</a>: JavaScript engine and runtime for development outside of browsers. Provides the <code>node</code> and <code>npm</code> commands.</li>
 <li>
-<a href="https://yarnpkg.com/en/">Yarn</a>: Command-line dependency management tool, provides the <code>yarn</code> command.</li>
+<a href="https://classic.yarnpkg.com/en/">Yarn</a>: Command-line dependency management tool, provides the <code>yarn</code> command.</li>
 </ul>
 <p>To follow along in this vignette, you’ll also need the following R packages:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"shiny"</span>, <span class="st">"devtools"</span>, <span class="st">"usethis"</span>, <span class="st">"htmlwidgets"</span>, <span class="st">"reactR"</span>))</pre></body></html></div>
@@ -137,7 +137,7 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Create the R package</span>
 <span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span>(<span class="st">"~/sparklines"</span>)
 <span class="co"># Inject the widget templating</span>
-<span class="kw pkg">withr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/withr/man/with_dir.html">with_dir</a></span>(
+<span class="kw pkg">withr</span><span class="kw ns">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_dir.html">with_dir</a></span>(
   <span class="st">"~/sparklines"</span>,
   <span class="kw pkg">reactR</span><span class="kw ns">::</span><span class="fu"><a href="../reference/scaffoldReactWidget.html">scaffoldReactWidget</a></span>(<span class="st">"sparklines"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"react-sparklines"</span> <span class="kw">=</span> <span class="st">"^1.7.0"</span>), <span class="kw">edit</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 )</pre></body></html></div>
@@ -152,7 +152,7 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"yarn install"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"yarn run webpack"</span>)</pre></body></html></div>
 <ul>
-<li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://yarnpkg.com/lang/en/docs/cli/install/">yarn documentation</a>.</p></li>
+<li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://classic.yarnpkg.com/en/docs/cli/install/">yarn documentation</a>.</p></li>
 <li><p><code>yarn run webpack</code> compiles the <a href="https://babeljs.io/docs/en/learn/">ES2015</a> JavaScript source file at <code>srcjs/sparklines.js</code> into <code>inst/htmlwidgets/sparklines.js</code>. The later file is one actually used by the R package and includes all the relevant JavaScript dependencies in a version of JavaScript that most browsers understand. Note that, if you add <code>--mode=development</code> to the end of this command, it will include a <a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger/How_to/Use_a_source_map">source map</a> is included with the compiled JavaScript, which makes JavaScript debugging much easier, but hopefully you won’t need to do much of any JavaScript debugging.</p></li>
 </ul>
 <p><code>yarn run webpack</code> is not strictly a <code>yarn</code> command. In fact, <code>yarn run</code> simply delegates to the <a href="https://webpack.js.org/">webpack</a> program. Webpack’s configuration is generated by <code>scaffoldReactWidget</code> in the file <code>webpack.config.js</code>, but you can always change this configuration and/or modify the <code>yarn run webpack</code> command to suit your needs.</p>

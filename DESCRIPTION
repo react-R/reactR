@@ -1,13 +1,13 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.4.3
-Date: 2020-07-12
+Version: 0.4.4
+Date: 2021-02-20
 Authors@R: c(
       person(
         "Facebook", "Inc"
         , role = c("aut", "cph")
-        , comment = "React library in lib, https://facebook.github.io/react; see AUTHORS for full list of contributors"
+        , comment = "React library in lib, https://reactjs.org/; see AUTHORS for full list of contributors"
       ),
       person(
         "Michel","Weststrate",
@@ -39,7 +39,7 @@ Encoding: UTF-8
 Imports:
     htmltools
 Suggests:
-    htmlwidgets (>= 0.6.0),
+    htmlwidgets (>= 1.5.3),
     rmarkdown,
     shiny,
     V8,
