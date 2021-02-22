@@ -1,6 +1,6 @@
 ---
 title: "Intro to reactR"
-author: "Kent Russell"
+author: "Kent Russell & Harry Anderson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,11 +9,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Why reactR?
+## Why reactR
 
-[`react`](https://reactjs.org/) has become incredibly popular, and the ecosystem around `react` is robust.  `reactR` aims to allow `R` users to more easily incorporate `react` and `JSX`.
+[`React`](https://reactjs.org/) is a JavaScript library for building user interfaces.
+The `{shiny}` package provides us with functions like `sliderInput()` and `selectInput()` to help us to easily implement common UI features in our Shiny apps.
+These functions are easy to use, and _most_ of the time they'll be all we need to build-out our prototypes.
+But seasoned web developers know that there's a world of UI potential beyond what `{shiny}` gives us out-of-the-box, and while packages like `[{shinydashboard}](https://github.com/rstudio/shinydashboard)` expand the libary of UI elements at our disposal, they only go so far.
 
-## Install
+The React ecosystem, on the other hand, has every piece of UI that we could ever imagine.
+The only problem is that React is a JavaScript (not an R) library.
+Enter: `{reactR}`, which binds React components to R functions, and makes our Shiny apps really shine. 
+
+If you don't know anything about React, then you should brush-up on it by going through the [official tutorial](https://reactjs.org/tutorial/tutorial.html).
+You'll need to be familliar with the basics of JavaScript modules, React components and JSX in order to properly understand the rest of this tutorial.
+
+
+## Installation
 
 ```
 install.packages("reactR")
@@ -23,9 +34,10 @@ install.packages("reactR")
 # devtools::install_github("timelyportfolio/reactR")
 ```
 
-## Quick Example
+---
 
-Let's use `react` to render a simple `h1` HTML element below.
+## A quick example
+### Using React to render a simple `h1` HTML element below
 
 <div id="react-heading-here"></div>
 
@@ -49,6 +61,15 @@ attachDependencies(
   html_dependency_react()
 )
 ```
+
+---
+
+## A complex example
+### Creating our own React component, and integrating it into a Shiny app
+
+## Requirements
+
+In addition to having our Shiny development environment up-and-running, we'll also need to have [Node and NPM](https://nodejs.org/en/download/) installed.
 
 ## Blog Post
 
