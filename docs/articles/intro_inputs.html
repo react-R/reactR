@@ -97,7 +97,7 @@
       <h1 data-toc-skip>Authoring inputs powered by React with reactR</h1>
                         <h4 class="author">Alan Dipert and Carson Sievert</h4>
             
-            <h4 class="date">2021-02-21</h4>
+            <h4 class="date">2021-02-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_inputs.Rmd"><code>vignettes/intro_inputs.Rmd</code></a></small>
       <div class="hidden name"><code>intro_inputs.Rmd</code></div>
@@ -171,7 +171,7 @@ yarn run webpack</code></pre>
 <h2 class="hasAnchor">
 <a href="#run-the-included-demo" class="anchor"></a>Run the included demo</h2>
 <p>Now that the input’s JavaScript is compiled, and the R package is installed, run <code>app.R</code> to see a demo in action:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runApp.html">runApp</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp</a></span>()</pre></body></html></div>
 <p>In RStudio, you can open <code>app.R</code> and press <code>Ctrl-Shift-Enter</code> (<code>Cmd-Shift-Enter</code> on macOS). You should see something like the following appear in the Viewer pane:</p>
 <p><img src="input_app.jpg"></p>
 </div>
@@ -249,7 +249,7 @@ yarn run webpack</code></pre>
 <span id="cb8-13"><a href="#cb8-13"></a><span class="co">// Note the first argument here should match the `class` </span></span>
 <span id="cb8-14"><a href="#cb8-14"></a><span class="co">// argument of the reactR::createReactShinyInput() from step 1</span></span>
 <span id="cb8-15"><a href="#cb8-15"></a><span class="at">reactShinyInput</span>(<span class="st">'.colorpicker'</span><span class="op">,</span> <span class="st">'colorpicker'</span><span class="op">,</span> PickerInput)<span class="op">;</span></span></code></pre></div>
-<p>Open the <code>srcjs/colorpicker.jsx</code> file in your colorpicker project and paste this code into it. After saving the file, run <code>yarn run webpack</code> in the terminal, re-install the package, then run <code><a href="https://shiny.rstudio.com/reference/shiny/latest/runApp.html">shiny::runApp()</a></code> again</p>
+<p>Open the <code>srcjs/colorpicker.jsx</code> file in your colorpicker project and paste this code into it. After saving the file, run <code>yarn run webpack</code> in the terminal, re-install the package, then run <code><a href="https://rdrr.io/pkg/shiny/man/runApp.html">shiny::runApp()</a></code> again</p>
 <video autoplay muted><source src="./input_sketchpicker.mp4"></source></video><p>When you select new colors, you should see the <code>textOutput</code> update accordingly.</p>
 <p>You might have noticed that the input showed up initially without a color selected. That’s because in <code>app.R</code> we didn’t supply a <code>default</code> argument to the <code>colorpickerInput</code> function inside our <code>ui</code>.</p>
 <p>Try replacing the call to <code>colorpickerInput</code> with this: <code>colorpickerInput("textInput", default = "#a76161")</code></p>
