@@ -18,13 +18,15 @@ But seasoned web developers know that there's a world of UI potential beyond wha
 
 The React ecosystem, on the other hand, has every piece of UI that we could ever imagine.
 The only problem is that React is a JavaScript (not an R) library.
-Enter: `{reactR}`, which binds React components to R functions, and makes our Shiny apps really shine. 
+Enter: `{reactR}`, which lets us bind React components to R functions.
 
-If you don't know anything about React, then you should brush-up on it by going through the [official tutorial](https://reactjs.org/tutorial/tutorial.html).
-You'll need to be familliar with the basics of JavaScript modules, React components and JSX in order to properly understand the rest of this tutorial.
+> `{reactR}` gives us the power to use any React component in our Shiny apps.
 
+If you don't know anything about React, then you may want to brush-up on it by going through the [official tutorial](https://reactjs.org/tutorial/tutorial.html).
+However, you won't need to know how to write JS code to use reactR.
+Simply look-up a component that you'd like to use, and then follow the steps below to implement it in R.
 
-## Installation
+## Installing reactR
 
 ```
 install.packages("reactR")
@@ -34,47 +36,54 @@ install.packages("reactR")
 # devtools::install_github("timelyportfolio/reactR")
 ```
 
----
-
 ## A quick example
-### Using React to render a simple `h1` HTML element below
+### Using reactR to render the `react-time-picker` input
 
-<div id="react-heading-here"></div>
+`react-time-picker` is a react component that renders a time-picker input.
+Neither `{shiny}`, nor any other prominent Shiny ecosystem package gives us a time-picker Shiny input, but using `{reactR}`, we're going to create a time-picker input that we can use in a Shiny app.
+The code below creates an `htmlDependency` for the `react-time-picker` NPM package.
 
 ```{r}
 library(reactR)
 library(htmltools)
 
-attachDependencies(
-  tags$script(
-  "
-    ReactDOM.render(
-      React.createElement(
-        'h1',
-        null,
-        'Powered by React'
-      ),
-      document.getElementById('react-heading-here')
-    )
-  "
-  ),
-  html_dependency_react()
+time_picker <- htmlDependency(
+  name = "react-time-picker",
+  version = "5.23.0",
+  src = c(href="https://unpkg.com/react-time-picker/dist"),
+  script = "entry.js",
+  stylesheet = "TimePicker.css"
+)
+
+browsable(
+  tagList(
+    html_dependency_react(offline=FALSE),
+    time_picker,
+    tags$div(id="time-picker-wrapper"),
+    tags$script(HTML(babel_transform(
+"
+ReactDOM.render(<TimePicker onChange={newTime => setValue(newTime)}
+                     value={value}
+                     { ...configuration } />, document.querySelector('#time-picker-wrapper'))
+"
+    )))
+  )
 )
 ```
 
----
+![](./time-picker.gif)
 
-## A complex example
-### Creating our own React component, and integrating it into a Shiny app
+The example above shows us how we can quickly make use of existing React components in R using `{reactR}`, but what we've seen in this introduction is actually just the tip of the iceberg for what we can accomplish with `{reactR}`.
+In fact, you can even develop your own Shiny inputs that are based on React components like the one above.
+The resources below will help you to get on your way to integrating React in your R projects:
 
-## Requirements
+* [Video: Integrating React.js and Shiny](https://rstudio.com/resources/rstudioconf-2019/integrating-react-js-and-shiny/)
+* [Blog post: React in R](https://www.jsinr.me/2017/11/19/react-in-r/)
 
-In addition to having our Shiny development environment up-and-running, we'll also need to have [Node and NPM](https://nodejs.org/en/download/) installed.
-
-## Blog Post
-
-For more on how we can use R and React, see the blog post [React in R](https://www.jsinr.me/2017/11/19/react-in-r/).  Also, there are many more examples in the Github repo at [inst/examples](https://github.com/react-R/reactR/tree/master/inst/examples).
+You can also find more examples of reactR at work in the Github repo at [inst/examples](https://github.com/react-R/reactR/tree/master/inst/examples).
 
 ## Using JSX
 
-[`JSX`](https://reactjs.org/docs/jsx-in-depth.html) helps ease some of the burden caused by `React.createElement`.  `reactR` provides a `babel_transform()` function to use `JSX`.  Hopefully, in the future, we can convince RStudio to modify `htmltools` to work directly with `JSX` (see [issue](https://github.com/rstudio/htmltools/pull/72)).
+[`JSX`](https://reactjs.org/docs/jsx-in-depth.html) helps ease some of the burden caused by `React.createElement`.
+`reactR` provides a `babel_transform()` function to use `JSX`.
+Hopefully, in the future, we can convince RStudio to modify `htmltools` to work directly with `JSX` (see [issue](https://github.com/rstudio/htmltools/pull/72)).
