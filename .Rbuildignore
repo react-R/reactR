@@ -18,3 +18,4 @@
 ^webpack\.config\.js$
 ^yarn\.lock$
 ^logo\.svg$
+^\.github$
