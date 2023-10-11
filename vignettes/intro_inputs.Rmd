@@ -14,8 +14,8 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-[Shiny](https://shiny.rstudio.com/) comes with a large library of input
-[widgets](https://shiny.rstudio.com/gallery/widget-gallery.html) for collecting
+[Shiny](https://shiny.posit.co/) comes with a large library of input
+[widgets](https://shiny.posit.co/r/gallery/widgets/widget-gallery/) for collecting
 input from the user and conveying input data to R.
 
 If you want a kind of input *not* provided by Shiny &mdash; like a color picker,
@@ -85,7 +85,7 @@ withr::with_dir(
 ### Building the JavaScript
 
 The next step is to navigate to the newly-created `colorpicker` project and run
-the following commands in the terminal. If you're new the terminal, we recommend opening your newly created RStudio  `~/colorpicker/colorpicker.Rproj` project file, then running the following in the [RStudio terminal tab](https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal):
+the following commands in the terminal. If you're new the terminal, we recommend opening your newly created RStudio  `~/colorpicker/colorpicker.Rproj` project file, then running the following in the [RStudio terminal tab](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal):
 
 ```
 yarn install
