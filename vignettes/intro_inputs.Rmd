@@ -85,7 +85,7 @@ withr::with_dir(
 ### Building the JavaScript
 
 The next step is to navigate to the newly-created `colorpicker` project and run
-the following commands in the terminal. If you're new the terminal, we recommend opening your newly created RStudio  `~/colorpicker/colorpicker.Rproj` project file, then running the following in the [RStudio terminal tab](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal):
+the following commands in the terminal. If you're new the terminal, we recommend opening your newly created RStudio  `~/colorpicker/colorpicker.Rproj` project file, then running the following in the RStudio terminal tab:
 
 ```
 yarn install
