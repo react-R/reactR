@@ -3,11 +3,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
-[![Travis-CI Build
-Status](https://travis-ci.org/react-R/reactR.svg?branch=master)](https://travis-ci.org/react-R/reactR)
-[![Slack
-Status](https://reactr-slackin.herokuapp.com/badge.svg)](https://reactr-slackin.herokuapp.com/)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/reactR)](https://cran.r-project.org/package=reactR)
+[![R-CMD-check](https://github.com/react-R/reactR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/react-R/reactR/actions/workflows/R-CMD-check.yaml)
 
 `reactR` provides a set of convenience functions for using
 [`React`](https://reactjs.org/) in `R` with `htmlwidget` constructor

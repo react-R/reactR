@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,23 +41,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -78,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/react-R/reactR/">
+  <a href="https://github.com/react-R/reactR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -95,132 +91,134 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="reactr-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#reactr-" class="anchor"></a>reactR <img src="articles/logo.svg" alt="reactR logo" width="100px">
+<div class="section level1">
+<div class="page-header"><h1 id="reactr-">reactR <img src="articles/logo.svg" alt="reactR logo" width="100px"><a class="anchor" aria-label="anchor" href="#reactr-"></a>
 </h1></div>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-<p><code>reactR</code> provides a set of convenience functions for using <a href="https://reactjs.org/"><code>React</code></a> in <code>R</code> with <code>htmlwidget</code> constructor templates and local JavaScript dependencies. The <code>React</code> ecosystem is rich with components that can enhance <code>R</code> web and Shiny apps. <code><a href="reference/scaffoldReactWidget.html">scaffoldReactWidget()</a></code> helps build <code>htmlwidgets</code> to integrate these <code>React</code> components as <code>R</code> <code>htmlwidgets</code>. <code><a href="reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput()</a></code> does the same for <code>Shiny</code> inputs. The local dependency functions are modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown"><code>rmarkdown</code></a> package.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install reactR from CRAN with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("reactR")</a></code>. For the development version, please use <code>devtools</code> as shown below.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"react-R/reactR"</span>)</pre></div>
+<p><a href="https://cran.r-project.org/package=reactR" class="external-link"><img src="https://www.r-pkg.org/badges/version/reactR" alt="CRAN_Status_Badge"></a> <a href="https://github.com/react-R/reactR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/react-R/reactR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
+<p><code>reactR</code> provides a set of convenience functions for using <a href="https://reactjs.org/" class="external-link"><code>React</code></a> in <code>R</code> with <code>htmlwidget</code> constructor templates and local JavaScript dependencies. The <code>React</code> ecosystem is rich with components that can enhance <code>R</code> web and Shiny apps. <code><a href="reference/scaffoldReactWidget.html">scaffoldReactWidget()</a></code> helps build <code>htmlwidgets</code> to integrate these <code>React</code> components as <code>R</code> <code>htmlwidgets</code>. <code><a href="reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput()</a></code> does the same for <code>Shiny</code> inputs. The local dependency functions are modeled after the <code>html_dependency_*</code> functions from RStudio’s <a href="https://github.com/rstudio/rmarkdown" class="external-link"><code>rmarkdown</code></a> package.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install reactR from CRAN with <code>install.packages("reactR")</code>. For the development version, please use <code>devtools</code> as shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"react-R/reactR"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="creating-htmlwidgets-with-react-components" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-htmlwidgets-with-react-components" class="anchor"></a>Creating htmlwidgets with React Components</h2>
-<p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R">react-R Github organization</a>.</p>
-<p><a href="https://github.com/glin/reactable"><code>reactable</code></a> is a very well-built <code>htmlwidget</code> leveraging this functionality.</p>
+<div class="section level2">
+<h2 id="creating-htmlwidgets-with-react-components">Creating htmlwidgets with React Components<a class="anchor" aria-label="anchor" href="#creating-htmlwidgets-with-react-components"></a>
+</h2>
+<p>To wrap a <code>React</code> component as an <code>htmlwidget</code>, please see the tutorial <a href="https://react-r.github.io/reactR/articles/intro_htmlwidgets.html" class="external-link">htmlwidgets with reactR</a>. Also, there are a variety of examples in the <a href="https://github.com/react-R" class="external-link">react-R Github organization</a>.</p>
+<p><a href="https://github.com/glin/reactable" class="external-link"><code>reactable</code></a> is a very well-built <code>htmlwidget</code> leveraging this functionality.</p>
 </div>
-<div id="shiny-outputs-and-inputs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#shiny-outputs-and-inputs" class="anchor"></a>Shiny Outputs and Inputs</h2>
-<p><code>htmlwidgets</code> built with <code>reactR</code> work well in Shiny as outputs. In version <code>0.4.0</code> Alan Dipert has added the ability to easily create React-based official <code>Shiny</code> inputs with helpers and scaffolds. Please see the <a href="https://react-r.github.io/reactR/articles/intro_inputs.html">tutorial</a> for more details.</p>
+<div class="section level2">
+<h2 id="shiny-outputs-and-inputs">Shiny Outputs and Inputs<a class="anchor" aria-label="anchor" href="#shiny-outputs-and-inputs"></a>
+</h2>
+<p><code>htmlwidgets</code> built with <code>reactR</code> work well in Shiny as outputs. In version <code>0.4.0</code> Alan Dipert has added the ability to easily create React-based official <code>Shiny</code> inputs with helpers and scaffolds. Please see the <a href="https://react-r.github.io/reactR/articles/intro_inputs.html" class="external-link">tutorial</a> for more details.</p>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
 <p>Below are examples of using <code>reactR</code> directly.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactR</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">htmltools</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/browsable.html">browsable</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tag.html">tagList</a></span>(
-  <span class="no">tags</span>$<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html">div</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="st">"app"</span>),
-  <span class="no">tags</span>$<span class="fu">script</span>(
-  <span class="st">"
-    ReactDOM.render(
-      React.createElement(
-        'h1',
-        null,
-        'Powered by React'
-      ),
-      document.getElementById('app')
-    )
-  "</span>
-  ),
-  <span class="co">#add core-js first to work in RStudio Viewer</span>
-  <span class="fu"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span>(),
-  <span class="fu"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
-))</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/react-R/reactR" class="external-link">reactR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/browsable.html" class="external-link">browsable</a></span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
+<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">div</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"app"</span><span class="op">)</span>,</span>
+<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span></span>
+<span>  <span class="st">"</span></span>
+<span><span class="st">    ReactDOM.render(</span></span>
+<span><span class="st">      React.createElement(</span></span>
+<span><span class="st">        'h1',</span></span>
+<span><span class="st">        null,</span></span>
+<span><span class="st">        'Powered by React'</span></span>
+<span><span class="st">      ),</span></span>
+<span><span class="st">      document.getElementById('app')</span></span>
+<span><span class="st">    )</span></span>
+<span><span class="st">  "</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="co">#add core-js first to work in RStudio Viewer</span></span>
+<span>  <span class="fu"><a href="reference/html_dependency_corejs.html">html_dependency_corejs</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="reference/html_dependency_react.html">html_dependency_react</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><code>reactR</code> uses the <code>V8</code> package if available to transform <code>JSX</code> and <code>ES2015</code> code with <code>babel</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactR</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">htmltools</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/browsable.html">browsable</a></span>(
-  <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tag.html">tagList</a></span>(
-    <span class="no">tags</span>$<span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html">div</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="st">"app"</span>),
-    <span class="no">tags</span>$<span class="fu">script</span>(
-      <span class="fu"><a href="reference/babel_transform.html">babel_transform</a></span>(<span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.getElementById("app"))'</span>)
-    ),
-    <span class="co"># add core-js shim first for React in older versions of RStudio Viewer</span>
-    <span class="co">#html_dependency_corejs(),</span>
-    <span class="fu"><a href="reference/html_dependency_react.html">html_dependency_react</a></span>()
-  )
-)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/react-R/reactR" class="external-link">reactR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/browsable.html" class="external-link">browsable</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
+<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">div</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"app"</span><span class="op">)</span>,</span>
+<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="reference/babel_transform.html">babel_transform</a></span><span class="op">(</span><span class="st">'ReactDOM.render(&lt;h1&gt;Powered By React/JSX&lt;/h1&gt;,document.getElementById("app"))'</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="co"># add core-js shim first for React in older versions of RStudio Viewer</span></span>
+<span>    <span class="co">#html_dependency_corejs(),</span></span>
+<span>    <span class="fu"><a href="reference/html_dependency_react.html">html_dependency_react</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="contributing-and-code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing-and-code-of-conduct" class="anchor"></a>Contributing and Code of Conduct</h2>
-<p>We welcome contributors and would love your participation. Please note that this project is released with a <a href="https://github.com/react-R/reactR/blob/master/CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by the terms.</p>
+<div class="section level2">
+<h2 id="contributing-and-code-of-conduct">Contributing and Code of Conduct<a class="anchor" aria-label="anchor" href="#contributing-and-code-of-conduct"></a>
+</h2>
+<p>We welcome contributors and would love your participation. Please note that this project is released with a <a href="https://github.com/react-R/reactR/blob/master/CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by the terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=reactR">https://​cloud.r-project.org/​package=reactR</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/react-R/reactR/">https://​github.com/​react-R/​reactR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/react-R/reactR/issues">https://​github.com/​react-R/​reactR/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=reactR" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/react-R/reactR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/react-R/reactR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Facebook Inc <br><small class="roles"> Author, copyright holder </small>  <br><small>(React library in lib, https://reactjs.org/; see AUTHORS for full list of contributors)</small>
-</li>
-<li>Michel Weststrate <br><small class="roles"> Author, copyright holder </small>  <br><small>(mobx library in lib, https://github.com/mobxjs)</small>
-</li>
-<li>Kent Russell <br><small class="roles"> Author, maintainer </small>  <br><small>(R interface)</small>
-</li>
-<li>Alan Dipert <br><small class="roles"> Author </small>  <br><small>(R interface)</small>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=reactR"><img src="https://www.r-pkg.org/badges/version/reactR" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://travis-ci.org/react-R/reactR"><img src="https://travis-ci.org/react-R/reactR.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://reactr-slackin.herokuapp.com/"><img src="https://reactr-slackin.herokuapp.com/badge.svg" alt="Slack Status"></a></li>
+<li><a href="authors.html#citation">Citing reactR</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Facebook Inc <br><small class="roles"> Author, copyright holder </small>  </li>
+<li>Michel Weststrate <br><small class="roles"> Author, copyright holder </small>  </li>
+<li>Kent Russell <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Alan Dipert <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
 </div>
+
+
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
+  <p></p>
+<p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -228,6 +226,8 @@
 
   
 
+
+  
 
   </body>
 </html>
