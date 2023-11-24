@@ -32,7 +32,7 @@ component <- function(name, varArgs = list()) {
     stop("Component name must be specified and start with an upper case character")
   }
   component <- htmltools::tag(name, varArgs)
-  structure(component, class = c("reactR_component", oldClass(component)))
+  structure(component, class = c("reactR_component", oldClass(component), "list"))
 }
 
 #' React component builder.

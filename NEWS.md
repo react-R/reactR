@@ -1,3 +1,11 @@
+# reactR 0.5.1
+
+* retain `list` in `reactR::component` classes #82
+
+# reactR 0.5.0
+
+* Update react to `18.2.0`
+
 # reactR 0.4.4
 
 * Update react to `16.12.0`
