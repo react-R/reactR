@@ -19,3 +19,4 @@
 ^yarn\.lock$
 ^logo\.svg$
 ^\.github$
+^CRAN-SUBMISSION$
