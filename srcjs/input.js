@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Shiny from 'shiny';
-import $ from 'jquery';
-
 /*
  * This default receiveMessage implementation expects data to contain whole
  * configuration and value properties. If either is present, it will be set and
