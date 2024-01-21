@@ -11,12 +11,5 @@
         "react": "^18.2.0",
         "vite": "^5.0.11",
         "vitest": "^1.2.1"
-    },
-    "dependencies": {
-        "-": "^0.0.1",
-        "@rgrove/parse-xml": "^4.1.0",
-        "D": "^1.0.0",
-        "html-react-parser": "^5.1.1",
-        "react-dom": "^18.2.0"
     }
 }
