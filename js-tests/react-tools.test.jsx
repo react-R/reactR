@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react'
 import { renderToString } from 'react-dom/server'
 import { parseXml } from '@rgrove/parse-xml'
-import { parse } from 'html-react-parser'
+import parse from 'html-react-parser'
 import { hydrate } from '../srcjs/react-tools'
 
 /**
