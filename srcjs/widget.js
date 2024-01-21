@@ -11,6 +11,15 @@ export function hydrate(components, tag) {
         && !components.hasOwnProperty(tag.name)) {
         throw new Error("Unknown component: " + tag.name);
     }
+    // thanks https://github.com/stla
+    //   https://github.com/react-R/reactR/issues/61
+    //   attribs that are slots will likely contain tags that also need hydration
+    //   convert any attribs that contain object that matches tag structure
+    for(let attrib in tag.attribs) {
+        if(isTag(tag.attribs[attrib])) {
+          tag.attribs[attrib] = hydrate(components, tag.attribs[attrib]);
+        }
+      }
     var elem = components.hasOwnProperty(tag.name) ? components[tag.name] : tag.name,
         args = [elem, tag.attribs];
     for (var i = 0; i < tag.children.length; i++) {

@@ -1,26 +1,17 @@
 {
-    "devDependencies": {
-        "@babel/core": "^7.2.2",
-        "@babel/preset-env": "^7.3.1",
-        "@babel/preset-react": "^7.0.0",
-        "@rgrove/parse-xml": "^1.1.1",
-        "babel-loader": "^8.0.5",
-        "chai": "^4.2.0",
-        "karma": "^3.1.4",
-        "karma-chai": "^0.1.0",
-        "karma-chrome-launcher": "^2.2.0",
-        "karma-mocha": "^1.3.0",
-        "karma-source-map-support": "^1.3.0",
-        "karma-webpack": "^4.0.0-rc.6",
-        "mocha": "^5.2.0",
-        "react": "^16.8.1",
-        "react-dom": "^16.8.1",
-        "react-html-parser": "^2.0.2",
-        "webpack": "^4.27.1",
-        "webpack-cli": "^3.1.2"
-    },
+    "name": "react-tools",
+    "private": true,
+    "type": "module",
     "scripts": {
-        "test": "karma start --single-run --browsers ChromeHeadless karma.conf.js"
+        "build": "vite build",
+        "test": "vitest run"
     },
-    "dependencies": {}
+    "devDependencies": {
+        "@rgrove/parse-xml": "^4.1.0",
+        "html-react-parser": "^5.1.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vite": "^5.0.11",
+        "vitest": "^1.2.1"
+    }
 }

@@ -80,9 +80,9 @@ html_dependency_reacttools <- function(){
   htmltools::htmlDependency(
     name = "reactwidget",
     src = "www/react-tools",
-    version = "1.0.0",
+    version = "2.0.0",
     package = "reactR",
-    script = c("react-tools.js")
+    script = c("react-tools.umd.cjs")
   )
 }
 

@@ -32,7 +32,7 @@ component <- function(name, varArgs = list()) {
     stop("Component name must be specified and start with an upper case character")
   }
   component <- htmltools::tag(name, varArgs)
-  structure(component, class = c("reactR_component", oldClass(component)))
+  structure(component, class = c("reactR_component", oldClass(component), "list"))
 }
 
 #' React component builder.
@@ -145,10 +145,10 @@ createReactShinyInput <- function(inputId,
     container(id = inputId, class = class),
     htmltools::tags$script(id = sprintf("%s_value", inputId),
                            type = "application/json",
-                           jsonlite::toJSON(value, auto_unbox = TRUE, null = "null")),
+                           jsonlite::toJSON(value, auto_unbox = TRUE, null = "null", force = TRUE)),
     htmltools::tags$script(id = sprintf("%s_configuration", inputId),
                            type = "application/json",
-                           jsonlite::toJSON(configuration, auto_unbox = TRUE, null = "null")),
+                           jsonlite::toJSON(configuration, auto_unbox = TRUE, null = "null", force = TRUE)),
     dependencies
   )
 }
