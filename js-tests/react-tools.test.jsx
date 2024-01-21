@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import parseXml from '@rgrove/parse-xml';
-import ReactHtmlParser from 'react-html-parser';
+import { assert, describe, it } from 'vitest'
+import React from 'react'
+import ReactDOM from 'react'
+import { renderToString } from 'react-dom/server'
+import { parseXml } from '@rgrove/parse-xml'
+import { parse } from 'html-react-parser'
+import { hydrate } from '../srcjs/react-tools'
 
 /**
  * Needed by react-tools.js
  * In normal operation, these are added to the page as htmlDependencies.
  */
-window.React = React;
-window.ReactDOM = ReactDOM;
+global.React = React;
+global.ReactDOM = ReactDOM;
 
 class Shout extends React.Component {
     render() {
@@ -71,22 +73,22 @@ describe('window.reactR', () => {
         it('hydrates an HTML5 component with a text child', () => {
             const markup = '<h1>Hello</h1>';
             assert.equal(
-                renderToString(ReactHtmlParser(markup)),
-                renderToString(reactR.hydrate({}, stringToTag(markup)))
+                renderToString(parse(markup)),
+                renderToString(hydrate({}, stringToTag(markup)))
             )
         })
         it('hydrates nested HTML5 components', () => {
             const markup = '<div><h1>Hello</h1><p>Oh, hello.</p></div>'
             assert.equal(
-                renderToString(ReactHtmlParser(markup)),
-                renderToString(reactR.hydrate({}, stringToTag(markup)))
+                renderToString(parse(markup)),
+                renderToString(hydrate({}, stringToTag(markup)))
             )
         })
     });
     describe('#hydrate() with Components', () => {
         it('should throw an exception with an unknown component', () => {
             assert.throws(() => {
-                reactR.hydrate({ Shout: Shout }, stringToTag('<Bar/>'))
+                hydrate({ Shout: Shout }, stringToTag('<Bar/>'))
             }, Error, /Unknown component/);
         });
     })
