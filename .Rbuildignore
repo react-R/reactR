@@ -11,11 +11,10 @@
 ^buildupdate$
 ^docs$
 ^cran-comments\.md$
-^karma\.conf\.js$
 ^logo.svg$
 ^package\.json$
-^yarn\.lock$
+^vite\.config\.js$
+^package-lock\.json$
 ^logo\.svg$
 ^\.github$
-^vite\.config\.js$
 ^CRAN-SUBMISSION$
