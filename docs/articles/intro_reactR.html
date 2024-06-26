@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,23 +39,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -76,7 +72,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/react-R/reactR/">
+  <a href="https://github.com/react-R/reactR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -91,60 +87,67 @@
 
       
 
-      </header><script src="intro_reactR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="intro_reactR_files/react-17.0.0/react.min.js"></script><script src="intro_reactR_files/react-17.0.0/react-dom.min.js"></script><div class="row">
+      </header><script src="intro_reactR_files/react-18.2.0/react.min.js"></script><script src="intro_reactR_files/react-18.2.0/react-dom.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Intro to reactR</h1>
-                        <h4 class="author">Kent Russell</h4>
+                        <h4 data-toc-skip class="author">Kent
+Russell</h4>
             
-            <h4 class="date">2021-02-22</h4>
+            <h4 data-toc-skip class="date">2024-06-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_reactR.Rmd"><code>vignettes/intro_reactR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/HEAD/vignettes/intro_reactR.Rmd" class="external-link"><code>vignettes/intro_reactR.Rmd</code></a></small>
       <div class="hidden name"><code>intro_reactR.Rmd</code></div>
 
     </div>
 
     
     
-<div id="why-reactr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-reactr" class="anchor"></a>Why reactR?</h2>
-<p><a href="https://reactjs.org/"><code>react</code></a> has become incredibly popular, and the ecosystem around <code>react</code> is robust. <code>reactR</code> aims to allow <code>R</code> users to more easily incorporate <code>react</code> and <code>JSX</code>.</p>
+<div class="section level2">
+<h2 id="why-reactr">Why reactR?<a class="anchor" aria-label="anchor" href="#why-reactr"></a>
+</h2>
+<p><a href="https://reactjs.org/" class="external-link"><code>react</code></a> has become
+incredibly popular, and the ecosystem around <code>react</code> is
+robust. <code>reactR</code> aims to allow <code>R</code> users to more
+easily incorporate <code>react</code> and <code>JSX</code>.</p>
 </div>
-<div id="install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install" class="anchor"></a>Install</h2>
-<pre><code>install.packages("reactR")
-
-# for the latest development version
-#  install from Github
-# devtools::install_github("timelyportfolio/reactR")</code></pre>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"reactR"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># for the latest development version</span></span>
+<span><span class="co">#  install from Github</span></span>
+<span><span class="co"># devtools::install_github("timelyportfolio/reactR")</span></span></code></pre>
 </div>
-<div id="quick-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-example" class="anchor"></a>Quick Example</h2>
-<p>Let’s use <code>react</code> to render a simple <code>h1</code> HTML element below.</p>
+<div class="section level2">
+<h2 id="quick-example">Quick Example<a class="anchor" aria-label="anchor" href="#quick-example"></a>
+</h2>
+<p>Let’s use <code>react</code> to render a simple <code>h1</code> HTML
+element below.</p>
 <div id="react-heading-here">
 
 </div>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">reactR</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">htmltools</span>)</pre></body></html></div>
-<pre><code>## Warning: package 'htmltools' was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/htmlDependencies.html">attachDependencies</a></span>(
-  <span class="no">tags</span>$<span class="fu">script</span>(
-  <span class="st">"
-    ReactDOM.render(
-      React.createElement(
-        'h1',
-        null,
-        'Powered by React'
-      ),
-      document.getElementById('react-heading-here')
-    )
-  "</span>
-  ),
-  <span class="fu"><a href="../reference/html_dependency_react.html">html_dependency_react</a></span>()
-)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/react-R/reactR" class="external-link">reactR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'htmltools' was built under R version 4.3.2</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/htmlDependencies.html" class="external-link">attachDependencies</a></span><span class="op">(</span></span>
+<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span></span>
+<span>  <span class="st">"</span></span>
+<span><span class="st">    ReactDOM.render(</span></span>
+<span><span class="st">      React.createElement(</span></span>
+<span><span class="st">        'h1',</span></span>
+<span><span class="st">        null,</span></span>
+<span><span class="st">        'Powered by React'</span></span>
+<span><span class="st">      ),</span></span>
+<span><span class="st">      document.getElementById('react-heading-here')</span></span>
+<span><span class="st">    )</span></span>
+<span><span class="st">  "</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/html_dependency_react.html">html_dependency_react</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <script>
     ReactDOM.render(
       React.createElement(
@@ -156,19 +159,26 @@
     )
   </script>
 </div>
-<div id="blog-post" class="section level2">
-<h2 class="hasAnchor">
-<a href="#blog-post" class="anchor"></a>Blog Post</h2>
-<p>For more on how we can use R and React, see the blog post <a href="https://www.jsinr.me/2017/11/19/react-in-r/">React in R</a>. Also, there are many more examples in the Github repo at <a href="https://github.com/react-R/reactR/tree/master/inst/examples">inst/examples</a>.</p>
+<div class="section level2">
+<h2 id="blog-post">Blog Post<a class="anchor" aria-label="anchor" href="#blog-post"></a>
+</h2>
+<p>For more on how we can use R and React, see the blog post <a href="https://www.jsinr.me/2017/11/19/react-in-r/" class="external-link">React in R</a>. Also,
+there are many more examples in the Github repo at <a href="https://github.com/react-R/reactR/tree/master/inst/examples" class="external-link">inst/examples</a>.</p>
 </div>
-<div id="using-jsx" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-jsx" class="anchor"></a>Using JSX</h2>
-<p><a href="https://reactjs.org/docs/jsx-in-depth.html"><code>JSX</code></a> helps ease some of the burden caused by <code>React.createElement</code>. <code>reactR</code> provides a <code><a href="../reference/babel_transform.html">babel_transform()</a></code> function to use <code>JSX</code>. Hopefully, in the future, we can convince RStudio to modify <code>htmltools</code> to work directly with <code>JSX</code> (see <a href="https://github.com/rstudio/htmltools/pull/72">issue</a>).</p>
+<div class="section level2">
+<h2 id="using-jsx">Using JSX<a class="anchor" aria-label="anchor" href="#using-jsx"></a>
+</h2>
+<p><a href="https://reactjs.org/docs/jsx-in-depth.html" class="external-link"><code>JSX</code></a>
+helps ease some of the burden caused by
+<code>React.createElement</code>. <code>reactR</code> provides a
+<code><a href="../reference/babel_transform.html">babel_transform()</a></code> function to use <code>JSX</code>.
+Hopefully, in the future, we can convince RStudio to modify
+<code>htmltools</code> to work directly with <code>JSX</code> (see <a href="https://github.com/rstudio/htmltools/pull/72" class="external-link">issue</a>).</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
         <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
     </nav>
 </div>
@@ -178,11 +188,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
+  <p></p>
+<p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -190,6 +202,8 @@
 
   
 
+
+  
 
   </body>
 </html>
