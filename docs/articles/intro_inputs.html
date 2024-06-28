@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,23 +39,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reactR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -76,7 +72,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/react-R/reactR/">
+  <a href="https://github.com/react-R/reactR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -91,179 +87,298 @@
 
       
 
-      </header><script src="intro_inputs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Authoring inputs powered by React with reactR</h1>
-                        <h4 class="author">Alan Dipert and Carson Sievert</h4>
+      <h1 data-toc-skip>Authoring inputs powered by React with
+reactR</h1>
+                        <h4 data-toc-skip class="author">Alan Dipert and
+Carson Sievert</h4>
             
-            <h4 class="date">2021-02-22</h4>
+            <h4 data-toc-skip class="date">2024-06-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/master/vignettes/intro_inputs.Rmd"><code>vignettes/intro_inputs.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/react-R/reactR/blob/HEAD/vignettes/intro_inputs.Rmd" class="external-link"><code>vignettes/intro_inputs.Rmd</code></a></small>
       <div class="hidden name"><code>intro_inputs.Rmd</code></div>
 
     </div>
 
     
     
-<p><a href="https://shiny.rstudio.com/">Shiny</a> comes with a large library of input <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">widgets</a> for collecting input from the user and conveying input data to R.</p>
-<p>If you want a kind of input <em>not</em> provided by Shiny — like a color picker, or a different kind of slider — you’ve always been able to build your own. Shiny’s input system is <a href="https://shiny.rstudio.com/articles/building-inputs.html">extensible</a>. All that’s required is an understanding of certain conventions and a little custom JavaScript.</p>
-<p>reactR provides additional tools to ease the creation of new Shiny inputs implemented using React. In the following tutorial, we will demonstrate these tools by implementing a new Shiny color picker input that wraps the <a href="https://github.com/casesandberg/react-color">react-color</a> library.</p>
-<div id="software-pre-requisites" class="section level2">
-<h2 class="hasAnchor">
-<a href="#software-pre-requisites" class="anchor"></a>Software pre-requisites</h2>
-<p>In order to develop a <strong>reactR</strong> Shiny input, you’ll need to install R and optionally RStudio. If you’re on Windows, you should also install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
+<p><a href="https://shiny.posit.co/" class="external-link">Shiny</a> comes with a large
+library of input <a href="https://shiny.posit.co/r/gallery/widgets/widget-gallery/" class="external-link">widgets</a>
+for collecting input from the user and conveying input data to R.</p>
+<p>If you want a kind of input <em>not</em> provided by Shiny — like a
+color picker, or a different kind of slider — you’ve always been able to
+build your own. Shiny’s input system is <a href="https://shiny.rstudio.com/articles/building-inputs.html" class="external-link">extensible</a>.
+All that’s required is an understanding of certain conventions and a
+little custom JavaScript.</p>
+<p>reactR provides additional tools to ease the creation of new Shiny
+inputs implemented using React. In the following tutorial, we will
+demonstrate these tools by implementing a new Shiny color picker input
+that wraps the <a href="https://github.com/casesandberg/react-color" class="external-link">react-color</a>
+library.</p>
+<div class="section level2">
+<h2 id="software-pre-requisites">Software pre-requisites<a class="anchor" aria-label="anchor" href="#software-pre-requisites"></a>
+</h2>
+<p>In order to develop a <strong>reactR</strong> Shiny input, you’ll
+need to install R and optionally RStudio. If you’re on Windows, you
+should also install <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">Rtools</a>.</p>
 <blockquote>
-<p>For an excellent general introduction to R package concepts, check out the <a href="https://r-pkgs.org/">R packages</a> online book.</p>
+<p>For an excellent general introduction to R package concepts, check
+out the <a href="https://r-pkgs.org/" class="external-link">R packages</a> online book.</p>
 </blockquote>
-<p>In addition, you’ll need to install the following JavaScript tools on your machine:</p>
+<p>In addition, you’ll need to install the following JavaScript tools on
+your machine:</p>
 <ul>
 <li>
-<a href="https://nodejs.org">Node.js</a>: JavaScript engine and runtime for development outside of browsers. Provides the <code>node</code> and <code>npm</code> commands.</li>
+<a href="https://nodejs.org" class="external-link">Node.js</a>: JavaScript engine and
+runtime for development outside of browsers. Provides the
+<code>node</code> and <code>npm</code> commands.</li>
 <li>
-<a href="https://classic.yarnpkg.com/en/">Yarn</a>: Command-line dependency management tool, provides the <code>yarn</code> command.</li>
+<a href="https://classic.yarnpkg.com/en/" class="external-link">Yarn</a>: Command-line
+dependency management tool, provides the <code>yarn</code> command.</li>
 </ul>
-<p>To follow along in this vignette, you’ll also need the following R packages:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"shiny"</span>, <span class="st">"devtools"</span>, <span class="st">"usethis"</span>, <span class="st">"reactR"</span>))</pre></body></html></div>
+<p>To follow along in this vignette, you’ll also need the following R
+packages:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shiny"</span>, <span class="st">"devtools"</span>, <span class="st">"usethis"</span>, <span class="st">"reactR"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="scaffolding" class="section level2">
-<h2 class="hasAnchor">
-<a href="#scaffolding" class="anchor"></a>Scaffolding</h2>
-<p>To create a new widget you can call <code>scaffoldReactShinyInput</code> to generate the basic structure and build configuration. This function will:</p>
+<div class="section level2">
+<h2 id="scaffolding">Scaffolding<a class="anchor" aria-label="anchor" href="#scaffolding"></a>
+</h2>
+<p>To create a new widget you can call
+<code>scaffoldReactShinyInput</code> to generate the basic structure and
+build configuration. This function will:</p>
 <ul>
 <li>Create the .R, .js, and .json files required by your input;</li>
-<li>If provided, take an <a href="https://www.npmjs.com/">npm</a> package name and version as a named list with <code>name</code> and <code>version</code> elements. For example, the npm package <code>foo</code> at version <code>^1.2.0</code> would be expressed as <code><a href="https://rdrr.io/r/base/list.html">list(name = "foo", version = "^1.2.0")</a></code>. The package, if provided, will be added to the new widget’s <code>package.json</code> as a build dependency.</li>
+<li>If provided, take an <a href="https://www.npmjs.com/" class="external-link">npm</a>
+package name and version as a named list with <code>name</code> and
+<code>version</code> elements. For example, the npm package
+<code>foo</code> at version <code>^1.2.0</code> would be expressed as
+<code>list(name = "foo", version =   "^1.2.0")</code>. The package, if
+provided, will be added to the new widget’s <code>package.json</code> as
+a build dependency.</li>
 </ul>
-<p>The following R code will create an R package named <strong>colorpicker</strong>, then provide the templating for creating an input powered by the <code>react-color</code> library on npm:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Create the R package (rstudio=TRUE is recommended if you're not already comfortable with your terminal)</span>
-<span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html">create_package</a></span>(<span class="st">"~/colorpicker"</span>, <span class="kw">rstudio</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co"># Scaffold initial input implementation files</span>
-<span class="kw pkg">withr</span><span class="kw ns">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_dir.html">with_dir</a></span>(
-  <span class="st">"~/colorpicker"</span>,
-  <span class="kw pkg">reactR</span><span class="kw ns">::</span><span class="fu"><a href="../reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput</a></span>(<span class="st">"colorpicker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"react-color"</span> <span class="kw">=</span> <span class="st">"^2.17.0"</span>), <span class="kw">edit</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-)</pre></body></html></div>
+<p>The following R code will create an R package named
+<strong>colorpicker</strong>, then provide the templating for creating
+an input powered by the <code>react-color</code> library on npm:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create the R package (rstudio=TRUE is recommended if you're not already comfortable with your terminal)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_package</a></span><span class="op">(</span><span class="st">"~/colorpicker"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Scaffold initial input implementation files</span></span>
+<span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_dir.html" class="external-link">with_dir</a></span><span class="op">(</span></span>
+<span>  <span class="st">"~/colorpicker"</span>,</span>
+<span>  <span class="fu">reactR</span><span class="fu">::</span><span class="fu"><a href="../reference/scaffoldReactShinyInput.html">scaffoldReactShinyInput</a></span><span class="op">(</span><span class="st">"colorpicker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"react-color"</span> <span class="op">=</span> <span class="st">"^2.17.0"</span><span class="op">)</span>, edit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="building-and-installing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#building-and-installing" class="anchor"></a>Building and installing</h2>
-<div id="building-the-javascript" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-the-javascript" class="anchor"></a>Building the JavaScript</h3>
-<p>The next step is to navigate to the newly-created <code>colorpicker</code> project and run the following commands in the terminal. If you’re new the terminal, we recommend opening your newly created RStudio <code>~/colorpicker/colorpicker.Rproj</code> project file, then running the following in the <a href="https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal">RStudio terminal tab</a>:</p>
+<div class="section level2">
+<h2 id="building-and-installing">Building and installing<a class="anchor" aria-label="anchor" href="#building-and-installing"></a>
+</h2>
+<div class="section level3">
+<h3 id="building-the-javascript">Building the JavaScript<a class="anchor" aria-label="anchor" href="#building-the-javascript"></a>
+</h3>
+<p>The next step is to navigate to the newly-created
+<code>colorpicker</code> project and run the following commands in the
+terminal. If you’re new the terminal, we recommend opening your newly
+created RStudio <code>~/colorpicker/colorpicker.Rproj</code> project
+file, then running the following in the RStudio terminal tab:</p>
 <pre><code>yarn install
 yarn run webpack</code></pre>
 <ul>
-<li><p><code>yarn install</code> downloads all of the dependencies listed in <code>package.json</code> and creates a new file, <code>yarn.lock</code>. You should add this file to revision control. It will be updated whenever you change dependencies and run <code>yarn install</code>. <strong>Note: you only need to run it after modifying package.json</strong>. For further documentation on <code>yarn install</code>, see the <a href="https://classic.yarnpkg.com/en/docs/cli/install/">yarn documentation</a>.</p></li>
-<li><p><code>yarn run webpack</code> compiles the <a href="https://babeljs.io/docs/en/babel-preset-env">modern JavaScript</a> with <a href="https://babeljs.io/docs/en/babel-preset-react">JSX</a> source file at <code>srcjs/colorpicker.jsx</code> into <code>www/colorpicker/colorpicker/colorpicker.js</code>. The latter file is the one actually used by the R package and includes all the relevant JavaScript dependencies in a dialect of JavaScript that most browsers understand.</p></li>
+<li><p><code>yarn install</code> downloads all of the dependencies
+listed in <code>package.json</code> and creates a new file,
+<code>yarn.lock</code>. You should add this file to revision control. It
+will be updated whenever you change dependencies and run
+<code>yarn install</code>. <strong>Note: you only need to run it after
+modifying package.json</strong>. For further documentation on
+<code>yarn install</code>, see the <a href="https://classic.yarnpkg.com/en/docs/cli/install/" class="external-link">yarn
+documentation</a>.</p></li>
+<li><p><code>yarn run webpack</code> compiles the <a href="https://babeljs.io/docs/en/babel-preset-env" class="external-link">modern JavaScript</a>
+with <a href="https://babeljs.io/docs/en/babel-preset-react" class="external-link">JSX</a>
+source file at <code>srcjs/colorpicker.jsx</code> into
+<code>www/colorpicker/colorpicker/colorpicker.js</code>. The latter file
+is the one actually used by the R package and includes all the relevant
+JavaScript dependencies in a dialect of JavaScript that most browsers
+understand.</p></li>
 </ul>
-<p><code>yarn run webpack</code> is not strictly a <code>yarn</code> command. In fact, <code>yarn run</code> simply delegates to the <a href="https://webpack.js.org/">webpack</a> program. Webpack’s configuration is generated by <code>scaffoldReactShinyInput</code> in the file <code>webpack.config.js</code>, but you can always change this configuration and/or modify the <code>yarn run webpack</code> command to suit your needs.</p>
+<p><code>yarn run webpack</code> is not strictly a <code>yarn</code>
+command. In fact, <code>yarn run</code> simply delegates to the <a href="https://webpack.js.org/" class="external-link">webpack</a> program. Webpack’s
+configuration is generated by <code>scaffoldReactShinyInput</code> in
+the file <code>webpack.config.js</code>, but you can always change this
+configuration and/or modify the <code>yarn run webpack</code> command to
+suit your needs.</p>
 </div>
-<div id="installing-the-r-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installing-the-r-package" class="anchor"></a>Installing the R package</h3>
-<p>Now that the input’s JavaScript is compiled, go ahead and install the R package:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>()
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/install.html">install</a></span>(<span class="kw">quick</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<p>In RStudio, you can use the keyboard shortcuts <code>Ctrl-Shift-D</code> and <code>Ctrl-Shift-B</code> to document and build the package. (On macOS, the shortcuts are <code>Cmd-Shift-D</code> and <code>Cmd-Shift-B</code>)</p>
+<div class="section level3">
+<h3 id="installing-the-r-package">Installing the R package<a class="anchor" aria-label="anchor" href="#installing-the-r-package"></a>
+</h3>
+<p>Now that the input’s JavaScript is compiled, go ahead and install the
+R package:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">document</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install.html" class="external-link">install</a></span><span class="op">(</span>quick <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>In RStudio, you can use the keyboard shortcuts
+<code>Ctrl-Shift-D</code> and <code>Ctrl-Shift-B</code> to document and
+build the package. (On macOS, the shortcuts are <code>Cmd-Shift-D</code>
+and <code>Cmd-Shift-B</code>)</p>
 </div>
 </div>
-<div id="run-the-included-demo" class="section level2">
-<h2 class="hasAnchor">
-<a href="#run-the-included-demo" class="anchor"></a>Run the included demo</h2>
-<p>Now that the input’s JavaScript is compiled, and the R package is installed, run <code>app.R</code> to see a demo in action:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp</a></span>()</pre></body></html></div>
-<p>In RStudio, you can open <code>app.R</code> and press <code>Ctrl-Shift-Enter</code> (<code>Cmd-Shift-Enter</code> on macOS). You should see something like the following appear in the Viewer pane:</p>
+<div class="section level2">
+<h2 id="run-the-included-demo">Run the included demo<a class="anchor" aria-label="anchor" href="#run-the-included-demo"></a>
+</h2>
+<p>Now that the input’s JavaScript is compiled, and the R package is
+installed, run <code>app.R</code> to see a demo in action:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html" class="external-link">runApp</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>In RStudio, you can open <code>app.R</code> and press
+<code>Ctrl-Shift-Enter</code> (<code>Cmd-Shift-Enter</code> on macOS).
+You should see something like the following appear in the Viewer
+pane:</p>
 <p><img src="input_app.jpg"></p>
 </div>
-<div id="authoring-a-react-input" class="section level2">
-<h2 class="hasAnchor">
-<a href="#authoring-a-react-input" class="anchor"></a>Authoring a React input</h2>
-<p>At this point, we have a working (if simple) React-powered text input. Let’s modify it to create an interface to the <code>react-color</code> library.</p>
-<div id="connecting-shiny-with-react" class="section level3">
-<h3 class="hasAnchor">
-<a href="#connecting-shiny-with-react" class="anchor"></a>Connecting Shiny with React</h3>
-<p>Consider the following example taken from the <a href="http://casesandberg.github.io/react-color/">react-color documentation</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="im">import</span> <span class="op">{</span> SketchPicker <span class="op">}</span> <span class="im">from</span> <span class="st">'react-color'</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">class</span> Component <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="at">render</span>() <span class="op">{</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>    <span class="cf">return</span> <span class="op">&lt;</span>SketchPicker <span class="op">/&gt;;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="op">}</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="op">}</span></span></code></pre></div>
-<p>That JavaScript code produces a <code>SketchPicker</code>-type interface that looks like this:</p>
+<div class="section level2">
+<h2 id="authoring-a-react-input">Authoring a React input<a class="anchor" aria-label="anchor" href="#authoring-a-react-input"></a>
+</h2>
+<p>At this point, we have a working (if simple) React-powered text
+input. Let’s modify it to create an interface to the
+<code>react-color</code> library.</p>
+<div class="section level3">
+<h3 id="connecting-shiny-with-react">Connecting Shiny with React<a class="anchor" aria-label="anchor" href="#connecting-shiny-with-react"></a>
+</h3>
+<p>Consider the following example taken from the <a href="http://casesandberg.github.io/react-color/" class="external-link">react-color
+documentation</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">import</span> { SketchPicker } <span class="im">from</span> <span class="st">'react-color'</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="kw">class</span> Component <span class="kw">extends</span> React<span class="op">.</span><span class="at">Component</span> {</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="fu">render</span>() {</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">&lt;</span>SketchPicker <span class="op">/&gt;;</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  }</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>}</span></code></pre></div>
+<p>That JavaScript code produces a <code>SketchPicker</code>-type
+interface that looks like this:</p>
 <p><img src="input_sketchpicker.jpg"></p>
-<p>However, that example doesn’t demonstrate a way to default to a particular color, or a way to cause something to happen when the color changes. To accomplish these, <code>react-color</code> components can <a href="http://casesandberg.github.io/react-color/#api">optionally take</a> the following <a href="https://reactjs.org/docs/components-and-props.html">props</a>:</p>
+<p>However, that example doesn’t demonstrate a way to default to a
+particular color, or a way to cause something to happen when the color
+changes. To accomplish these, <code>react-color</code> components can <a href="http://casesandberg.github.io/react-color/#api" class="external-link">optionally
+take</a> the following <a href="https://reactjs.org/docs/components-and-props.html" class="external-link">props</a>:</p>
 <ul>
 <li>
-<a href="http://casesandberg.github.io/react-color/#api-color"><code>color</code></a>: accepts a string of a hex color like <code>'#333'</code>
+<a href="http://casesandberg.github.io/react-color/#api-color" class="external-link"><code>color</code></a>:
+accepts a string of a hex color like <code>'#333'</code>
 </li>
 <li>
-<a href="http://casesandberg.github.io/react-color/#api-onChangeComplete"><code>onChangeComplete</code></a>: accepts a JavaScript function taking a single argument, the new <code>color</code>, that will be called when the new color is selected</li>
+<a href="http://casesandberg.github.io/react-color/#api-onChangeComplete" class="external-link"><code>onChangeComplete</code></a>:
+accepts a JavaScript function taking a single argument, the new
+<code>color</code>, that will be called when the new color is
+selected</li>
 </ul>
-<p>Since this React component calls a configurable function (i.e., <code>onChangeComplete</code>) when the input (i.e., color) value changes, we can supply a function to inform Shiny about these changes. You could, in theory, do this by writing your own custom Shiny input wrapper around this component, but <code>reactR</code> provides some conventions to make it much easier. These conventions have two main parts (R and JavaScript):</p>
+<p>Since this React component calls a configurable function (i.e.,
+<code>onChangeComplete</code>) when the input (i.e., color) value
+changes, we can supply a function to inform Shiny about these changes.
+You could, in theory, do this by writing your own custom Shiny input
+wrapper around this component, but <code>reactR</code> provides some
+conventions to make it much easier. These conventions have two main
+parts (R and JavaScript):</p>
 <ol style="list-style-type: decimal">
-<li>Use <code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code> to construct the user-facing R input and route any user-supplied options (e.g., the <code>default</code> input value and other <code>configuration</code>) to the React component. This part was already done for us in the <code>R/colorpicker.R</code> file of our colorpicker project:</li>
+<li>Use <code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code> to construct the
+user-facing R input and route any user-supplied options (e.g., the
+<code>default</code> input value and other <code>configuration</code>)
+to the React component. This part was already done for us in the
+<code>R/colorpicker.R</code> file of our colorpicker project:</li>
 </ol>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">colorpickerInput</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">inputId</span>, <span class="no">default</span> <span class="kw">=</span> <span class="st">""</span>) {
-  <span class="kw pkg">reactR</span><span class="kw ns">::</span><span class="fu"><a href="../reference/createReactShinyInput.html">createReactShinyInput</a></span>(
-    <span class="kw">inputId</span> <span class="kw">=</span> <span class="no">inputId</span>,
-    <span class="kw">class</span> <span class="kw">=</span> <span class="st">"colorpicker"</span>,
-    <span class="kw">dependencies</span> <span class="kw">=</span> <span class="kw pkg">htmltools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/htmlDependency.html">htmlDependency</a></span>(
-      <span class="kw">name</span> <span class="kw">=</span> <span class="st">"colorpicker-input"</span>,
-      <span class="kw">version</span> <span class="kw">=</span> <span class="st">"1.0.0"</span>,
-      <span class="kw">src</span> <span class="kw">=</span> <span class="st">"www/colorpicker/colorpicker"</span>,
-      <span class="kw">package</span> <span class="kw">=</span> <span class="st">"colorpicker"</span>,
-      <span class="kw">script</span> <span class="kw">=</span> <span class="st">"colorpicker.js"</span>
-    ),
-    <span class="kw">default</span> <span class="kw">=</span> <span class="no">default</span>,
-    <span class="kw">configuration</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(),
-    <span class="kw">container</span> <span class="kw">=</span> <span class="kw pkg">htmltools</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/htmltools/man/builder.html">tags</a></span>$<span class="no">span</span>
-  )
-}</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">colorpickerInput</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputId</span>, <span class="va">default</span> <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">reactR</span><span class="fu">::</span><span class="fu"><a href="../reference/createReactShinyInput.html">createReactShinyInput</a></span><span class="op">(</span></span>
+<span>    inputId <span class="op">=</span> <span class="va">inputId</span>,</span>
+<span>    class <span class="op">=</span> <span class="st">"colorpicker"</span>,</span>
+<span>    dependencies <span class="op">=</span> <span class="fu">htmltools</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/htmlDependency.html" class="external-link">htmlDependency</a></span><span class="op">(</span></span>
+<span>      name <span class="op">=</span> <span class="st">"colorpicker-input"</span>,</span>
+<span>      version <span class="op">=</span> <span class="st">"1.0.0"</span>,</span>
+<span>      src <span class="op">=</span> <span class="st">"www/colorpicker/colorpicker"</span>,</span>
+<span>      package <span class="op">=</span> <span class="st">"colorpicker"</span>,</span>
+<span>      script <span class="op">=</span> <span class="st">"colorpicker.js"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    default <span class="op">=</span> <span class="va">default</span>,</span>
+<span>    configuration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    container <span class="op">=</span> <span class="fu">htmltools</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">tags</a></span><span class="op">$</span><span class="va">span</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>Design an <em>intermediate</em> React component that routes information from <code>colorpickerInput()</code> to the <code>&lt;SketchPicker&gt;</code> component and also inform Shiny when a new color is chosen. This intermediate component should be a <a href="https://reactjs.org/docs/components-and-props.html#function-and-class-components">functional component</a> with three arguments:</li>
+<li>Design an <em>intermediate</em> React component that routes
+information from <code>colorpickerInput()</code> to the
+<code>&lt;SketchPicker&gt;</code> component and also inform Shiny when a
+new color is chosen. This intermediate component should be a <a href="https://reactjs.org/docs/components-and-props.html#function-and-class-components" class="external-link">functional
+component</a> with three arguments:</li>
 </ol>
 <ul>
 <li>
-<code>configuration</code>: The JSON equivalent of the <code>configuration</code> argument from <code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code>. In this particular example, <code>configuration</code> isn’t used.</li>
+<code>configuration</code>: The JSON equivalent of the
+<code>configuration</code> argument from
+<code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code>. In this particular
+example, <code>configuration</code> isn’t used.</li>
 <li>
-<code>value</code>: The input’s values over time, beginning with the <code>default</code> supplied from <code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code>.</li>
+<code>value</code>: The input’s values over time, beginning with the
+<code>default</code> supplied from
+<code><a href="../reference/createReactShinyInput.html">reactR::createReactShinyInput()</a></code>.</li>
 <li>
-<code>setValue</code>: A JavaScript function to call with the input’s new value when one is created. This function is not user supplied, but rather an internal hook for informing Shiny about changes to the component’s current state (i.e. value).</li>
+<code>setValue</code>: A JavaScript function to call with the
+input’s new value when one is created. This function is not user
+supplied, but rather an internal hook for informing Shiny about changes
+to the component’s current state (i.e. value).</li>
 </ul>
-<p>Consider the following intermediate component, <code>PickerInput</code>. Note how this intermediate component allows one to set the default <code>value</code> from R and also calls <code>setValue()</code> inside <code>onChangeComplete</code> in order to inform Shiny about new color values. Finally, <code>reactR.reactShinyInput()</code> registers this intermediate component as a custom Shiny input binding named <code>colorpicker</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> <span class="op">{</span> reactShinyInput <span class="op">}</span> <span class="im">from</span> <span class="st">'reactR'</span><span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> <span class="op">{</span> SketchPicker <span class="op">}</span> <span class="im">from</span> <span class="st">'react-color'</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">const</span> PickerInput <span class="op">=</span> (<span class="op">{</span> configuration<span class="op">,</span> value<span class="op">,</span> setValue <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="cf">return</span> (</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="op">&lt;</span>SketchPicker</span>
-<span id="cb8-7"><a href="#cb8-7"></a>      color<span class="op">={</span> value <span class="op">}</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>      onChangeComplete<span class="op">={</span> color <span class="kw">=&gt;</span> <span class="at">setValue</span>(<span class="va">color</span>.<span class="at">hex</span>) <span class="op">}</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>    /&gt;</span>
-<span id="cb8-10"><a href="#cb8-10"></a>  )<span class="op">;</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="op">};</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">// Note the first argument here should match the `class` </span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">// argument of the reactR::createReactShinyInput() from step 1</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="at">reactShinyInput</span>(<span class="st">'.colorpicker'</span><span class="op">,</span> <span class="st">'colorpicker'</span><span class="op">,</span> PickerInput)<span class="op">;</span></span></code></pre></div>
-<p>Open the <code>srcjs/colorpicker.jsx</code> file in your colorpicker project and paste this code into it. After saving the file, run <code>yarn run webpack</code> in the terminal, re-install the package, then run <code><a href="https://rdrr.io/pkg/shiny/man/runApp.html">shiny::runApp()</a></code> again</p>
-<video autoplay muted><source src="./input_sketchpicker.mp4"></source></video><p>When you select new colors, you should see the <code>textOutput</code> update accordingly.</p>
-<p>You might have noticed that the input showed up initially without a color selected. That’s because in <code>app.R</code> we didn’t supply a <code>default</code> argument to the <code>colorpickerInput</code> function inside our <code>ui</code>.</p>
-<p>Try replacing the call to <code>colorpickerInput</code> with this: <code>colorpickerInput("textInput", default = "#a76161")</code></p>
-<p>Now when you run the app, the color should start as a shade of red.</p>
+<p>Consider the following intermediate component,
+<code>PickerInput</code>. Note how this intermediate component allows
+one to set the default <code>value</code> from R and also calls
+<code>setValue()</code> inside <code>onChangeComplete</code> in order to
+inform Shiny about new color values. Finally,
+<code>reactR.reactShinyInput()</code> registers this intermediate
+component as a custom Shiny input binding named
+<code>colorpicker</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> { reactShinyInput } <span class="im">from</span> <span class="st">'reactR'</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="im">import</span> { SketchPicker } <span class="im">from</span> <span class="st">'react-color'</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="kw">const</span> PickerInput <span class="op">=</span> ({ configuration<span class="op">,</span> value<span class="op">,</span> setValue }) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    <span class="op">&lt;</span>SketchPicker</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>      color<span class="op">=</span>{ value }</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>      onChangeComplete<span class="op">=</span>{ color <span class="kw">=&gt;</span> <span class="fu">setValue</span>(color<span class="op">.</span><span class="at">hex</span>) }</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    <span class="op">/&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">// Note the first argument here should match the `class` </span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">// argument of the reactR::createReactShinyInput() from step 1</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="fu">reactShinyInput</span>(<span class="st">'.colorpicker'</span><span class="op">,</span> <span class="st">'colorpicker'</span><span class="op">,</span> PickerInput)<span class="op">;</span></span></code></pre></div>
+<p>Open the <code>srcjs/colorpicker.jsx</code> file in your colorpicker
+project and paste this code into it. After saving the file, run
+<code>yarn run webpack</code> in the terminal, re-install the package,
+then run <code><a href="https://rdrr.io/pkg/shiny/man/runApp.html" class="external-link">shiny::runApp()</a></code> again</p>
+<video autoplay muted><source src="./input_sketchpicker.mp4"></source></video><p>When you select new colors, you should see the
+<code>textOutput</code> update accordingly.</p>
+<p>You might have noticed that the input showed up initially without a
+color selected. That’s because in <code>app.R</code> we didn’t supply a
+<code>default</code> argument to the <code>colorpickerInput</code>
+function inside our <code>ui</code>.</p>
+<p>Try replacing the call to <code>colorpickerInput</code> with this:
+<code>colorpickerInput("textInput", default = "#a76161")</code></p>
+<p>Now when you run the app, the color should start as a shade of
+red.</p>
 </div>
 </div>
-<div id="further-learning" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-learning" class="anchor"></a>Further learning</h2>
-<p>This tutorial walked you through the steps taken to wrap the <code>react-color</code> library in a Shiny input. The full example package is accessible at <a href="https://github.com/react-R/colorpicker-example" class="uri">https://github.com/react-R/colorpicker-example</a>. Our intention is keep creating example packages under the <a href="https://github.com/react-R" class="uri">https://github.com/react-R</a> organization, so head there if you’d like to see other examples of interfacing with React.</p>
+<div class="section level2">
+<h2 id="further-learning">Further learning<a class="anchor" aria-label="anchor" href="#further-learning"></a>
+</h2>
+<p>This tutorial walked you through the steps taken to wrap the
+<code>react-color</code> library in a Shiny input. The full example
+package is accessible at <a href="https://github.com/react-R/colorpicker-example" class="external-link uri">https://github.com/react-R/colorpicker-example</a>. Our
+intention is keep creating example packages under the <a href="https://github.com/react-R" class="external-link uri">https://github.com/react-R</a> organization, so head there
+if you’d like to see other examples of interfacing with React.</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
         <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
     </nav>
 </div>
@@ -273,11 +388,13 @@ yarn run webpack</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
+  <p></p>
+<p>Developed by Facebook Inc, Michel Weststrate, Kent Russell, Alan Dipert.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -285,6 +402,8 @@ yarn run webpack</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

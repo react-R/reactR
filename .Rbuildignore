@@ -8,14 +8,13 @@
 ^CONDUCT\.md$
 ^README\.Rmd$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^buildupdate$
 ^docs$
 ^cran-comments\.md$
-^karma\.conf\.js$
 ^logo.svg$
 ^package\.json$
-^webpack\.config\.js$
-^yarn\.lock$
+^vite\.config\.js$
+^package-lock\.json$
 ^logo\.svg$
 ^\.github$
+^CRAN-SUBMISSION$

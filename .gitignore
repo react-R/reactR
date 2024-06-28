@@ -10,3 +10,4 @@ reactR.Rcheck
 reactR_*.tar.gz
 *.swp
 .DS_Store
+inst/www/react-tools/react-tools.js

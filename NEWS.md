@@ -1,3 +1,15 @@
+# reactR 0.6.0
+
+* retain `list` in `reactR::component` classes [#82](https://github.com/react-R/reactR/issues/82)
+* hydrate props/attribs that are tags assuming tag-like props/attribs should be slots[#67](https://github.com/react-R/reactR/issues/67) [#61](https://github.com/react-R/reactR/issues/61)
+* update build tools to `vite` from `webpack`
+* update js testing library from `karma` to `vitest`
+
+
+# reactR 0.5.0
+
+* Update react to `18.2.0`
+
 # reactR 0.4.4
 
 * Update react to `16.12.0`
