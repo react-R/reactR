@@ -31,7 +31,7 @@ Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
 Description: Make it easy to use 'React' in R with 'htmlwidget' scaffolds,
               helper dependency functions, an embedded 'Babel' 'transpiler',
               and examples.
-URL: https://github.com/react-R/reactR
+URL: https://react-r.github.io/reactR/, https://github.com/react-R/reactR
 BugReports: https://github.com/react-R/reactR/issues
 License: MIT + file LICENSE
 LazyData: TRUE
