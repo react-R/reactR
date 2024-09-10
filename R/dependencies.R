@@ -82,7 +82,7 @@ html_dependency_reacttools <- function(){
     src = "www/react-tools",
     version = "2.0.0",
     package = "reactR",
-    script = c("react-tools.umd.cjs")
+    script = c("react-tools.js")
   )
 }
 

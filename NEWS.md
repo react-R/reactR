@@ -1,3 +1,7 @@
+# reactR 0.6.1
+
+* Fix issue where the `react-tools.umd.cjs` script could be blocked by the browser in some cases, such as apps deployed on shinyapps.io [#86](https://github.com/react-R/reactR/issues/86)
+
 # reactR 0.6.0
 
 * retain `list` in `reactR::component` classes [#82](https://github.com/react-R/reactR/issues/82)
