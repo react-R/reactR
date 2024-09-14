@@ -28,7 +28,7 @@ Authors@R: c(
       ),
       person(
         "Greg", "Lin"
-        , role = c("aut", "cre")
+        , role = c("aut")
         , comment = "R interface"
         , email = "glin@glin.io"
       )
