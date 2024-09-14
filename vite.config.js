@@ -7,10 +7,10 @@ export default defineConfig({
     outDir: join(__dirname, "inst/www/react-tools/"),
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, '/srcjs/react-tools.js'),
+      entry: resolve(__dirname, 'srcjs/react-tools.js'),
       name: 'reactR',
-      // the proper extensions will be added
-      fileName: 'react-tools',
+      fileName: () => 'react-tools.js',
+      formats: ['umd'],
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'jquery', 'shiny'],
