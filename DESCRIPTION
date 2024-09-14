@@ -2,7 +2,7 @@ Package: reactR
 Type: Package
 Title: React Helpers
 Version: 0.6.1
-Date: 2024-09-09
+Date: 2024-09-14
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -25,6 +25,12 @@ Authors@R: c(
         , role = c("aut")
         , comment = "R interface"
         , email = "alan@rstudio.com"
+      ),
+      person(
+        "Greg", "Lin"
+        , role = c("aut")
+        , comment = "R interface"
+        , email = "glin@glin.io"
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
