@@ -61,11 +61,11 @@ html_dependency_react <- function(offline=TRUE){
 #' @importFrom htmltools htmlDependency
 #' @export
 html_dependency_corejs <- function() {
-  #shim/polyfill for ES5 and ES6 so react will show up in RStudio Viewer
-  #https://unpkg.com/core-js@2.5.3/
+  # shim/polyfill for ES5 and ES6 so react will show up in RStudio Viewer  
+  # https://cdn.jsdelivr.net/npm/core-js-bundle@3.40.0/minified.min.js
   htmltools::htmlDependency(
     name = "core-js",
-    version = "2.5.3",
+    version = "3.40.0",
     src = c(file=system.file("www/core-js/", package="reactR")),
     script = "shim.min.js"
   )

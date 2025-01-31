@@ -1,8 +1,8 @@
 Package: reactR
 Type: Package
 Title: React Helpers
-Version: 0.6.1
-Date: 2024-09-14
+Version: 0.6.2
+Date: 2025-01-31
 Authors@R: c(
       person(
         "Facebook", "Inc"
@@ -31,6 +31,11 @@ Authors@R: c(
         , role = c("aut")
         , comment = "R interface"
         , email = "glin@glin.io"
+      ),
+      person(
+        "Jinhwan", "Kim"
+        , role = c("ctb")
+        , email = "hwanistic@gmail.com"
       )
     )
 Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
