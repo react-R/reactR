@@ -7,6 +7,7 @@
  */
 export function hydrate(components, tag) {
     if (typeof tag === 'string') return tag;
+    if (isDependency(tag)) return null;
     if (tag.name[0] === tag.name[0].toUpperCase()
         && !components.hasOwnProperty(tag.name)) {
         throw new Error("Unknown component: " + tag.name);
@@ -71,6 +72,14 @@ export function isTag(value) {
         && value.hasOwnProperty('name')
         && value.hasOwnProperty('attribs')
         && value.hasOwnProperty('children');
+}
+
+export function isDependency(value) {
+    return (typeof value === 'object')
+        && value.hasOwnProperty('name')
+        && value.hasOwnProperty('version')
+        && value.hasOwnProperty('src')
+        && value.hasOwnProperty('script');
 }
 
 /**
